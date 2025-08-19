@@ -1,0 +1,78 @@
+/* Reset & Font */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    transition: background 0.3s ease-in-out;
+}
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    background: none; /* <-- remove static background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out; /* smooth fade */
+}
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Cormorant Garamond, serif';
+
+}
+.hero-content p {
+    font-size: 1.25rem;
+}
+
+/* Feature Cards */
+.feature-card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.brand-logo {
+    font-family: "Abhaya Libre","Noto Sans Sinhala", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem; /* Bootstrap fs-3 = ~1.75rem */
+    text-transform: none; /* Remove forced uppercase */
+    letter-spacing: 0.02em;
+    background: linear-gradient(180deg, #c79a57 0%, #9b6a2c 55%, #7a4d1a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+}
