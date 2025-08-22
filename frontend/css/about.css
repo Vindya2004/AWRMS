@@ -1,0 +1,37 @@
+body { font-family: 'Poppins', sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
+
+.navbar { background: rgba(60,60,60,0.95); transition:0.3s; padding:20px 0; z-index:9999; }
+.navbar .nav-link { color:#000; font-weight:500; margin:0 12px; transition:0.3s; }
+.navbar .nav-link:hover, .navbar .nav-link.active { color:#FFD700; transform: translateY(-2px);}
+.navbar .dropdown-menu { background: rgba(60,60,60,0.95); border:none; }
+.navbar .dropdown-item { color:#000; transition:0.3s; }
+.navbar .dropdown-item:hover { background:#FFD700; color:#000; transform:translateX(5px);}
+.brand-logo { font-family:"Abhaya Libre","Noto Sans Sinhala",sans-serif; font-weight:800; font-size:1.8rem; text-transform:none;
+    background:linear-gradient(180deg,#c79a57 0%,#9b6a2c 55%,#7a4d1a 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,0.15),0 4px 12px rgba(0,0,0,0.25);}
+.about-section { max-width:1200px; margin:0 auto; padding:60px 20px;}
+.about-section h1 { text-align:center; font-family:'Playfair Display', serif; font-size:38px; color:#5C4033; margin-bottom:20px; letter-spacing:2px; }
+.about-section p.intro { text-align:center; max-width:800px; margin:0 auto 50px; font-size:18px; color:#555; }
+.about-content { display:flex; flex-wrap:wrap; gap:40px; align-items:center; justify-content:center; background:#fff; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1); padding:40px;}
+.about-image { flex:1 1 400px;}
+.about-image img { width:100%; border-radius:15px; object-fit:cover;}
+.about-text { flex:1 1 400px;}
+.about-text h2 { font-family:'Playfair Display', serif; font-size:30px; color:#5C4033; margin-bottom:20px; }
+.about-text p { font-size:17px; margin-bottom:20px; color:#555;}
+.about-text ul { list-style:none; padding-left:0; }
+.about-text ul li { position:relative; padding-left:25px; margin-bottom:12px; font-weight:500;}
+.about-text ul li::before { content:"✓"; position:absolute; left:0; color:#8B4513; font-weight:bold; }
+
+.about-images-scroll { overflow:hidden; width:100%; margin-top:30px; border-radius:10px; position:relative;}
+.scroll-track { display:flex; transition: transform 0.5s ease; }
+.scroll-track img { width:350px; margin-right:10px; border-radius:10px; object-fit:cover; }
+.scroll-arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:2.2rem; color:#8B4513; background:rgba(255,255,255,0.85); padding:8px 14px; border-radius:50%; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.15); transition:0.3s; z-index:10;}
+.scroll-arrow:hover { background:#8B4513; color:#fff; transform:translateY(-50%) scale(1.1);}
+.scroll-arrow.left { left:15px;}
+.scroll-arrow.right { right:15px;}
+.scroll-dots { display:flex; justify-content:center; gap:12px; margin-top:20px;}
+.scroll-dots span { display:block; width:14px; height:14px; background:#ccc; border-radius:50%; cursor:pointer; transition:0.3s;}
+.scroll-dots span.active { background:#8B4513; transform:scale(1.2); }
+
+@media (max-width:900px) { .about-content { flex-direction:column; } .scroll-track img { width:250px;} .scroll-arrow { font-size:1.8rem; padding:6px 10px; } }
+@media (max-width:600px) { .scroll-track img { width:180px;} .scroll-arrow { font-size:1.5rem; padding:5px 8px; } }

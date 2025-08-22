@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up - Hela Suwaya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+<div class="signup-card">
+    <h2 class="mb-3">Create Account</h2>
+    <p class="subtitle">Join Hela Suwaya Ayurveda Wellness</p>
+    <form id="signupForm">
+        <div class="mb-3">
+            <label for="username" class="form-label">User Name</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Enter your name" required pattern="[A-Za-z ]{3,50}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required minlength="6">
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Re-enter password" required minlength="6">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <a href="signin.html" class="btn btn-register">Already have an account?</a>
+        </div>
+    </form>
+</div>
+
+<script src="lib/jquery-3.7.1.min.js"></script>
+</body>
+</html>
