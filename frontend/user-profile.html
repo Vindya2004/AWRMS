@@ -259,14 +259,6 @@
         </div>
     </div>
 
-    <div id="registerWarning" class="card border-danger text-danger bg-light d-none mt-3">
-        <div class="card-body">
-            <h5 class="card-title text-danger">Do you want to register for TravelEase?</h5>
-            <p>You haven't registered a vehicle yet. want to register?</p>
-            <button class="btn btn-danger" onclick="loadPage('vehicle-register.html')">Register Vehicle</button>
-        </div>
-    </div>
-
     <!-- Vehicle details section (hidden by default) -->
     <div id="vehicleDetails" class="card border-success d-none mt-3">
         <div class="card-body">
@@ -512,11 +504,11 @@
                 $('#userPhone').text(response.data.contact);
 
                 let userRole = response.data.role;
+                // Show vehicle details only for VEHICLE role
                 if (userRole === "VEHICLE") {
                     document.getElementById("vehicleDetails").classList.remove("d-none");
-                } else {
-                    document.getElementById("registerWarning").classList.remove("d-none");
                 }
+                // Note: Removed vehicle registration warning section and related logic
             }).fail(function (error) {
                 console.error("Error fetching user data:", error);
             });
