@@ -32,20 +32,24 @@
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#treatments">Treatments</a></li>
+                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>
                 <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 
-                <!-- Language Switcher -->
-                <li class="nav-item dropdown ms-lg-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown">
-                        EN
+                <!-- ✅ FIXED: Sign in/up -->
+                <li class="nav-item">
+                    <a href="signin.html" class="nav-link">Sign in/up</a>
+                </li>
+
+                <!-- ✅ FIXED: Dropdown -->
+                <li class="nav-item dropdown d-none" id="userDropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        Hi, User Name
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">EN</a></li>
-                        <li><a class="dropdown-item" href="#">DE</a></li>
-                        <li><a class="dropdown-item" href="#">RU</a></li>
-                        <li><a class="dropdown-item" href="#">LK</a></li>
+                    <ul class="dropdown-menu border-0 rounded-0 m-0">
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>
                     </ul>
                 </li>
             </ul>
@@ -140,86 +144,305 @@
     </div>
 </section>
 
-<section class="hero-section" id="contact">
-    <p style="font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 1rem; color: #999;">WE'D LOVE TO HEAR FROM YOU</p>
-    <h1>CONTACT US</h1>
-    <p>Your transformative journey of Ayurvedic healing is only one call away. Reservations can be made on our website, via email, or by calling us. If you have any further questions regarding our packages, treatments and facilities, or need guidance with the reservation process, please do not hesitate to get in touch with us.</p>
-</section>
+<!-- Destination Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Accommodation</h6>
+            <h1> Our Accommodation</h1>
+        </div>
+        <div class="row" id="destinationList">
+            <!-- Destination items will be appended here dynamically -->
+        </div>
+
+    </div>
+</div>
+<!-- Destination End -->
+
+<!-- Service Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Services</h6>
+            <h1>Treatment Services</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                    <i class="fa fa-2x fa-spa mx-auto mb-4"></i>
+                    <h5 class="mb-2">Ayurvedic Doctor Consultation</h5>
+                    <p class="m-0">Meet our experienced Ayurveda doctors for personalized health consultations and lifestyle guidance.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                    <i class="fa fa-2x fa-leaf mx-auto mb-4"></i>
+                    <h5 class="mb-2">Herbal Treatments</h5>
+                    <p class="m-0">Traditional therapies using natural herbs and oils to heal the body, mind, and soul.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                    <i class="fa fa-2x fa-hand-holding-heart mx-auto mb-4"></i>
+                    <h5 class="mb-2">Wellness Packages</h5>
+                    <p class="m-0">Customized Ayurveda wellness programs for detox, stress relief, and overall rejuvenation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+
+<!-- Packages Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
+            <h1>Perfect Treatment Packages</h1>
+        </div>
+        <div class="row" id="dynamicPackageContainer">
+            <!-- Packages will be injected here via JS -->
+        </div>
+    </div>
+</div>
+<!-- Packages End -->
+
+<!-- Team Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Doctors</h6>
+            <h1>Our Doctors</h1>
+        </div>
+        <div class="row" id="guidesContainer">
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                <div class="team-item bg-white mb-4">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <h5 class="text-truncate">Doctor Name</h5>
+                        <p class="m-0">Location</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                <div class="team-item bg-white mb-4">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <h5 class="text-truncate">Doctor Name</h5>
+                        <p class="m-0">Location</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                <div class="team-item bg-white mb-4">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <h5 class="text-truncate">Doctor Name</h5>
+                        <p class="m-0">Location</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                <div class="team-item bg-white mb-4">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <h5 class="text-truncate">Doctor Name</h5>
+                        <p class="m-0">Location</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+<!-- Testimonial Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
+            <h1>What Say Our Clients</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel">
+            <div class="text-center pb-4">
+                <img class="img-fluid mx-auto" src="img/testimonial-1.jpg" style="width: 100px; height: 100px;" >
+                <div class="testimonial-text bg-white p-4 mt-n5">
+                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                    <h5 class="text-truncate">Client Name</h5>
+                    <span>Profession</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <img class="img-fluid mx-auto" src="img/testimonial-2.jpg" style="width: 100px; height: 100px;" >
+                <div class="testimonial-text bg-white p-4 mt-n5">
+                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                    <h5 class="text-truncate">Client Name</h5>
+                    <span>Profession</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <img class="img-fluid mx-auto" src="img/testimonial-3.jpg" style="width: 100px; height: 100px;" >
+                <div class="testimonial-text bg-white p-4 mt-n5">
+                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                    <h5 class="text-truncate">Client Name</h5>
+                    <span>Profession</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <img class="img-fluid mx-auto" src="img/testimonial-4.jpg" style="width: 100px; height: 100px;" >
+                <div class="testimonial-text bg-white p-4 mt-n5">
+                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                    <h5 class="text-truncate">Client Name</h5>
+                    <span>Profession</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+
+
+
 
 <section class="contact-container">
-    <div class="contact-content">
-        <div class="contact-details">
-            <h2>CONTACT DETAILS</h2>
+    <div class="contact-grid">
+        <!-- Left card: Contact details + Map -->
+        <div class="contact-card contact-info-card">
+            <h2 class="card-title">Contact Details</h2>
 
-            <div class="contact-info">
-                <p>395/4,<br>
-                    Harischandra Mawatha,<br>
-                    Anuradhapura,<br>
-                    Sri Lanka</p>
+            <ul class="info-list">
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <strong>Address</strong><br>
+                        395/4, Harischandra Mawatha,<br>Anuradhapura, Sri Lanka
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <strong>General</strong> <a href="tel:+94769921134">+94 76 992 1134</a><br>
+                        <strong>Reservations</strong> <a href="tel:+94769921134">+94 76 992 1134</a>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong> <a href="mailto:reservations@helasuwaya.lk">reservations@helasuwaya.lk</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="social-row">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
 
-            <div class="contact-info">
-                <h3>GENERAL NUMBER</h3>
-                <p>+94 25 2030200</p>
+            <div class="map-wrap">
+                <iframe class="map-embed"
+                        src="https://www.google.com/maps?q=395/4%20Harischandra%20Mawatha,%20Anuradhapura,%20Sri%20Lanka&z=16&output=embed"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
 
-            <div class="contact-info">
-                <h3>RESERVATION NUMBER</h3>
-                <p>+94 704 725 634</p>
-            </div>
-
-            <div class="contact-info">
-                <h3>EMAIL ADDRESS</h3>
-                <p>reservations@helasuwaya.lk</p>
-            </div>
-
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook">f</a>
-                <a href="#" aria-label="Twitter">t</a>
-                <a href="#" aria-label="YouTube">▶</a>
-                <a href="#" aria-label="LinkedIn">in</a>
-                <a href="#" aria-label="Instagram">📷</a>
+            <div class="quick-actions">
+                <a class="btn-action" href="https://www.google.com/maps/dir/?api=1&destination=395/4%20Harischandra%20Mawatha,%20Anuradhapura,%20Sri%20Lanka" target="_blank">
+                    <i class="fa-solid fa-route"></i> Get Directions
+                </a>
+                <a class="btn-action" href="https://wa.me/94769921134" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a class="btn-action" href="mailto:reservations@helasuwaya.lk">
+                    <i class="fa-solid fa-paper-plane"></i> Email Us
+                </a>
             </div>
         </div>
 
-        <form class="contact-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-            </div>
+        <!-- Right card: Contact form -->
+        <div class="contact-card contact-form-card">
+            <h2 class="card-title">Send us a message</h2>
+            <form class="contact-form" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">In Submitting This Inquiry, I Confirm That I Have Read The <a href="#">Refund & Cancelation Policy</a> Of This Website.</label>
-            </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">In Submitting This Inquiry, I Confirm That I Have Read The <a href="#">Refund & Cancelation Policy</a> Of This Website.</label>
+                </div>
 
-            <button type="submit" class="submit-btn">SUBMIT</button>
-        </form>
+                <button type="submit" class="submit-btn">SUBMIT</button>
+            </form>
+        </div>
     </div>
 </section>
-
 <!-- Footer Section -->
 <footer class="footer">
     <div class="footer-content">
@@ -236,8 +459,8 @@
 
             <div class="contact-item">
                 <h4>GENERAL NUMBER</h4>
-                <p>+94 25 2030200</p>
-                <p>+94 704 725 634</p>
+                <p>+94 76 992 1134</p>
+                <p>+94 76 992 1134</p>
             </div>
 
             <div class="contact-item">
@@ -311,12 +534,13 @@
     </button>
 
     <!-- WhatsApp button -->
-    <a href="https://wa.me/94704725634" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/94769921134" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 </footer>
 
 <script>
+
     function scrollToTop() {
         window.scrollTo({
             top: 0,

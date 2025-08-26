@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Ayurveda Wellness</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS (if you have them) -->
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/about.css" rel="stylesheet">
+
+    <style>
+        /* ===============================
+           Ayurveda Booking Page Styles
+           NOTE: Navbar untouched.
+           Scope: #bookingPage only
+           =============================== */
+
+        /* Theme tokens */
+        :root {
+            --ay-primary: #2e7d64;     /* Herbal green */
+            --ay-primary-600: #256f59; /* Darker green */
+            --ay-accent: #e8a842;      /* Warm turmeric */
+            --ay-bg: #f7f6f2;          /* Sand */
+            --ay-text: #1f2937;        /* Slate */
+            --ay-muted: #6b7280;       /* Muted text */
+            --ay-success: #21a179;
+            --ay-danger: #ef4444;
+            --ay-shadow: 0 8px 24px rgba(16,24,40,0.08);
+        }
+
+        /* Wrap only the booking area so navbar won't change */
+        #bookingPage {
+            padding-top: 6.5rem; /* space for fixed navbar */
+            background: linear-gradient(180deg, var(--ay-bg) 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+
+        /* Titles */
+        #bookingPage h2,
+        #bookingPage h4,
+        #bookingPage .form-label {
+            color: #243b36;
+        }
+        #bookingPage h2 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: .3px;
+        }
+
+        /* Cards */
+        #bookingPage .card {
+            border: 1px solid rgba(16,24,40,.06);
+            border-radius: 16px;
+            box-shadow: var(--ay-shadow);
+            overflow: hidden;
+            background: #ffffff;
+        }
+        #bookingPage .rounded-4 { border-radius: 16px !important; }
+
+        /* Form fields */
+        #bookingPage .form-label {
+            font-weight: 600;
+            margin-bottom: .35rem;
+        }
+        #bookingPage .form-control {
+            border: 1.2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 10px 14px;
+            box-shadow: none !important;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;
+        }
+        #bookingPage .form-control:focus {
+            border-color: var(--ay-primary);
+            box-shadow: 0 0 0 .2rem rgba(46,125,100,.15) !important;
+        }
+        /* Remove number spinners (webkit) */
+        #bookingPage input[type=number]::-webkit-outer-spin-button,
+        #bookingPage input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none; margin: 0;
+        }
+        #bookingPage input[type=number] { -moz-appearance: textfield; } /* firefox */
+
+        /* Buttons */
+        #bookingPage .btn-primary {
+            background: linear-gradient(135deg, var(--ay-primary) 0%, #268f78 100%);
+            border: 0;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-weight: 600;
+            letter-spacing: .2px;
+            box-shadow: 0 10px 22px rgba(38,143,120,.28);
+            transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+        }
+        #bookingPage .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 26px rgba(38,143,120,.32);
+            filter: brightness(1.03);
+        }
+        #bookingPage .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 8px 20px rgba(38,143,120,.25);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            background: var(--ay-primary);
+            border: 0;
+            box-shadow: 0 8px 16px rgba(46,125,100,.3);
+        }
+        .back-to-top:hover { background: var(--ay-primary-600); }
+
+        /* Sticky booking summary (right panel) */
+        @media (min-width: 992px) {
+            #bookingPage .col-md-4 > .card.bg-light {
+                position: sticky;
+                top: 6.75rem;
+            }
+        }
+        #bookingPage .card.bg-light {
+            background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%) !important;
+        }
+
+        /* Summary list styles */
+        #bookingPage .list-group-item {
+            background: transparent;
+            border: none;
+            padding: 10px 0;
+            color: #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #bookingPage .list-group-item strong {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        #bookingPage #summaryTotal {
+            color: var(--ay-primary) !important;
+            font-weight: 800;
+        }
+
+        /* Selectable cards (Packages / Vehicles / Guides) */
+        #packageCards .card,
+        #availableVehicles .card,
+        #guideCards .card,
+        #packageCards .selectable-card,
+        #availableVehicles .selectable-card,
+        #guideCards .selectable-card {
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            border-radius: 14px;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;
+            cursor: pointer;
+        }
+        #packageCards .card:hover,
+        #availableVehicles .card:hover,
+        #guideCards .card:hover,
+        #packageCards .selectable-card:hover,
+        #availableVehicles .selectable-card:hover,
+        #guideCards .selectable-card:hover {
+            border-color: var(--ay-primary);
+            box-shadow: 0 10px 22px rgba(46,125,100,.12);
+            transform: translateY(-1px);
+        }
+        #packageCards .card.selected,
+        #availableVehicles .card.selected,
+        #guideCards .card.selected,
+        #packageCards .selectable-card.selected,
+        #availableVehicles .selectable-card.selected,
+        #guideCards .selectable-card.selected {
+            border-color: var(--ay-primary);
+            box-shadow: 0 12px 26px rgba(46,125,100,.18);
+            outline: 3px solid rgba(46,125,100,.08);
+        }
+
+        /* Mini badges */
+        #bookingPage .badge-soft {
+            color: #0f5132;
+            background: rgba(46,125,100,.12);
+            border: 1px solid rgba(46,125,100,.22);
+            border-radius: 999px;
+            padding: .25rem .5rem;
+            font-weight: 600;
+            font-size: .8rem;
+        }
+
+        /* Payment modal */
+        #paymentModal .modal-content {
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 18px 40px rgba(16,24,40,.2);
+        }
+        #paymentModal .btn-success {
+            background: linear-gradient(135deg, var(--ay-success), #1a8a65);
+            border: 0;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-weight: 700;
+            box-shadow: 0 10px 22px rgba(33,161,121,.28);
+        }
+        #paymentModal .btn-success:hover {
+            filter: brightness(1.03);
+            transform: translateY(-1px);
+        }
+
+        /* Inputs inside modal use same style */
+        #paymentModal .form-control {
+            border-radius: 12px;
+            border: 1.2px solid #e2e8f0;
+        }
+        #paymentModal .form-control:focus {
+            border-color: var(--ay-primary);
+            box-shadow: 0 0 0 .2rem rgba(46,125,100,.15) !important;
+        }
+
+        /* Small helpers */
+        #bookingPage .text-success { color: var(--ay-success) !important; }
+        #bookingPage .text-danger { color: var(--ay-danger) !important; }
+
+        /* Spacing tweaks */
+        #bookingPage .g-2 > [class*='col'],
+        #bookingPage .g-3 > [class*='col'] { display: flex; }
+        #bookingPage .g-2 .card,
+        #bookingPage .g-3 .card { width: 100%; }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <nav class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>
+                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+                <!-- Sign in/up -->
+                <li class="nav-item">
+                    <a href="signin.html" class="nav-link">Sign in/up</a>
+                </li>
+
+                <!-- Dropdown (hidden until login) -->
+                <li class="nav-item dropdown d-none" id="userDropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        Hi, User Name
+                    </a>
+                    <ul class="dropdown-menu border-0 rounded-0 m-0">
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Booking Page Wrapper -->
+<main id="bookingPage">
+    <div class="container py-5">
+        <div class="card shadow-lg p-4 mx-auto">
+            <h2 class="mb-4 text-center">Create a New Booking</h2>
+
+            <div class="row g-4">
+                <!-- Left Panel -->
+                <div class="col-md-7">
+                    <div class="card p-4 shadow-sm rounded-4">
+
+                        <!-- Booking Date -->
+                        <div class="mb-3">
+                            <label for="bookingDate" class="form-label">Booking Start Date</label>
+                            <input type="date" id="bookingDate" class="form-control" required>
+                        </div>
+
+                        <!-- Number of People -->
+                        <div class="mb-3">
+                            <label for="numPeople" class="form-label">Number of People</label>
+                            <input type="number" id="numPeople" class="form-control" value="1" min="1" required>
+                        </div>
+
+                        <!-- Package Cards -->
+                        <div class="mb-3">
+                            <label class="form-label">Select Package</label>
+                            <div id="packageCards" class="row g-3">
+                                <!-- Packages will render here -->
+                            </div>
+                        </div>
+
+                        <!-- Available Vehicles -->
+                        <div class="mb-3">
+                            <label class="form-label">Available Location</label>
+                            <div id="availableVehicles" class="row g-3">
+                                <!-- Vehicles will be loaded here dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Available Guides -->
+                        <div class="mb-3">
+                            <label class="form-label">Available Doctors</label>
+                            <div id="guideCards" class="row g-2">
+                                <!-- Guides will be loaded here dynamically -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Panel -->
+                <div class="col-md-4 offset-md-1 offset-lg-1 offset-xl-1">
+                    <div class="card shadow-sm rounded-4 p-4 bg-light">
+                        <h4 class="mb-3 text-center">Booking Summary</h4>
+
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">User email</label>
+                            <input type="text" id="userEmail" name="userEmail" class="form-control" readonly>
+                        </div>
+
+                        <!-- Booking Date-->
+                        <div class="mb-3">
+                            <label for="summaryBookingDate" class="form-label">Booking Date</label>
+                            <input type="text" id="summaryBookingDate" class="form-control" readonly>
+                        </div>
+
+                        <!-- Checkout Date (calculated) -->
+                        <div class="mb-3">
+                            <label for="checkoutDate" class="form-label">Checkout Date</label>
+                            <input type="text" id="checkoutDate" class="form-control" readonly>
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Estimated Days:</strong> <span id="summaryDays">--</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Selected Package:</strong> <span id="summaryPackage">--</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>People:</strong> <span id="summaryPeople">1</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Location:</strong> <span id="summaryVehicle">--</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Doctor:</strong> <span id="summaryGuide">--</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Doctor Email:</strong> <span id="summaryGuideEmail">--</span>
+                            </li>
+                            <li class="list-group-item ">
+                                <strong>Location No:</strong> <span id="summaryVehicleNumber">--</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Base Price:</strong> <span id="summaryBase">LKR 0.00</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Doctor Fee:</strong> <span id="summaryGuideFee">LKR 0.00</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Total Price:</strong>
+                                <span id="summaryTotal" class="text-success fw-bold">LKR 0.00</span>
+                            </li>
+                        </ul>
+
+                        <div class="d-grid mt-4">
+                            <button class="btn btn-primary btn-lg" id="confirmBookingBtn" type="button">Confirm Booking</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /row -->
+        </div> <!-- /card -->
+    </div> <!-- /container -->
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Complete Your Payment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p><strong>Email:</strong> <span id="paymentEmail"></span></p>
+                    <p><strong>Total Amount:</strong> <span class="text-success fw-bold"><span id="paymentTotal">LKR 0.00</span></span></p>
+
+                    <form id="cardPaymentForm" novalidate>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="expiryDate" class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="password" class="form-control" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cardHolderName" class="form-label">Card Holder Name</label>
+                            <input type="text" class="form-control" id="cardHolderName" placeholder="Vindya Madubhashini" required>
+                        </div>
+
+                        <button type="submit" id="makePaymentBtn" class="btn btn-success w-100 mt-3">Pay Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section contact-details">
+            <h3>CONTACT DETAILS</h3>
+
+            <div class="contact-item">
+                <h4>ADDRESS</h4>
+                <p>395/4,<br>
+                    Harischandra Mawatha,<br>
+                    Anuradhapura,<br>
+                    Sri Lanka</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>GENERAL NUMBER</h4>
+                <p>+94 25 2030200</p>
+                <p>+94 704 725 634</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>EMAIL ADDRESS</h4>
+                <p>reservations@helasuwaya.lk</p>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section menu-section">
+            <h3>Hela Suwaya MENU</h3>
+
+            <div class="menu-columns">
+                <div class="menu-column">
+                    <ul>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">OUR DOCTORS</a></li>
+                        <li><a href="#">OUR PACKAGES</a></li>
+                        <li><a href="#">OUR FACILITIES</a></li>
+                        <li><a href="#">AYURVEDA</a></li>
+                        <li><a href="#">OUR BLOG</a></li>
+                    </ul>
+                </div>
+                <div class="menu-column">
+                    <ul>
+                        <li><a href="#">ABOUT US</a></li>
+                        <li><a href="#">OUR TREATMENTS</a></li>
+                        <li><a href="#">ACCOMMODATION</a></li>
+                        <li><a href="#">DESTINATIONS AND EXCURSIONS</a></li>
+                        <li><a href="#">HELA WEDAKAMA</a></li>
+                        <li><a href="#">CONTACT US</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-section logos-section">
+            <div class="logo-container">
+                <div class="main-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-leaf" style="font-size: 2rem; color: #d4af37;"></i>
+                        <h4>Hela Suwaya<br>AYURVEDA</h4>
+                    </div>
+                </div>
+                <div class="certification-logo">
+                    <div class="cert-placeholder">
+                        <i class="fas fa-certificate" style="font-size: 1.5rem; color: #4a7c59;"></i>
+                        <small>Certification<br>Partner</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy;2024 Hela Suwaya Ayurveda Private Limited</p>
+        <p>Website Design and Development by <a href="#">Athwa Solutions</a></p>
+    </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+        <span>Back to top</span>
+    </button>
+
+    <!-- WhatsApp button -->
+    <a href="https://wa.me/94704725634" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</footer>
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" id="backToTop" style="position: fixed; bottom: 24px; right: 24px; display: none;"><i class="fa fa-angle-double-up"></i></a>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--&lt;!&ndash; Page Logic &ndash;&gt;-->
+<!--<script>-->
+<!--    (function() {-->
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Sample Data &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        const packages = [-->
+<!--            {-->
+<!--                id: 'p1',-->
+<!--                name: 'Herbal Rejuvenation',-->
+<!--                days: 3,-->
+<!--                pricePerPerson: 15000,-->
+<!--                description: 'Abhyanga + Shirodhara + Herbal Steam',-->
+<!--                tags: ['3 days', 'Oil therapy']-->
+<!--            },-->
+<!--            {-->
+<!--                id: 'p2',-->
+<!--                name: 'Detox & Cleanse',-->
+<!--                days: 5,-->
+<!--                pricePerPerson: 24000,-->
+<!--                description: 'Panchakarma prelude with herbal meals',-->
+<!--                tags: ['5 days', 'Herbal meals']-->
+<!--            },-->
+<!--            {-->
+<!--                id: 'p3',-->
+<!--                name: 'Gold Retreat',-->
+<!--                days: 7,-->
+<!--                pricePerPerson: 38000,-->
+<!--                description: 'Full body therapy, yoga & meditation',-->
+<!--                tags: ['7 days', 'Yoga', 'Premium']-->
+<!--            }-->
+<!--        ];-->
+
+<!--        const vehicles = [-->
+<!--            { id: 'v1', name: 'Toyota Axio', seats: 4, ac: true, number: 'CAA-1234' },-->
+<!--            { id: 'v2', name: 'Nissan Caravan', seats: 8, ac: true, number: 'CAB-5678' },-->
+<!--            { id: 'v3', name: 'KDH Van', seats: 12, ac: true, number: 'KC-3456' },-->
+<!--            { id: 'v4', name: 'Suzuki Alto', seats: 3, ac: false, number: 'SP-9988' }-->
+<!--        ];-->
+
+<!--        const guides = [-->
+<!--            { id: 'g1', name: 'Sanduni Perera', email: 'sanduni@ayurveda.lk', feePerDay: 3500, languages: ['Sinhala', 'English'] },-->
+<!--            { id: 'g2', name: 'Nuwan Jayasiri', email: 'nuwan@ayurveda.lk', feePerDay: 4000, languages: ['Sinhala', 'English', 'Tamil'] },-->
+<!--            { id: 'g3', name: 'Ishara Fernando', email: 'ishara@ayurveda.lk', feePerDay: 4500, languages: ['English'] }-->
+<!--        ];-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; State &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        const state = {-->
+<!--            selectedPackageId: null,-->
+<!--            selectedVehicleId: null,-->
+<!--            selectedGuideId: null,-->
+<!--            numPeople: 1,-->
+<!--            startDate: null-->
+<!--        };-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; DOM &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        const userEmailInput = document.getElementById('userEmail');-->
+<!--        const bookingDateInput = document.getElementById('bookingDate');-->
+<!--        const numPeopleInput = document.getElementById('numPeople');-->
+
+<!--        const packageCardsEl = document.getElementById('packageCards');-->
+<!--        const vehicleCardsEl = document.getElementById('availableVehicles');-->
+<!--        const guideCardsEl = document.getElementById('guideCards');-->
+
+<!--        const summaryBookingDate = document.getElementById('summaryBookingDate');-->
+<!--        const checkoutDateEl = document.getElementById('checkoutDate');-->
+<!--        const summaryDays = document.getElementById('summaryDays');-->
+<!--        const summaryPackage = document.getElementById('summaryPackage');-->
+<!--        const summaryPeople = document.getElementById('summaryPeople');-->
+<!--        const summaryVehicle = document.getElementById('summaryVehicle');-->
+<!--        const summaryVehicleNumber = document.getElementById('summaryVehicleNumber');-->
+<!--        const summaryGuide = document.getElementById('summaryGuide');-->
+<!--        const summaryGuideEmail = document.getElementById('summaryGuideEmail');-->
+<!--        const summaryBase = document.getElementById('summaryBase');-->
+<!--        const summaryGuideFee = document.getElementById('summaryGuideFee');-->
+<!--        const summaryTotal = document.getElementById('summaryTotal');-->
+
+<!--        const confirmBookingBtn = document.getElementById('confirmBookingBtn');-->
+
+<!--        const paymentModalEl = document.getElementById('paymentModal');-->
+<!--        const paymentEmailEl = document.getElementById('paymentEmail');-->
+<!--        const paymentTotalEl = document.getElementById('paymentTotal');-->
+<!--        const cardPaymentForm = document.getElementById('cardPaymentForm');-->
+<!--        const backToTopBtn = document.getElementById('backToTop');-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Utils &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        const fmtCurrency = (amount) => new Intl.NumberFormat('en-LK', { style: 'currency', currency: 'LKR' }).format(amount || 0);-->
+<!--        const fmtDateNice = (date) => date ? date.toLocaleDateString('en-GB', { weekday:'short', year:'numeric', month:'short', day:'numeric' }) : '&#45;&#45;';-->
+<!--        const todayISO = () => {-->
+<!--            const t = new Date();-->
+<!--            t.setHours(0,0,0,0);-->
+<!--            return toInputDate(t);-->
+<!--        };-->
+<!--        function toInputDate(date) {-->
+<!--            const y = date.getFullYear();-->
+<!--            const m = String(date.getMonth() + 1).padStart(2, '0');-->
+<!--            const d = String(date.getDate()).padStart(2, '0');-->
+<!--            return `${y}-${m}-${d}`;-->
+<!--        }-->
+<!--        function parseInputDate(val) {-->
+<!--            if (!val) return null;-->
+<!--            const [y,m,d] = val.split('-').map(Number);-->
+<!--            const dt = new Date(y, m-1, d);-->
+<!--            dt.setHours(0,0,0,0);-->
+<!--            return dt;-->
+<!--        }-->
+<!--        function addDays(date, days) {-->
+<!--            const d = new Date(date);-->
+<!--            d.setDate(d.getDate() + days - 1); // Checkout is last day of stay-->
+<!--            return d;-->
+<!--        }-->
+<!--        function getSelectedPackage() {-->
+<!--            return packages.find(p => p.id === state.selectedPackageId) || null;-->
+<!--        }-->
+<!--        function getSelectedVehicle() {-->
+<!--            return vehicles.find(v => v.id === state.selectedVehicleId) || null;-->
+<!--        }-->
+<!--        function getSelectedGuide() {-->
+<!--            return guides.find(g => g.id === state.selectedGuideId) || null;-->
+<!--        }-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Renderers &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        function renderPackages() {-->
+<!--            packageCardsEl.innerHTML = '';-->
+<!--            packages.forEach(p => {-->
+<!--                const col = document.createElement('div');-->
+<!--                col.className = 'col-12 col-md-6 col-lg-4';-->
+
+<!--                const card = document.createElement('div');-->
+<!--                card.className = 'card selectable-card h-100 p-3';-->
+<!--                card.tabIndex = 0;-->
+<!--                card.setAttribute('role', 'button');-->
+<!--                if (state.selectedPackageId === p.id) card.classList.add('selected');-->
+
+<!--                card.innerHTML = `-->
+<!--                <div class="d-flex justify-content-between align-items-start">-->
+<!--                    <h6 class="mb-1">${p.name}</h6>-->
+<!--                    <span class="badge-soft">${p.days} days</span>-->
+<!--                </div>-->
+<!--                <p class="text-muted small mb-2">${p.description}</p>-->
+<!--                <div class="d-flex flex-wrap gap-1 mb-2">-->
+<!--                    ${p.tags.map(t => `<span class="badge-soft">${t}</span>`).join('')}-->
+<!--                </div>-->
+<!--                <div class="d-flex justify-content-between align-items-center">-->
+<!--                    <small class="text-muted">Per person</small>-->
+<!--                    <span class="fw-semibold text-success">${fmtCurrency(p.pricePerPerson)}</span>-->
+<!--                </div>-->
+<!--            `;-->
+
+<!--                card.addEventListener('click', () => {-->
+<!--                    state.selectedPackageId = p.id;-->
+<!--                    // Reset checkout calculation on package change-->
+<!--                    updateSummary();-->
+<!--                    // Re-render selection state-->
+<!--                    renderPackages();-->
+<!--                });-->
+
+<!--                col.appendChild(card);-->
+<!--                packageCardsEl.appendChild(col);-->
+<!--            });-->
+<!--        }-->
+
+<!--        function renderVehicles() {-->
+<!--            vehicleCardsEl.innerHTML = '';-->
+<!--            const neededSeats = Math.max(1, Number(state.numPeople) || 1);-->
+<!--            const filtered = vehicles.filter(v => v.seats >= neededSeats);-->
+
+<!--            if (!filtered.length) {-->
+<!--                vehicleCardsEl.innerHTML = `<div class="col-12"><div class="alert alert-warning mb-0">No vehicles available for ${neededSeats} people. Try reducing people or add a larger vehicle to the list.</div></div>`;-->
+<!--                state.selectedVehicleId = null;-->
+<!--                updateSummary();-->
+<!--                return;-->
+<!--            }-->
+
+<!--            filtered.forEach(v => {-->
+<!--                const col = document.createElement('div');-->
+<!--                col.className = 'col-12 col-md-6';-->
+
+<!--                const card = document.createElement('div');-->
+<!--                card.className = 'card selectable-card h-100 p-3';-->
+<!--                card.tabIndex = 0;-->
+<!--                card.setAttribute('role', 'button');-->
+<!--                if (state.selectedVehicleId === v.id) card.classList.add('selected');-->
+
+<!--                card.innerHTML = `-->
+<!--                <div class="d-flex justify-content-between align-items-start">-->
+<!--                    <h6 class="mb-1">${v.name}</h6>-->
+<!--                    ${v.ac ? `<span class="badge-soft">A/C</span>` : `<span class="badge-soft">Non A/C</span>`}-->
+<!--                </div>-->
+<!--                <div class="text-muted small mb-2">Seats: ${v.seats}</div>-->
+<!--                <div class="d-flex justify-content-between align-items-center">-->
+<!--                    <small class="text-muted">Vehicle No</small>-->
+<!--                    <span class="fw-semibold">${v.number}</span>-->
+<!--                </div>-->
+<!--            `;-->
+
+<!--                card.addEventListener('click', () => {-->
+<!--                    state.selectedVehicleId = v.id;-->
+<!--                    renderVehicles();-->
+<!--                    updateSummary();-->
+<!--                });-->
+
+<!--                col.appendChild(card);-->
+<!--                vehicleCardsEl.appendChild(col);-->
+<!--            });-->
+
+<!--            // If previously selected vehicle no longer valid (due to people change), clear it-->
+<!--            const current = getSelectedVehicle();-->
+<!--            if (current && current.seats < neededSeats) {-->
+<!--                state.selectedVehicleId = null;-->
+<!--                updateSummary();-->
+<!--            }-->
+<!--        }-->
+
+<!--        function renderGuides() {-->
+<!--            guideCardsEl.innerHTML = '';-->
+<!--            guides.forEach(g => {-->
+<!--                const col = document.createElement('div');-->
+<!--                col.className = 'col-12 col-sm-6';-->
+
+<!--                const card = document.createElement('div');-->
+<!--                card.className = 'card selectable-card h-100 p-3';-->
+<!--                card.tabIndex = 0;-->
+<!--                card.setAttribute('role', 'button');-->
+<!--                if (state.selectedGuideId === g.id) card.classList.add('selected');-->
+
+<!--                card.innerHTML = `-->
+<!--                <div class="d-flex justify-content-between align-items-start">-->
+<!--                    <h6 class="mb-1">${g.name}</h6>-->
+<!--                    <span class="badge-soft">${g.languages.join(' / ')}</span>-->
+<!--                </div>-->
+<!--                <div class="text-muted small mb-2">${g.email}</div>-->
+<!--                <div class="d-flex justify-content-between align-items-center">-->
+<!--                    <small class="text-muted">Guide fee (per day)</small>-->
+<!--                    <span class="fw-semibold text-success">${fmtCurrency(g.feePerDay)}</span>-->
+<!--                </div>-->
+<!--            `;-->
+
+<!--                card.addEventListener('click', () => {-->
+<!--                    state.selectedGuideId = g.id;-->
+<!--                    renderGuides();-->
+<!--                    updateSummary();-->
+<!--                });-->
+
+<!--                col.appendChild(card);-->
+<!--                guideCardsEl.appendChild(col);-->
+<!--            });-->
+<!--        }-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Summary and Price &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        function updateSummary() {-->
+<!--            summaryPeople.textContent = String(state.numPeople);-->
+
+<!--            // Dates-->
+<!--            const start = parseInputDate(bookingDateInput.value || todayISO());-->
+<!--            state.startDate = start;-->
+<!--            summaryBookingDate.value = fmtDateNice(start);-->
+
+<!--            const pack = getSelectedPackage();-->
+<!--            const days = pack ? pack.days : 0;-->
+<!--            summaryDays.textContent = days || '&#45;&#45;';-->
+
+<!--            if (start && days) {-->
+<!--                const co = addDays(start, days);-->
+<!--                checkoutDateEl.value = fmtDateNice(co);-->
+<!--            } else {-->
+<!--                checkoutDateEl.value = '';-->
+<!--            }-->
+
+<!--            // Package summary + base price-->
+<!--            if (pack) {-->
+<!--                summaryPackage.textContent = pack.name;-->
+<!--                const base = (pack.pricePerPerson || 0) * Math.max(1, state.numPeople);-->
+<!--                summaryBase.textContent = fmtCurrency(base);-->
+<!--            } else {-->
+<!--                summaryPackage.textContent = '&#45;&#45;';-->
+<!--                summaryBase.textContent = fmtCurrency(0);-->
+<!--            }-->
+
+<!--            // Vehicle summary-->
+<!--            const veh = getSelectedVehicle();-->
+<!--            summaryVehicle.textContent = veh ? veh.name : '&#45;&#45;';-->
+<!--            summaryVehicleNumber.textContent = veh ? veh.number : '&#45;&#45;';-->
+
+<!--            // Guide summary + fee-->
+<!--            const guide = getSelectedGuide();-->
+<!--            summaryGuide.textContent = guide ? guide.name : '&#45;&#45;';-->
+<!--            summaryGuideEmail.textContent = guide ? guide.email : '&#45;&#45;';-->
+<!--            const guideFee = (guide && days) ? (guide.feePerDay * days) : 0;-->
+<!--            summaryGuideFee.textContent = fmtCurrency(guideFee);-->
+
+<!--            // Total = base + guide fee (vehicle free for now)-->
+<!--            const baseVal = pack ? (pack.pricePerPerson * Math.max(1, state.numPeople)) : 0;-->
+<!--            const total = baseVal + guideFee;-->
+<!--            summaryTotal.textContent = fmtCurrency(total);-->
+<!--        }-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Payment &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        function validateCardForm() {-->
+<!--            const num = (document.getElementById('cardNumber').value || '').replace(/\s+/g, '');-->
+<!--            const exp = (document.getElementById('expiryDate').value || '').trim();-->
+<!--            const cvv = (document.getElementById('cvv').value || '').trim();-->
+<!--            const name = (document.getElementById('cardHolderName').value || '').trim();-->
+
+<!--            // Very basic validations-->
+<!--            if (!/^\d{16}$/.test(num)) return { ok: false, msg: 'Please enter a valid 16-digit card number.' };-->
+<!--            if (!/^\d{2}\/\d{2}$/.test(exp)) return { ok: false, msg: 'Expiry should be MM/YY.' };-->
+<!--            const [mm, yy] = exp.split('/').map(Number);-->
+<!--            if (mm < 1 || mm > 12) return { ok: false, msg: 'Expiry month must be between 01 and 12.' };-->
+<!--            if (!/^\d{3,4}$/.test(cvv)) return { ok: false, msg: 'CVV must be 3 or 4 digits.' };-->
+<!--            if (name.length < 3) return { ok: false, msg: 'Card holder name is too short.' };-->
+<!--            return { ok: true };-->
+<!--        }-->
+
+<!--        function canConfirm() {-->
+<!--            return Boolean(getSelectedPackage() && getSelectedVehicle() && getSelectedGuide() && state.startDate);-->
+<!--        }-->
+
+<!--        // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Events &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        document.addEventListener('DOMContentLoaded', () => {-->
+<!--            // Prefill email from localStorage or fallback-->
+<!--            const savedEmail = localStorage.getItem('userEmail') || 'guest@ayurveda.lk';-->
+<!--            userEmailInput.value = savedEmail;-->
+
+<!--            // Init date-->
+<!--            bookingDateInput.min = todayISO();-->
+<!--            bookingDateInput.value = todayISO();-->
+
+<!--            // Set initial state-->
+<!--            state.numPeople = Math.max(1, parseInt(numPeopleInput.value || '1', 10));-->
+<!--            updateSummary();-->
+
+<!--            // Render lists-->
+<!--            renderPackages();-->
+<!--            renderVehicles();-->
+<!--            renderGuides();-->
+<!--        });-->
+
+<!--        bookingDateInput.addEventListener('change', () => {-->
+<!--            updateSummary();-->
+<!--        });-->
+
+<!--        numPeopleInput.addEventListener('input', () => {-->
+<!--            const val = Math.max(1, Number(numPeopleInput.value || 1));-->
+<!--            state.numPeople = val;-->
+<!--            summaryPeople.textContent = String(val);-->
+<!--            renderVehicles(); // filter by seats-->
+<!--            updateSummary();-->
+<!--        });-->
+
+<!--        confirmBookingBtn.addEventListener('click', () => {-->
+<!--            if (!canConfirm()) {-->
+<!--                const missing = [];-->
+<!--                if (!getSelectedPackage()) missing.push('package');-->
+<!--                if (!getSelectedVehicle()) missing.push('vehicle');-->
+<!--                if (!getSelectedGuide()) missing.push('guide');-->
+<!--                if (!state.startDate) missing.push('start date');-->
+
+<!--                alert('Please select: ' + missing.join(', ') + '.');-->
+<!--                return;-->
+<!--            }-->
+<!--            // Open modal with payment details-->
+<!--            paymentEmailEl.textContent = userEmailInput.value || 'guest@ayurveda.lk';-->
+<!--            paymentTotalEl.textContent = summaryTotal.textContent;-->
+<!--            const pm = new bootstrap.Modal(paymentModalEl);-->
+<!--            pm.show();-->
+<!--        });-->
+
+<!--        cardPaymentForm.addEventListener('submit', (e) => {-->
+<!--            e.preventDefault();-->
+<!--            const v = validateCardForm();-->
+<!--            if (!v.ok) {-->
+<!--                alert(v.msg);-->
+<!--                return;-->
+<!--            }-->
+
+<!--            // Simulate payment success-->
+<!--            const btn = document.getElementById('makePaymentBtn');-->
+<!--            btn.disabled = true;-->
+<!--            btn.textContent = 'Processing...';-->
+
+<!--            setTimeout(() => {-->
+<!--                btn.disabled = false;-->
+<!--                btn.textContent = 'Pay Now';-->
+<!--                const pm = bootstrap.Modal.getInstance(paymentModalEl);-->
+<!--                pm && pm.hide();-->
+<!--                alert('Payment successful! Your booking is confirmed.');-->
+<!--                // TODO: Send booking to backend via fetch if needed.-->
+<!--            }, 1200);-->
+<!--        });-->
+
+<!--        // Back to top-->
+<!--        window.addEventListener('scroll', () => {-->
+<!--            if (window.scrollY > 300) {-->
+<!--                backToTopBtn.style.display = 'inline-flex';-->
+<!--            } else {-->
+<!--                backToTopBtn.style.display = 'none';-->
+<!--            }-->
+<!--        });-->
+<!--        backToTopBtn.addEventListener('click', (e) => {-->
+<!--            e.preventDefault();-->
+<!--            window.scrollTo({ top: 0, behavior: 'smooth' });-->
+<!--        });-->
+<!--    })();-->
+<!--</script>-->
+
+</body>
+</html>

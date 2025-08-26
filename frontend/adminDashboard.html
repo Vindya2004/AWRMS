@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AyurWedha Admin Panel</title>
+
+    <!-- Styles & Libs -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --sidebar-bg: #1b5e20;     /* dark green */
+            --sidebar-hover: #2e7d32;  /* mid green */
+            --accent: #66bb6a;         /* light green accent */
+            --text-light: #ffffff;
+        }
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            background: #f7faf7;
+        }
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            background: var(--sidebar-bg);
+            color: var(--text-light);
+            padding: 20px;
+        }
+        .sidebar .brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+            color: #e8f5e9;
+        }
+        .sidebar a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: background .2s ease;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: var(--sidebar-hover);
+        }
+        .content {
+            flex-grow: 1;
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        .hidden { display: none; }
+        .stat-card i {
+            font-size: 34px;
+            color: var(--accent);
+        }
+        .stat-card h4 { margin: 0; }
+        .table thead th {
+            background: #225e2a !important;
+            color: #fff !important;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .content { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center justify-content-center mb-3">
+        <i class="fa-solid fa-leaf me-2"></i> AyurWedha Admin
+    </div>
+
+    <a onclick="showPanel('dashboard')" class="active"><i class="fa-solid fa-gauge-high me-2"></i> Dashboard</a>
+    <a onclick="showPanel('patients')"><i class="fa-solid fa-users me-2"></i> User</a>
+    <a onclick="showPanel('practitioners')"><i class="fa-solid fa-user-doctor me-2"></i> Doctor</a>
+    <a onclick="showPanel('appointments')"><i class="fa-solid fa-calendar-check me-2"></i> Booking</a>
+    <a onclick="showPanel('treatments')"><i class="fa-solid fa-spa me-2"></i> Treatments</a>
+    <a onclick="showPanel('payments')"><i class="fa-solid fa-wallet me-2"></i> Payments</a>
+    <!-- Add under existing links -->
+    <a onclick="showPanel('accommodations')"><i class="fa-solid fa-hotel me-2"></i> Accommodation</a>
+    <a onclick="showPanel('packages')"><i class="fa-solid fa-box-open me-2"></i> Packages</a>
+
+
+    <div class="mt-auto">
+        <h6 class="mb-2">Hi, <span class="fw-bold">admin</span></h6>
+        <button id="logoutBtn" class="btn btn-outline-light btn-sm" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket me-1"></i> Log Out
+        </button>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="container mt-3">
+        <h2 class="mb-4">Welcome to AyurWedha Dashboard</h2>
+
+        <!-- Stats -->
+        <div class="row g-3">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card shadow-sm border-0 stat-card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fa-solid fa-calendar-check me-3"></i>
+                        <div>
+                            <h6 class="text-muted mb-1">Total Appointments</h6>
+                            <h4 id="totalAppointments">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card shadow-sm border-0 stat-card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fa-solid fa-users me-3"></i>
+                        <div>
+                            <h6 class="text-muted mb-1">Total Patients</h6>
+                            <h4 id="totalPatients">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card shadow-sm border-0 stat-card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fa-solid fa-user-doctor me-3"></i>
+                        <div>
+                            <h6 class="text-muted mb-1">Total Practitioners</h6>
+                            <h4 id="totalPractitioners">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card shadow-sm border-0 stat-card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fa-solid fa-sack-dollar me-3"></i>
+                        <div>
+                            <h6 class="text-muted mb-1">Revenue Today (LKR)</h6>
+                            <h4 id="revenueToday">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row g-4 mt-1">
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="text-center">Appointments Per Day</h5>
+                        <canvas id="appointmentsPerDayChart" height="350"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="text-center">Revenue by Treatment</h5>
+                        <canvas id="revenueByTreatmentChart" height="350"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patients -->
+    <div id="patients" class="hidden">
+        <h1>Patient Management</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <input type="text" id="searchPatient" class="form-control w-50" placeholder="Search by name, email or phone">
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Age</th>
+                <th>Registered On</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="patientTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Practitioners -->
+    <div id="practitioners" class="hidden">
+        <h1>Practitioner Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPractitionerModal">
+                <i class="fa-solid fa-plus me-1"></i> Add Practitioner
+            </button>
+            <input type="text" id="searchPractitioner" class="form-control w-25" placeholder="Search by name or email">
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Specialty</th>
+                <th>Fee / Session (LKR)</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="practitionerTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Add Practitioner Modal -->
+    <div class="modal fade" id="addPractitionerModal" tabindex="-1" aria-labelledby="addPractitionerLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="addPractitionerForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addPractitionerLabel">Add Practitioner</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="prName" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="prEmail" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Specialty</label>
+                            <input type="text" class="form-control" id="prSpecialty" placeholder="e.g., Panchakarma, Herbal Medicine" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Fee / Session (LKR)</label>
+                            <input type="number" class="form-control" id="prFee" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="prDescription" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">LinkedIn (optional)</label>
+                            <input type="url" class="form-control" id="prLinkedIn">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Profile Image</label>
+                            <input type="file" class="form-control" id="prImage" accept="image/*">
+                            <img id="prImagePreview" style="width:80px;height:80px;display:none;border-radius:6px;margin-top:6px;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Save Practitioner</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Appointments -->
+    <div id="appointments" class="hidden">
+        <h1>Appointment Management</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <input type="text" id="searchAppointment" class="form-control w-25" placeholder="Search by patient/practitioner">
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Patient</th>
+                <th>Practitioner</th>
+                <th>Treatment</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Fee (LKR)</th>
+            </tr>
+            </thead>
+            <tbody id="appointmentTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Treatments -->
+    <div id="treatments" class="hidden">
+        <h1>Treatment Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTreatmentModal">
+                <i class="fa-solid fa-plus me-1"></i> Add Treatment
+            </button>
+            <input type="text" id="searchTreatment" class="form-control w-25" placeholder="Search treatments">
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Duration (min)</th>
+                <th>Base Fee (LKR)</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="treatmentTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Add Treatment Modal -->
+    <div class="modal fade" id="addTreatmentModal" tabindex="-1" aria-labelledby="addTreatmentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="addTreatmentForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addTreatmentLabel">Add Treatment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label class="form-label">Code</label>
+                            <input type="text" class="form-control" id="trCode" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="trName" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Duration (min)</label>
+                            <input type="number" class="form-control" id="trDuration" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Base Fee (LKR)</label>
+                            <input type="number" class="form-control" id="trFee" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="trDescription" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Image</label>
+                            <input type="file" class="form-control" id="trImage" accept="image/*">
+                            <img id="trImagePreview" style="width:80px;height:80px;display:none;border-radius:6px;margin-top:6px;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Create Treatment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accommodation -->
+    <div id="accommodations" class="hidden">
+        <h1>Accommodation Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAccommodationModal">
+                <i class="fa-solid fa-plus me-1"></i> Add Accommodation
+            </button>
+            <input type="text" id="searchAccommodation" class="form-control w-25" placeholder="Search by code, name or type">
+        </div>
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Capacity</th>
+                <th>Price / Night (LKR)</th>
+                <th>Status</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="accommodationTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Add Accommodation Modal -->
+    <div class="modal fade" id="addAccommodationModal" tabindex="-1" aria-labelledby="addAccommodationLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="addAccommodationForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addAccommodationLabel">Add Accommodation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label class="form-label">Code</label>
+                            <input type="text" class="form-control" id="accCode" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="accName" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Type</label>
+                            <select class="form-select" id="accType" required>
+                                <option value="">Select type</option>
+                                <option>Room</option>
+                                <option>Suite</option>
+                                <option>Villa</option>
+                                <option>Cottage</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Capacity</label>
+                            <input type="number" class="form-control" id="accCapacity" min="1" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Price / Night (LKR)</label>
+                            <input type="number" class="form-control" id="accPrice" min="0" step="0.01" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="accStatus" required>
+                                <option>AVAILABLE</option>
+                                <option>UNAVAILABLE</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="accDescription" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Image</label>
+                            <input type="file" class="form-control" id="accImage" accept="image/*">
+                            <img id="accImagePreview" style="width:80px;height:80px;display:none;border-radius:6px;margin-top:6px;object-fit:cover">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Save Accommodation</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Packages -->
+    <div id="packages" class="hidden">
+        <h1>Package Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPackageModal">
+                <i class="fa-solid fa-plus me-1"></i> Add Package
+            </button>
+            <input type="text" id="searchPackage" class="form-control w-25" placeholder="Search by code, name or includes">
+        </div>
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Days</th>
+                <th>Price (LKR)</th>
+                <th>Includes</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="packageTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Add Package Modal -->
+    <div class="modal fade" id="addPackageModal" tabindex="-1" aria-labelledby="addPackageLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="addPackageForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addPackageLabel">Add Package</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label class="form-label">Code</label>
+                            <input type="text" class="form-control" id="pkgCode" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="pkgName" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Days</label>
+                            <input type="number" class="form-control" id="pkgDays" min="1" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Price (LKR)</label>
+                            <input type="number" class="form-control" id="pkgPrice" min="0" step="0.01" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Includes</label>
+                            <textarea class="form-control" id="pkgIncludes" rows="2" placeholder="e.g., 2 Panchakarma sessions, Herbal meals, 1-night accommodation"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="pkgDescription" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Image</label>
+                            <input type="file" class="form-control" id="pkgImage" accept="image/*">
+                            <img id="pkgImagePreview" style="width:80px;height:80px;display:none;border-radius:6px;margin-top:6px;object-fit:cover">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Create Package</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payments -->
+    <div id="payments" class="hidden">
+        <h1>Payment Management</h1>
+        <input type="text" id="searchPaymentEmail" class="form-control mb-3" placeholder="Search by patient email">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Patient Email</th>
+                <th>Amount (LKR)</th>
+                <th>Method</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody id="paymentTableBody"></tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<!-- Global Scripts -->
+<script>
+    const BASE_URL = "http://localhost:8080/api/v1"; // ← Update if needed
+
+    // Navigation
+    function showPanel(panelId) {
+        $('.content > div').addClass('hidden');
+        $('#' + panelId).removeClass('hidden');
+        $('.sidebar a').removeClass('active');
+        $(`.sidebar a[onclick*="${panelId}"]`).addClass('active');
+
+        switch (panelId) {
+            case 'dashboard':
+                loadDashboardCounts();
+                loadAppointmentsPerDayChart();
+                loadRevenueByTreatmentChart();
+                break;
+            case 'patients':
+                loadAllPatients();
+                break;
+            case 'practitioners':
+                loadAllPractitioners();
+                break;
+            case 'appointments':
+                loadAllAppointments();
+                break;
+            case 'treatments':
+                loadAllTreatments();
+                break;
+            case 'medicines':
+                loadAllMedicines();
+                break;
+            case 'payments':
+                loadAllPayments();
+                break;
+        }
+    }
+
+    // Logout
+    function logout() {
+        localStorage.removeItem("name");
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
+        window.location.href = "index.html";
+    }
+
+    // DASHBOARD ---------------------------------------------------
+    function loadDashboardCounts() {
+        $.ajax({
+            url: `${BASE_URL}/admin/dashboard/counts`,
+            method: "GET",
+            success: function (res) {
+                const d = res.data || {};
+                $('#totalAppointments').text(d.totalAppointments ?? 0);
+                $('#totalPatients').text(d.totalPatients ?? 0);
+                $('#totalPractitioners').text(d.totalPractitioners ?? 0);
+                $('#revenueToday').text((d.revenueToday ?? 0).toLocaleString());
+            },
+            error: function () {
+                console.warn("Failed to load dashboard counts");
+            }
+        });
+    }
+
+    let appointmentsChartRef, revenueChartRef;
+
+    function loadAppointmentsPerDayChart() {
+        $.ajax({
+            url: `${BASE_URL}/admin/dashboard/chart/appointments-per-day`,
+            method: "GET",
+            success: function (res) {
+                const labels = (res.data || []).map(i => i.date);
+                const data = (res.data || []).map(i => i.count);
+                if (appointmentsChartRef) appointmentsChartRef.destroy();
+                appointmentsChartRef = new Chart(document.getElementById('appointmentsPerDayChart'), {
+                    type: 'bar',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'Appointments',
+                            data,
+                            backgroundColor: 'rgba(102,187,106,0.7)'
+                        }]
+                    },
+                    options: { plugins: { legend: { display: false } } }
+                });
+            },
+            error: function () {
+                console.warn("Failed to load appointments-per-day chart");
+            }
+        });
+    }
+
+    function loadRevenueByTreatmentChart() {
+        $.ajax({
+            url: `${BASE_URL}/admin/dashboard/chart/revenue-by-treatment`,
+            method: "GET",
+            success: function (res) {
+                const labels = (res.data || []).map(i => i.treatmentName);
+                const data = (res.data || []).map(i => i.revenue);
+                if (revenueChartRef) revenueChartRef.destroy();
+                revenueChartRef = new Chart(document.getElementById('revenueByTreatmentChart'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'Revenue (LKR)',
+                            data,
+                            fill: false,
+                            tension: 0.2,
+                            borderColor: 'rgba(46,125,50,0.9)'
+                        }]
+                    },
+                    options: { plugins: { legend: { display: false } } }
+                });
+            },
+            error: function () {
+                console.warn("Failed to load revenue-by-treatment chart");
+            }
+        });
+    }
+
+    // PATIENTS ----------------------------------------------------
+    let allPatients = [];
+    function loadAllPatients() {
+        $.ajax({
+            url: `${BASE_URL}/patients/getAll`,
+            method: "GET",
+            success: function (res) {
+                allPatients = res.data || [];
+                renderPatients(allPatients);
+            },
+            error: function () { alert("Failed to load patients."); }
+        });
+    }
+    function renderPatients(list) {
+        const tbody = $("#patientTableBody");
+        tbody.empty();
+        list.forEach(p => {
+            tbody.append(`
+          <tr>
+            <td>${p.name || ''}</td>
+            <td>${p.email || ''}</td>
+            <td>${p.phone || ''}</td>
+            <td>${p.age ?? ''}</td>
+            <td>${p.registeredOn || ''}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="deletePatient('${p.email}')">Delete</button>
+            </td>
+          </tr>
+        `);
+        });
+    }
+    $("#searchPatient").on("input", function(){
+        const q = $(this).val().toLowerCase();
+        const filtered = allPatients.filter(p =>
+            (p.name||'').toLowerCase().includes(q) ||
+            (p.email||'').toLowerCase().includes(q) ||
+            (p.phone||'').toLowerCase().includes(q)
+        );
+        renderPatients(filtered);
+    });
+    function deletePatient(email){
+        if(!confirm("Delete this patient?")) return;
+        $.ajax({
+            url: `${BASE_URL}/patients/delete/${email}`,
+            method: "DELETE",
+            success: function(){ loadAllPatients(); },
+            error: function(){ alert("Failed to delete patient."); }
+        });
+    }
+
+    // PRACTITIONERS ----------------------------------------------
+    let allPractitioners = [];
+    function loadAllPractitioners() {
+        $.ajax({
+            url: `${BASE_URL}/practitioners/getAll`,
+            method: "GET",
+            success: function (res) {
+                allPractitioners = res.data || [];
+                renderPractitioners(allPractitioners);
+            },
+            error: function(){ alert("Failed to load practitioners."); }
+        });
+    }
+    function renderPractitioners(list){
+        const tbody = $("#practitionerTableBody");
+        tbody.empty();
+        list.forEach(pr => {
+            tbody.append(`
+          <tr>
+            <td>${pr.name || ''}</td>
+            <td>${pr.email || ''}</td>
+            <td>${pr.specialty || ''}</td>
+            <td>${(pr.feePerSession ?? 0).toLocaleString()}</td>
+            <td>${pr.status ?? 'ACTIVE'}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="deletePractitioner('${pr.email}')">Delete</button>
+            </td>
+          </tr>
+        `);
+        });
+    }
+    $("#searchPractitioner").on("input", function(){
+        const q = $(this).val().toLowerCase();
+        const filtered = allPractitioners.filter(pr =>
+            (pr.name||'').toLowerCase().includes(q) ||
+            (pr.email||'').toLowerCase().includes(q)
+        );
+        renderPractitioners(filtered);
+    });
+    function deletePractitioner(email){
+        if(!confirm("Delete this practitioner?")) return;
+        $.ajax({
+            url: `${BASE_URL}/practitioners/delete/${email}`,
+            method: "DELETE",
+            success: function(){ loadAllPractitioners(); },
+            error: function(){ alert("Failed to delete practitioner."); }
+        });
+    }
+
+    // Add Practitioner (image optional)
+    $("#prImage").on("change", function(){
+        const f = this.files?.[0];
+        if(!f) return;
+        const reader = new FileReader();
+        reader.onload = e => $("#prImagePreview").attr("src", e.target.result).show();
+        reader.readAsDataURL(f);
+    });
+    $("#addPractitionerForm").on("submit", function(e){
+        e.preventDefault();
+        const fd = new FormData();
+        fd.append("name", $("#prName").val());
+        fd.append("email", $("#prEmail").val());
+        fd.append("specialty", $("#prSpecialty").val());
+        fd.append("feePerSession", $("#prFee").val());
+        fd.append("description", $("#prDescription").val());
+        fd.append("linkedin", $("#prLinkedIn").val());
+        const img = $("#prImage")[0].files[0];
+        if(img) fd.append("image", img);
+
+        $.ajax({
+            url: `${BASE_URL}/practitioners/create`,
+            method: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(){
+                $("#addPractitionerModal").modal('hide');
+                $("#addPractitionerForm")[0].reset();
+                $("#prImagePreview").hide();
+                loadAllPractitioners();
+            },
+            error: function(){ alert("Failed to create practitioner."); }
+        });
+    });
+
+    // APPOINTMENTS -----------------------------------------------
+    let allAppointments = [];
+    function loadAllAppointments() {
+        $.ajax({
+            url: `${BASE_URL}/appointments/getAll`,
+            method: "GET",
+            success: function (res) {
+                allAppointments = res.data || [];
+                renderAppointments(allAppointments);
+            },
+            error: function(){ alert("Failed to load appointments."); }
+        });
+    }
+    function renderAppointments(list){
+        const tbody = $("#appointmentTableBody");
+        tbody.empty();
+        list.forEach(a => {
+            tbody.append(`
+          <tr>
+            <td>${a.patientName || a.patientEmail || ''}</td>
+            <td>${a.practitionerName || a.practitionerEmail || ''}</td>
+            <td>${a.treatmentName || ''}</td>
+            <td>${a.date || ''}</td>
+            <td>${a.time || ''}</td>
+            <td>${a.status || ''}</td>
+            <td>${(a.fee ?? 0).toLocaleString()}</td>
+          </tr>
+        `);
+        });
+    }
+    $("#searchAppointment").on("input", function(){
+        const q = $(this).val().toLowerCase();
+        const filtered = allAppointments.filter(a =>
+            (a.patientName||'').toLowerCase().includes(q) ||
+            (a.practitionerName||'').toLowerCase().includes(q) ||
+            (a.patientEmail||'').toLowerCase().includes(q) ||
+            (a.practitionerEmail||'').toLowerCase().includes(q)
+        );
+        renderAppointments(filtered);
+    });
+
+    // TREATMENTS -------------------------------------------------
+    let allTreatments = [];
+    function loadAllTreatments() {
+        $.ajax({
+            url: `${BASE_URL}/treatments/getAll`,
+            method: "GET",
+            success: function (res) {
+                allTreatments = res.data || [];
+                renderTreatments(allTreatments);
+            },
+            error: function(){ alert("Failed to load treatments."); }
+        });
+    }
+    function renderTreatments(list){
+        const tbody = $("#treatmentTableBody");
+        tbody.empty();
+        list.forEach(t => {
+            tbody.append(`
+          <tr>
+            <td>${t.code || ''}</td>
+            <td>${t.name || ''}</td>
+            <td>${t.durationMinutes ?? ''}</td>
+            <td>${(t.baseFee ?? 0).toLocaleString()}</td>
+            <td>${t.description || ''}</td>
+            <td>${t.imageUrl ? `<img src="${t.imageUrl}" style="width:60px;height:60px;border-radius:4px;object-fit:cover">` : ''}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="deleteTreatment('${t.code}')">Delete</button>
+            </td>
+          </tr>
+        `);
+        });
+    }
+    $("#trImage").on("change", function(){
+        const f = this.files?.[0];
+        if(!f) return;
+        const reader = new FileReader();
+        reader.onload = e => $("#trImagePreview").attr("src", e.target.result).show();
+        reader.readAsDataURL(f);
+    });
+    $("#addTreatmentForm").on("submit", function(e){
+        e.preventDefault();
+        const fd = new FormData();
+        fd.append("code", $("#trCode").val());
+        fd.append("name", $("#trName").val());
+        fd.append("durationMinutes", $("#trDuration").val());
+        fd.append("baseFee", $("#trFee").val());
+        fd.append("description", $("#trDescription").val());
+        const img = $("#trImage")[0].files[0];
+        if(img) fd.append("image", img);
+
+        $.ajax({
+            url: `${BASE_URL}/treatments/create`,
+            method: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(){
+                $("#addTreatmentModal").modal('hide');
+                $("#addTreatmentForm")[0].reset();
+                $("#trImagePreview").hide();
+                loadAllTreatments();
+            },
+            error: function(){ alert("Failed to create treatment."); }
+        });
+    });
+    $("#searchTreatment").on("input", function(){
+        const q = $(this).val().toLowerCase();
+        const filtered = allTreatments.filter(t =>
+            (t.name||'').toLowerCase().includes(q) ||
+            (t.code||'').toLowerCase().includes(q) ||
+            (t.description||'').toLowerCase().includes(q)
+        );
+        renderTreatments(filtered);
+    });
+    function deleteTreatment(code){
+        if(!confirm("Delete this treatment?")) return;
+        $.ajax({
+            url: `${BASE_URL}/treatments/delete/${code}`,
+            method: "DELETE",
+            success: function(){ loadAllTreatments(); },
+            error: function(){ alert("Failed to delete treatment."); }
+        });
+    }
+
+    // MEDICINES --------------------------------------------------
+    let allMedicines = [];
+    function loadAllMedicines() {
+        $.ajax({
+            url: `${BASE_URL}/medicines/getAll`,
+            method: "GET",
+            success: function (res) {
+                allMedicines = res.data || [];
+                renderMedicines(allMedicines);
+            },
+            error: function(){ alert("Failed to load medicines."); }
+        });
+    }
+    function renderMedicines(list){
+        const tbody = $("#medicineTableBody");
+        tbody.empty();
+        list.forEach(m => {
+            tbody.append(`
+          <tr>
+            <td>${m.sku || ''}</td>
+            <td>${m.name || ''}</td>
+            <td>${m.category || ''}</td>
+            <td>${m.stock ?? 0}</td>
+            <td>${(m.unitPrice ?? 0).toLocaleString()}</td>
+            <td>${m.reorderLevel ?? 0}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="deleteMedicine('${m.sku}')">Delete</button>
+            </td>
+          </tr>
+        `);
+        });
+    }
+    $("#searchMedicine").on("input", function(){
+        const q = $(this).val().toLowerCase();
+        const filtered = allMedicines.filter(m =>
+            (m.name||'').toLowerCase().includes(q) ||
+            (m.sku||'').toLowerCase().includes(q)
+        );
+        renderMedicines(filtered);
+    });
+    function deleteMedicine(sku){
+        if(!confirm("Delete this item?")) return;
+        $.ajax({
+            url: `${BASE_URL}/medicines/delete/${sku}`,
+            method: "DELETE",
+            success: function(){ loadAllMedicines(); },
+            error: function(){ alert("Failed to delete medicine."); }
+        });
+    }
+
+    // PAYMENTS ---------------------------------------------------
+    let allPayments = [];
+    function loadAllPayments() {
+        $.ajax({
+            url: `${BASE_URL}/payments/getAll`,
+            method: "GET",
+            success: function (res) {
+                allPayments = res.data || [];
+                renderPayments(allPayments);
+            },
+            error: function(){ alert("Failed to load payments."); }
+        });
+    }
+    function renderPayments(list){
+        const tbody = $("#paymentTableBody");
+        tbody.empty();
+        list.forEach(p => {
+            const amt = Number(p.amount || 0);
+            tbody.append(`
+          <tr>
+            <td>${p.id || ''}</td>
+            <td>${p.patientEmail || ''}</td>
+            <td>LKR ${amt.toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+            <td>${p.method || ''}</td>
+            <td>${p.paymentDate || ''}</td>
+          </tr>
+        `);
+        });
+    }
+    $("#searchPaymentEmail").on("input", function(){
+        const q = $(this).val().toLowerCase();
+        const filtered = allPayments.filter(p => (p.patientEmail||'').toLowerCase().includes(q));
+        renderPayments(filtered);
+    });
+
+    // INIT -------------------------------------------------------
+    $(document).ready(function () {
+        showPanel('dashboard'); // default
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

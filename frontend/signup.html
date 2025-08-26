@@ -27,6 +27,16 @@
             <label for="confirmPassword" class="form-label">Confirm Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Re-enter password" required minlength="6">
         </div>
+
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select id="role" name="role" class="form-select" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Sign Up</button>
             <a href="signin.html" class="btn btn-register">Already have an account?</a>

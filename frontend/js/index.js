@@ -3,7 +3,8 @@ const heroImages = [
     'image/C.jpg',
     'image/A.jpg',
     'image/B.jpg',
-    'image/D.jpg'
+    'image/D.jpg',
+
 ];
 
 // Get the hero section

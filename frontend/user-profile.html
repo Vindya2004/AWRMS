@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hela Suwaya | User Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Font Awesome 5 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+
+    <style>
+        /* Reset & Font */
+        html, body {
+            margin:0; padding:0;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            color: #1f2b22;
+            background: #f8faf9;
+        }
+
+        /* Brand tokens */
+        :root{
+            --primary:#4a7c59;
+            --primary-600:#3d664a;
+            --accent:#d4af37;
+            --text:#1f2b22;
+            --muted:#556b57;
+        }
+
+        /* Bootstrap overrides (light touch) */
+        .text-primary { color: var(--primary) !important; }
+        .bg-primary { background-color: var(--primary) !important; }
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); }
+        .btn-primary:hover { background-color: var(--primary-600); border-color: var(--primary-600); }
+
+        /* Navbar (styled) */
+        .navbar { transition: background 0.3s ease-in-out, box-shadow .3s ease-in-out; }
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.85) !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        }
+        .brand-logo {
+            font-family: "Abhaya Libre","Noto Sans Sinhala", system-ui, sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: 0.02em;
+            background: linear-gradient(180deg, #c79a57 0%, #9b6a2c 55%, #7a4d1a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        /* PAGE HEADER / HERO */
+        .page-header{
+            position: relative;
+            min-height: 360px;
+            background: linear-gradient(135deg, #243124, #1a241b);
+            color:#fff;
+            overflow: hidden;
+            isolation:isolate;
+        }
+        .page-header::before {
+            content:"";
+            position:absolute;
+            inset:0;
+            background-image: url('https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=1950&h=1100&dpr=1');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity:.35; z-index:0;
+        }
+        .page-header::after{
+            content:"";
+            position:absolute; inset:0;
+            background:
+                    radial-gradient(800px circle at 15% 20%, rgba(212,175,55,.18), transparent 50%),
+                    radial-gradient(1000px circle at 85% 80%, rgba(74,124,89,.18), transparent 55%);
+            pointer-events:none; z-index:1;
+        }
+        .page-header > .container{ position:relative; z-index:2; }
+        .page-header .display-4{
+            letter-spacing:2px; font-weight:700;
+            text-shadow:0 2px 12px rgba(0,0,0,.35);
+        }
+        .page-header .d-inline-flex{
+            backdrop-filter: blur(4px);
+            background:rgba(255,255,255,.08);
+            padding:6px 14px; border-radius:999px; gap:10px;
+        }
+
+        /* Cards + Modals */
+        .card { border:1px solid rgba(31,43,34,.08); box-shadow:0 8px 22px rgba(0,0,0,.06); }
+        .card-header { border-bottom: 1px solid rgba(255,255,255,.2); }
+        .modal-content { border-radius: 12px; border: 1px solid rgba(31,43,34,.08); }
+
+        /* Table theming */
+        .table { background: #fff; }
+        .table thead { letter-spacing: .3px; }
+        .table thead th {
+            background-color: var(--primary-600) !important;
+            color: #fff; border-color: var(--primary-600) !important;
+        }
+        .table-bordered { border-color: rgba(31,43,34,.12) !important; }
+        .table-striped tbody tr:nth-of-type(odd) { background-color: rgba(74,124,89,.03); }
+        @media (max-width: 576px){
+            .container .table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+
+        /* Footer (styled) */
+        .footer {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
+            url('/placeholder.svg?height=800&width=1200') center/cover;
+            color: white; padding: 60px 0 20px; position: relative; min-height: 500px;
+            margin-top: 80px;
+        }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 40px; align-items: start;
+        }
+        .footer-section h3 {
+            color: #d4af37; font-size: 1.2rem; font-weight: bold; margin-bottom: 30px; letter-spacing: 1px;
+        }
+        .footer-section h4 {
+            color: #d4af37; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; margin-top: 25px; letter-spacing: 0.5px;
+        }
+        .footer-section h4:first-of-type { margin-top: 0; }
+        .contact-details p { color: #e0e0e0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 5px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 30px; }
+        .social-icon {
+            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white;
+            text-decoration: none; transition: all 0.3s ease;
+        }
+        .social-icon:hover { background: #d4af37; border-color: #d4af37; transform: translateY(-2px); }
+        .menu-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .menu-column ul { list-style: none; padding: 0; margin: 0; }
+        .menu-column li { margin-bottom: 12px; }
+        .menu-column a {
+            color: #e0e0e0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; letter-spacing: 0.5px;
+        }
+        .menu-column a:hover { color: #d4af37; }
+        .logos-section { display: flex; justify-content: center; align-items: flex-start; }
+        .logo-container { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+        .main-logo, .certification-logo { text-align: center; }
+        .logo-placeholder {
+            background: rgba(212, 175, 55, 0.1); border: 2px solid #d4af37; border-radius: 10px;
+            padding: 20px; min-width: 120px; min-height: 80px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+        }
+        .logo-placeholder h4 { color: #d4af37; font-size: 0.9rem; font-weight: bold; line-height: 1.2; margin: 0; }
+        .cert-placeholder {
+            background: rgba(74, 124, 89, 0.1); border: 2px solid #4a7c59; border-radius: 10px;
+            padding: 15px; min-width: 100px; min-height: 60px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+        }
+        .cert-placeholder small { color: #4a7c59; font-size: 0.7rem; text-align: center; line-height: 1.2; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px; padding-top: 20px; text-align: center;
+            max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px;
+        }
+        .footer-bottom p { color: #b0b0b0; font-size: 0.85rem; margin-bottom: 5px; }
+        .footer-bottom a { color: #d4af37; text-decoration: none; }
+        .footer-bottom a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header{ min-height:300px; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .menu-columns { grid-template-columns: 1fr; gap: 20px; }
+            .social-icons { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .footer { padding: 40px 0 20px; }
+            .footer-content { padding: 0 15px; gap: 30px; }
+            .logo-container { flex-direction: row; gap: 20px; }
+            .logo-placeholder, .cert-placeholder { min-width: 80px; min-height: 60px; padding: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce){
+            *{ transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <nav class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>
+                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+                <li class="nav-item">
+                    <a href="signin.html" class="nav-link">Sign in/up</a>
+                </li>
+
+                <li class="nav-item dropdown d-none" id="userDropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hi, User Name</a>
+                    <ul class="dropdown-menu border-0 rounded-0 m-0">
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Header Start -->
+<div class="container-fluid page-header" id="home" style="padding-top: 70px;">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-4 text-white text-uppercase">Packages</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white text-decoration-none" href="#">Home</a></p>
+                <i class="fas fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Packages</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- user details -->
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center mb-0">User Profile</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Name:</strong> <span id="userName"></span></p>
+            <p><strong>Email:</strong> <span id="userEmail"></span></p>
+            <p><strong>Contact:</strong> <span id="userPhone"></span></p>
+
+            <button id="editButton" class="btn btn-warning me-2">Edit Profile</button>
+            <button id="deleteButton" class="btn btn-danger">Delete Account</button>
+        </div>
+    </div>
+
+    <div id="registerWarning" class="card border-danger text-danger bg-light d-none mt-3">
+        <div class="card-body">
+            <h5 class="card-title text-danger">Do you want to register for TravelEase?</h5>
+            <p>You haven't registered a vehicle yet. want to register?</p>
+            <button class="btn btn-danger" onclick="loadPage('vehicle-register.html')">Register Vehicle</button>
+        </div>
+    </div>
+
+    <!-- Vehicle details section (hidden by default) -->
+    <div id="vehicleDetails" class="card border-success d-none mt-3">
+        <div class="card-body">
+            <h5 class="card-title text-success">Vehicle Details</h5>
+            <button class="btn btn-success" onclick="loadVehicleDetails()">View Vehicle details</button>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="mb-3">
+                            <label for="editName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehicle Modal -->
+    <div class="modal fade" id="vehicleModal" tabindex="-1" aria-labelledby="vehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vehicleModalLabel">Vehicle Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Vehicle Number</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Fuel Type</th>
+                            <th>Booked</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody id="vehicleTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- No User Modal -->
+<div class="modal fade" id="noUserModal" tabindex="-1" aria-labelledby="noUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noUserModalLabel">Error</h5>
+            </div>
+            <div class="modal-body">
+                <p>No user is logged in.</p>
+                <p>Redirecting to login page...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="redirectLogin">Go to Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer" id="contact">
+    <div class="footer-content">
+        <div class="footer-section contact-details">
+            <h3>CONTACT DETAILS</h3>
+
+            <div class="contact-item">
+                <h4>ADDRESS</h4>
+                <p>395/4,<br>
+                    Harischandra Mawatha,<br>
+                    Anuradhapura,<br>
+                    Sri Lanka</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>GENERAL NUMBER</h4>
+                <p>+94 25 2030200</p>
+                <p>+94 704 725 634</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>EMAIL ADDRESS</h4>
+                <p>reservations@helasuwaya.lk</p>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section menu-section">
+            <h3>Hela Suwaya MENU</h3>
+
+            <div class="menu-columns">
+                <div class="menu-column">
+                    <ul>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">OUR DOCTORS</a></li>
+                        <li><a href="#">OUR PACKAGES</a></li>
+                        <li><a href="#">OUR FACILITIES</a></li>
+                        <li><a href="#">AYURVEDA</a></li>
+                        <li><a href="#">OUR BLOG</a></li>
+                    </ul>
+                </div>
+                <div class="menu-column">
+                    <ul>
+                        <li><a href="#">ABOUT US</a></li>
+                        <li><a href="#">OUR TREATMENTS</a></li>
+                        <li><a href="#">ACCOMMODATION</a></li>
+                        <li><a href="#">DESTINATIONS AND EXCURSIONS</a></li>
+                        <li><a href="#">HELA WEDAKAMA</a></li>
+                        <li><a href="#">CONTACT US</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-section logos-section">
+            <div class="logo-container">
+                <div class="main-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-leaf" style="font-size: 2rem; color: #d4af37;"></i>
+                        <h4>Hela Suwaya<br>AYURVEDA</h4>
+                    </div>
+                </div>
+                <div class="certification-logo">
+                    <div class="cert-placeholder">
+                        <i class="fas fa-certificate" style="font-size: 1.5rem; color: #4a7c59;"></i>
+                        <small>Certification<br>Partner</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy;2024 Hela Suwaya Ayurveda Private Limited</p>
+        <p>Website Design and Development by <a href="#">Athwa Solutions</a></p>
+    </div>
+</footer>
+
+<!-- JS libs -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Page Scripts -->
+<script>
+    // Navbar scroll effect
+    document.addEventListener('scroll', function () {
+        const nav = document.querySelector('.navbar');
+        if (!nav) return;
+        if (window.scrollY > 10) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // Back to top (if you add a button)
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Vehicle details loader
+    function loadVehicleDetails() {
+        const email = getFromLocalStorage("email");
+        if (!email) { alert("User email not found in local storage!"); return; }
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/vehicle/byUserEmail/" + email,
+            method: "GET",
+            success: function (vehicles) {
+                let html = "";
+                vehicles.forEach(vehicle => {
+                    html += `<tr>
+              <td>${vehicle.vehicleNumber}</td>
+              <td>${vehicle.model}</td>
+              <td>${vehicle.vehicleType}</td>
+              <td>${vehicle.fuelType}</td>
+              <td>${vehicle.booked}</td>
+              <td>${vehicle.status}</td>
+           </tr>`;
+                });
+                $("#vehicleTableBody").html(html);
+                const modal = new bootstrap.Modal(document.getElementById("vehicleModal"));
+                modal.show();
+            },
+            error: function () { alert("Failed to load vehicle details."); }
+        });
+    }
+
+    // Get Data from Local Storage with Expiration Check
+    function getFromLocalStorage(key) {
+        const data = localStorage.getItem(key);
+        if (!data) return null;
+        const parsedData = JSON.parse(data);
+        const now = new Date().getTime();
+        if (now > parsedData.expiry) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return parsedData.value;
+    }
+
+    // Auth checks + profile actions
+    document.addEventListener("DOMContentLoaded", () => {
+        const email = getFromLocalStorage("email");
+
+        if (!email) {
+            const noUserModal = new bootstrap.Modal(document.getElementById("noUserModal"));
+            noUserModal.show();
+            document.getElementById("redirectLogin").addEventListener("click", () => {
+                window.location.href = "loginRegister.html";
+            });
+            return;
+        }
+
+        $(function () {
+            // Load user details
+            $.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${encodeURIComponent(email)}`, function (response) {
+                $('#userName').text(response.data.name);
+                $('#userEmail').text(response.data.email);
+                $('#userPhone').text(response.data.contact);
+
+                let userRole = response.data.role;
+                if (userRole === "VEHICLE") {
+                    document.getElementById("vehicleDetails").classList.remove("d-none");
+                } else {
+                    document.getElementById("registerWarning").classList.remove("d-none");
+                }
+            }).fail(function (error) {
+                console.error("Error fetching user data:", error);
+            });
+
+            // Edit modal open
+            $('#editButton').click(function () {
+                $.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${encodeURIComponent(email)}`, function (response) {
+                    $('#editName').val(response.data.name);
+                    $('#editEmail').val(response.data.email);
+                    let editModal = new bootstrap.Modal($('#editUserModal')[0]);
+                    editModal.show();
+                }).fail(function (error) {
+                    console.error("Error loading user details:", error);
+                });
+            });
+
+            // Update profile
+            $('#editForm').submit(function (e) {
+                e.preventDefault();
+                const updatedUser = {
+                    name: $('#editName').val(),
+                    email: $('#editEmail').val()
+                };
+
+                // TODO: userId not defined in snippet; set it from API/localStorage if needed
+                const userId = getFromLocalStorage("userId");
+                if (!userId) return alert("User ID not found.");
+
+                $.ajax({
+                    url: `http://localhost:8080/api/users/${userId}`,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(updatedUser),
+                    success: function () {
+                        alert("Profile updated successfully!");
+                        location.reload();
+                    },
+                    error: function (error) { console.error("Error updating profile:", error); }
+                });
+            });
+
+            // Delete account
+            $('#deleteButton').click(function () {
+                const userId = getFromLocalStorage("userId");
+                if (!userId) return alert("User ID not found.");
+                if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+                    $.ajax({
+                        url: `http://localhost:8080/api/users/${userId}`,
+                        method: 'DELETE',
+                        success: function () {
+                            alert("Account deleted successfully!");
+                            localStorage.clear();
+                            window.location.href = "login.html";
+                        },
+                        error: function (error) { console.error("Error deleting account:", error); }
+                    });
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
