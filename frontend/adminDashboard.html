@@ -204,10 +204,10 @@
 
     <!-- Practitioners -->
     <div id="practitioners" class="hidden">
-        <h1>Practitioner Management</h1>
+        <h1>Doctor Management</h1>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPractitionerModal">
-                <i class="fa-solid fa-plus me-1"></i> Add Practitioner
+                <i class="fa-solid fa-plus me-1"></i> Add Doctor
             </button>
             <input type="text" id="searchPractitioner" class="form-control w-25" placeholder="Search by name or email">
         </div>
@@ -216,9 +216,12 @@
             <tr>
                 <th>Full Name</th>
                 <th>Email</th>
-                <th>Specialty</th>
-                <th>Fee / Session (LKR)</th>
+                <th>Description</th>
+                <th>Payment / Day (LKR)</th>
                 <th>Status</th>
+                <th>Booked</th>
+                <th>LinkedIn</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -232,7 +235,7 @@
             <div class="modal-content">
                 <form id="addPractitionerForm" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addPractitionerLabel">Add Practitioner</h5>
+                        <h5 class="modal-title" id="addPractitionerLabel">Add Doctor</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
@@ -245,16 +248,12 @@
                             <input type="email" class="form-control" id="prEmail" required>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Specialty</label>
-                            <input type="text" class="form-control" id="prSpecialty" placeholder="e.g., Panchakarma, Herbal Medicine" required>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">Fee / Session (LKR)</label>
-                            <input type="number" class="form-control" id="prFee" required>
-                        </div>
-                        <div class="mb-2">
                             <label class="form-label">Description</label>
                             <textarea class="form-control" id="prDescription" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Payment / Day (LKR)</label>
+                            <input type="number" class="form-control" id="prFee" required>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">LinkedIn (optional)</label>
@@ -267,13 +266,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Save Practitioner</button>
+                        <button type="submit" class="btn btn-success">Save Doctor</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 
 
     <!-- Appointments -->
@@ -725,28 +723,37 @@
 
     // PRACTITIONERS ----------------------------------------------
     let allPractitioners = [];
+
     function loadAllPractitioners() {
         $.ajax({
-            url: `${BASE_URL}/practitioners/getAll`,
+            url: "http://localhost:8080/api/v1/doctor/getAll",
             method: "GET",
             success: function (res) {
                 allPractitioners = res.data || [];
                 renderPractitioners(allPractitioners);
             },
-            error: function(){ alert("Failed to load practitioners."); }
+            error: function () { alert("Failed to load doctors."); }
         });
     }
-    function renderPractitioners(list){
+
+    function renderPractitioners(list) {
         const tbody = $("#practitionerTableBody");
         tbody.empty();
         list.forEach(pr => {
             tbody.append(`
           <tr>
-            <td>${pr.name || ''}</td>
+            <td>${pr.fullName || ''}</td>
             <td>${pr.email || ''}</td>
-            <td>${pr.specialty || ''}</td>
-            <td>${(pr.feePerSession ?? 0).toLocaleString()}</td>
+            <td>${pr.description || ''}</td>
+            <td>${(pr.paymentPerDay ?? 0).toLocaleString()}</td>
             <td>${pr.status ?? 'ACTIVE'}</td>
+            <td>${pr.booked ?? 'NO'}</td>
+            <td>
+              <a href="${pr.linkedin || '#'}" target="_blank">${pr.linkedin ? 'LinkedIn' : ''}</a>
+            </td>
+            <td>
+              ${pr.imageUrl ? `<img src="${pr.imageUrl}" style="width:50px;height:50px;border-radius:6px;">` : ''}
+            </td>
             <td>
               <button class="btn btn-danger btn-sm" onclick="deletePractitioner('${pr.email}')">Delete</button>
             </td>
@@ -754,57 +761,61 @@
         `);
         });
     }
-    $("#searchPractitioner").on("input", function(){
+
+    $("#searchPractitioner").on("input", function () {
         const q = $(this).val().toLowerCase();
         const filtered = allPractitioners.filter(pr =>
-            (pr.name||'').toLowerCase().includes(q) ||
-            (pr.email||'').toLowerCase().includes(q)
+            (pr.fullName || '').toLowerCase().includes(q) ||
+            (pr.email || '').toLowerCase().includes(q)
         );
         renderPractitioners(filtered);
     });
-    function deletePractitioner(email){
-        if(!confirm("Delete this practitioner?")) return;
+
+    function deletePractitioner(email) {
+        if (!confirm("Delete this practitioner?")) return;
         $.ajax({
             url: `${BASE_URL}/practitioners/delete/${email}`,
             method: "DELETE",
-            success: function(){ loadAllPractitioners(); },
-            error: function(){ alert("Failed to delete practitioner."); }
+            success: function () { loadAllPractitioners(); },
+            error: function () { alert("Failed to delete practitioner."); }
         });
     }
 
     // Add Practitioner (image optional)
-    $("#prImage").on("change", function(){
+    $("#prImage").on("change", function () {
         const f = this.files?.[0];
-        if(!f) return;
+        if (!f) return;
         const reader = new FileReader();
         reader.onload = e => $("#prImagePreview").attr("src", e.target.result).show();
         reader.readAsDataURL(f);
     });
-    $("#addPractitionerForm").on("submit", function(e){
+
+    $("#addPractitionerForm").on("submit", function (e) {
         e.preventDefault();
         const fd = new FormData();
-        fd.append("name", $("#prName").val());
+        fd.append("fullName", $("#prName").val());
         fd.append("email", $("#prEmail").val());
-        fd.append("specialty", $("#prSpecialty").val());
-        fd.append("feePerSession", $("#prFee").val());
         fd.append("description", $("#prDescription").val());
+        fd.append("paymentPerDay", $("#prFee").val());
         fd.append("linkedin", $("#prLinkedIn").val());
+        fd.append("status", "ACTIVE"); // default
+        fd.append("booked", "NO");     // default
         const img = $("#prImage")[0].files[0];
-        if(img) fd.append("image", img);
+        if (img) fd.append("image", img);
 
         $.ajax({
-            url: `${BASE_URL}/practitioners/create`,
+            url: "http://localhost:8080/api/v1/doctor/getAll",
             method: "POST",
             data: fd,
             processData: false,
             contentType: false,
-            success: function(){
+            success: function () {
                 $("#addPractitionerModal").modal('hide');
                 $("#addPractitionerForm")[0].reset();
                 $("#prImagePreview").hide();
                 loadAllPractitioners();
             },
-            error: function(){ alert("Failed to create practitioner."); }
+            error: function () { alert("Failed to create Doctor."); }
         });
     });
 

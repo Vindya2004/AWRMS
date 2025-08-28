@@ -2,6 +2,7 @@ package org.example.awrms.config;
 
 import lombok.RequiredArgsConstructor;
 import org.example.awrms.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,5 +35,10 @@ public class ApplicationConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

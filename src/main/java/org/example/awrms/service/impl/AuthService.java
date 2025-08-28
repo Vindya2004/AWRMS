@@ -1,4 +1,4 @@
-package org.example.awrms.service;
+package org.example.awrms.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.awrms.dto.AuthDTO;
