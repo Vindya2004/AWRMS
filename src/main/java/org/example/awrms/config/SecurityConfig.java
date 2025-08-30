@@ -30,7 +30,8 @@ public class SecurityConfig {
                         auth->
                                 auth.requestMatchers("/auth/**"
                                                 , "/api/v1/doctor/**"
-                                                ,"/api/v1/accommodation/**").permitAll()
+                                                ,"/api/v1/accommodation/**"
+                                                ,"/api/v1/package/**","/api/v1/activity/**").permitAll()
                                         .anyRequest().authenticated())
                 .sessionManagement(
                         session->session

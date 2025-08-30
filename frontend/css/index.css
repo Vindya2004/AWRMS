@@ -10,8 +10,32 @@ body, html {
 .navbar {
     transition: background 0.3s ease-in-out;
 }
+
 .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.8) !important;
+    background: #ffffff !important; /* White background */
+}
+
+.navbar .nav-link,
+.navbar.scrolled .nav-link,
+.navbar .navbar-brand,
+.navbar.scrolled .navbar-brand,
+.navbar .navbar-toggler-icon,
+.navbar.scrolled .navbar-toggler-icon {
+    color: #d4af37 !important; /* White color for links, brand, and toggler icon */
+}
+
+.navbar .nav-link:hover {
+    color: #f1f5f9 !important; /* Gold color on hover */
+}
+
+.brand-logo {
+    font-family: "Abhaya Libre","Noto Sans Sinhala", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem; /* Bootstrap fs-3 = ~1.75rem */
+    text-transform: none; /* Remove forced uppercase */
+    letter-spacing: 0.02em;
+    color: #d4af37 !important; /* Solid gold color for logo */
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);
 }
 
 /* Hero Section */
