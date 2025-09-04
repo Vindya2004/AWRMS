@@ -33,7 +33,7 @@
 //         }
 //     });
 // });
-
+// Show / Hide password
 $("#showPassword").on("change", function() {
     const pwd = $("#password");
     if (this.checked) {
@@ -43,13 +43,16 @@ $("#showPassword").on("change", function() {
     }
 });
 
+// Handle Sign Up form submit
 $("#signupForm").on("submit", function(e) {
     e.preventDefault();
+
     const username = $("#username").val().trim();
+    const email = $("#email").val().trim();   // ✅ new email field
     const password = $("#password").val();
     const role = $("#role").val();
 
-    if (!username || !password || !role) {
+    if (!username || !email || !password || !role) {
         alert("Please fill in all fields.");
         return;
     }
@@ -58,7 +61,7 @@ $("#signupForm").on("submit", function(e) {
         url: "http://localhost:8080/auth/register",
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify({ username, password, role }),
+        data: JSON.stringify({ username, email, password, role }), // ✅ send email
         success: function(response) {
             alert(response.message || "Registered successfully!");
             window.location.href = "signin.html";

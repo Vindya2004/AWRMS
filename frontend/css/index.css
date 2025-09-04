@@ -290,7 +290,7 @@ body, html {
 }
 
 .back-to-top {
-    position: fixed;
+    position: absolute;
     bottom: 100px;
     right: 30px;
     background: #d4af37;
@@ -315,7 +315,7 @@ body, html {
 }
 
 .whatsapp-btn {
-    position: fixed;
+    position: absolute;
     bottom: 30px;
     right: 30px;
     width: 60px;
@@ -409,7 +409,7 @@ body, html {
 .ayurveda-illustration {
     width: 100%;
     height: 500px;
-    background: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%20%287%29-4Nvz7iU0Qe8zvKS9mX1ONe28536tjP.png') center/cover;
+    background: url('/frontend/image/Adhitya-Anuradhapura.webp') center/cover;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }

@@ -6,18 +6,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String username;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uid;
+    private String name;
+    @Column(unique = true)
+    private String email;
+    private String contact;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 }
