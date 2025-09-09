@@ -22,6 +22,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:63342")
 @RestController
+
 @RequestMapping("api/v1/doctor")
 public class DoctorController {
     @Autowired
@@ -29,7 +30,7 @@ public class DoctorController {
     @Autowired
     private EmailService emailService;
 
-    private static final String UPLOAD_DIR = "src/main/resources/uploads/";
+    private static final String UPLOAD_DIR = System.getProperty("user.dir")+"/uploads/";
 
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO> saveDoctor(
@@ -195,6 +196,25 @@ public class DoctorController {
             } else {
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(new ResponseDTO(VarList.Created, "Available doctors Retrieved Successfully", availableGuides));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
+
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<ResponseDTO> deleteDoctor(@PathVariable String email) {
+        try {
+            int res = doctorService.deleteDoctor(email); // Ensure this method exists in GuideService
+            if (res == VarList.Created) {
+                return ResponseEntity.ok(new ResponseDTO(VarList.Created, "Doctor Deleted Successfully", null));
+            } else if (res == VarList.Not_Found) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Found, "Doctor Not Found", null));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                        .body(new ResponseDTO(VarList.Bad_Gateway, "Error", null));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

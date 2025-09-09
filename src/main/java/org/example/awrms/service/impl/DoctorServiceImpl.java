@@ -23,6 +23,8 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public int saveDoctor(DoctorDTO doctorDTO) {
 
+        System.out.println(doctorRepository.existsByEmail(doctorDTO.getEmail()));
+
         if (doctorRepository.existsByEmail(doctorDTO.getEmail())) {
             return VarList.Not_Acceptable;
         }
@@ -93,5 +95,17 @@ public class DoctorServiceImpl implements DoctorService {
                 .map(doctor -> modelMapper.map(doctor, DoctorDTO.class))
                 .collect(Collectors.toList());
     }
-    }
+
+    @Override
+    public int deleteDoctor(String email) {
+
+            Optional<Doctor> existing = doctorRepository.findByEmail(email);
+            if (existing.isPresent()) {
+                doctorRepository.delete(existing.get());
+                return VarList.Created;
+            }
+            return VarList.Not_Found;
+        }
+
+}
 

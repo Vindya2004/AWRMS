@@ -974,6 +974,61 @@ textarea{
     .social-row a{ background: #0b1220; color: #cbd5e1; }
 }
 
+/*service section*/
+/* Service Section */
+.service-item {
+    border-radius: 16px;
+    transition: all 0.35s ease-in-out;
+    border: 1px solid rgba(212, 175, 55, 0.2); /* soft gold border */
+    background: #ffffff;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,175,55,0.12), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease-in-out;
+}
+
+.service-item i {
+    color: #d4af37; /* gold */
+    z-index: 1;
+    position: relative;
+}
+
+.service-item h5 {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #2c2c2c;
+    position: relative;
+    z-index: 1;
+}
+
+.service-item p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.15);
+    border-color: #d4af37;
+}
+
+.service-item:hover::before {
+    opacity: 1;
+}
+
+
+
 /* Motion preference */
 @media (prefers-reduced-motion: reduce){
     *{ transition: none !important; }

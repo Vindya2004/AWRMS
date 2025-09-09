@@ -23,4 +23,4 @@ function changeHeroImage() {
 heroSection.style.backgroundImage = `url('${heroImages[currentIndex]}')`;
 
 // Change image every 5 seconds
-setInterval(changeHeroImage, 5000);
+setInterval(changeHeroImage, 2000);

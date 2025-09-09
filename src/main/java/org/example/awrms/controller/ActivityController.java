@@ -26,7 +26,7 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
-    private static final String UPLOAD_DIR = "src/main/resources/uploads/";
+    private static final String UPLOAD_DIR = System.getProperty("user.dir")+"/uploads/";
 
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO>saveActivity(

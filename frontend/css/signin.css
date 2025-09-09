@@ -1,96 +1,96 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background: url('../image/herbs-powder-traditional-spa-wooden-background-2.jpg') no-repeat center center/cover;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 1s ease-in-out;
-    position: relative;
-}
+/*body {*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*    background: url('../image/herbs-powder-traditional-spa-wooden-background-2.jpg') no-repeat center center/cover;*/
+/*    min-height: 100vh;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    padding: 20px;*/
+/*    animation: fadeIn 1s ease-in-out;*/
+/*    position: relative;*/
+/*}*/
 
-/* Overlay ekak danna - text eka clear wenna */
-body::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.45); /* little darker for better contrast */
-    z-index: 0;
-}
+/*!* Overlay ekak danna - text eka clear wenna *!*/
+/*body::before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 0; left: 0; right: 0; bottom: 0;*/
+/*    background: rgba(0, 0, 0, 0.45); !* little darker for better contrast *!*/
+/*    z-index: 0;*/
+/*}*/
 
-/* Glassmorphism card */
-.signin-card {
-    position: relative;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.15); /* transparent white */
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    padding: 50px 40px;
-    width: 100%;
-    max-width: 480px;
-    animation: slideUp 1s ease-out;
-    text-align: center;
-    color: #fff;
-}
+/*!* Glassmorphism card *!*/
+/*.signin-card {*/
+/*    position: relative;*/
+/*    z-index: 1;*/
+/*    background: rgba(255, 255, 255, 0.15); !* transparent white *!*/
+/*    backdrop-filter: blur(12px) saturate(150%);*/
+/*    -webkit-backdrop-filter: blur(12px) saturate(150%);*/
+/*    border-radius: 20px;*/
+/*    border: 1px solid rgba(255, 255, 255, 0.3);*/
+/*    box-shadow: 0 20px 40px rgba(0,0,0,0.2);*/
+/*    padding: 50px 40px;*/
+/*    width: 100%;*/
+/*    max-width: 480px;*/
+/*    animation: slideUp 1s ease-out;*/
+/*    text-align: center;*/
+/*    color: #fff;*/
+/*}*/
 
-/* Headings */
-.signin-card h2 {
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 10px;
-}
+/*!* Headings *!*/
+/*.signin-card h2 {*/
+/*    font-weight: 600;*/
+/*    color: #fff;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
-.signin-card .subtitle {
-    font-size: 14px;
-    color: #e0e0e0;
-    margin-bottom: 25px;
-}
+/*.signin-card .subtitle {*/
+/*    font-size: 14px;*/
+/*    color: #e0e0e0;*/
+/*    margin-bottom: 25px;*/
+/*}*/
 
-/* Inputs */
-.form-control {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #fff;
-}
-.form-control::placeholder {
-    color: #ddd;
-}
+/*!* Inputs *!*/
+/*.form-control {*/
+/*    background: rgba(255, 255, 255, 0.2);*/
+/*    border: 1px solid rgba(255, 255, 255, 0.4);*/
+/*    color: #fff;*/
+/*}*/
+/*.form-control::placeholder {*/
+/*    color: #ddd;*/
+/*}*/
 
-/* Buttons */
-.btn-primary {
-    background: linear-gradient(135deg, #4caf50, #81c784);
-    border: none;
-    font-weight: 600;
-    padding: 10px;
-    border-radius: 12px;
-}
-.btn-primary:hover {
-    background: linear-gradient(135deg, #388e3c, #66bb6a);
-}
+/*!* Buttons *!*/
+/*.btn-primary {*/
+/*    background: linear-gradient(135deg, #4caf50, #81c784);*/
+/*    border: none;*/
+/*    font-weight: 600;*/
+/*    padding: 10px;*/
+/*    border-radius: 12px;*/
+/*}*/
+/*.btn-primary:hover {*/
+/*    background: linear-gradient(135deg, #388e3c, #66bb6a);*/
+/*}*/
 
-.btn-register {
-    background: rgba(255, 255, 255, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #fff;
-    border-radius: 12px;
-    font-weight: 500;
-    padding: 10px;
-}
-.btn-register:hover {
-    background: rgba(255, 255, 255, 0.4);
-    color: #000;
-}
+/*.btn-register {*/
+/*    background: rgba(255, 255, 255, 0.25);*/
+/*    border: 1px solid rgba(255, 255, 255, 0.4);*/
+/*    color: #fff;*/
+/*    border-radius: 12px;*/
+/*    font-weight: 500;*/
+/*    padding: 10px;*/
+/*}*/
+/*.btn-register:hover {*/
+/*    background: rgba(255, 255, 255, 0.4);*/
+/*    color: #000;*/
+/*}*/
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+/*!* Animations *!*/
+/*@keyframes fadeIn {*/
+/*    from { opacity: 0; }*/
+/*    to { opacity: 1; }*/
+/*}*/
+/*@keyframes slideUp {*/
+/*    from { transform: translateY(40px); opacity: 0; }*/
+/*    to { transform: translateY(0); opacity: 1; }*/
+/*}*/

@@ -1,15 +1,15 @@
+
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
-<!--    <title>Sign In - Ayurveda Retreat</title>-->
+<!--    <title>Sign In</title>-->
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
 <!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">-->
-<!--    <link rel="stylesheet" href="css/signin.css"> &lt;!&ndash; external CSS &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="css/signin.css">-->
 <!--</head>-->
 <!--<body>-->
 <!--<div class="signin-card">-->
-<!--    <h2 class="mb-3">Welcome Back Hela Suwaya</h2>-->
-<!--    <p class="subtitle">Sign in to manage your Ayurveda wellness retreat</p>-->
+<!--    <h2 class="mb-3">Sign In</h2>-->
 <!--    <form id="signinForm">-->
 <!--        <div class="mb-3">-->
 <!--            <label for="username" class="form-label">User name</label>-->
@@ -32,41 +32,266 @@
 
 <!--<script src="lib/jquery-3.7.1.min.js"></script>-->
 <!--<script src="js/signin.js"></script>-->
-
 <!--</body>-->
 <!--</html>-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Sign In</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/signin.css">
-</head>
-<body>
-<div class="signin-card">
-    <h2 class="mb-3">Sign In</h2>
-    <form id="signinForm">
-        <div class="mb-3">
-            <label for="username" class="form-label">User name</label>
-            <input type="text" id="username" name="username" class="form-control" required pattern="[A-Za-z ]{3,50}" title="3 to 50 letters and spaces">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" id="password" name="password" class="form-control" required minlength="6" title="At least 6 characters">
-            <div class="form-check mt-2">
-                <input type="checkbox" id="showPassword" class="form-check-input">
-                <label for="showPassword" class="form-check-label">Show Password</label>
-            </div>
-        </div>
-        <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">Sign In</button>
-            <a href="signup.html" class="btn btn-register">Create an account</a>
-        </div>
-    </form>
-</div>
+<!--<!doctype html>-->
+<!--<html lang="si">-->
+<!--<head>-->
+<!--    <meta charset="utf-8" />-->
+<!--    <title>Sign In</title>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1" />-->
+<!--    <style>-->
+<!--        :root {-->
+<!--            &#45;&#45;bg: #0f172a;-->
+<!--            &#45;&#45;card: #111827;-->
+<!--            &#45;&#45;txt: #e5e7eb;-->
+<!--            &#45;&#45;muted: #9ca3af;-->
+<!--            &#45;&#45;accent: #22c55e;-->
+<!--            &#45;&#45;danger: #ef4444;-->
+<!--            &#45;&#45;input: #1f2937;-->
+<!--        }-->
+<!--        body {-->
+<!--            margin: 0;-->
+<!--            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";-->
+<!--            background: radial-gradient(1200px 800px at 80% -10%, #1e293b 0%, #0b1020 45%, #070b15 100%), var(&#45;&#45;bg);-->
+<!--            color: var(&#45;&#45;txt);-->
+<!--            min-height: 100svh;-->
+<!--            display: grid;-->
+<!--            place-items: center;-->
+<!--            padding: 24px;-->
+<!--        }-->
+<!--        .card {-->
+<!--            width: 100%;-->
+<!--            max-width: 420px;-->
+<!--            background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));-->
+<!--            border: 1px solid rgba(255,255,255,0.08);-->
+<!--            border-radius: 16px;-->
+<!--            padding: 28px;-->
+<!--            box-shadow: 0 20px 80px rgba(0,0,0,0.35);-->
+<!--            backdrop-filter: blur(6px);-->
+<!--        }-->
+<!--        h1 { margin: 0 0 6px; font-size: 26px; }-->
+<!--        p.sub { margin: 0 0 20px; color: var(&#45;&#45;muted); font-size: 14px; }-->
+<!--        .field { margin-bottom: 14px; }-->
+<!--        label { display: block; margin: 0 0 6px; font-size: 14px; color: var(&#45;&#45;muted); }-->
+<!--        input {-->
+<!--            width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);-->
+<!--            background: var(&#45;&#45;input); color: var(&#45;&#45;txt); outline: none; transition: border-color .2s, box-shadow .2s;-->
+<!--        }-->
+<!--        input:focus { border-color: rgba(34,197,94,0.5); box-shadow: 0 0 0 4px rgba(34,197,94,0.15); }-->
+<!--        .actions { display: flex; gap: 10px; align-items: center; margin-top: 8px; }-->
+<!--        button {-->
+<!--            appearance: none; border: none; border-radius: 10px; padding: 12px 16px; cursor: pointer;-->
+<!--            background: linear-gradient(135deg, #22c55e, #16a34a); color: white; font-weight: 600; width: 100%;-->
+<!--            box-shadow: 0 10px 30px rgba(34,197,94,0.3);-->
+<!--            transition: transform .05s ease, box-shadow .2s ease, opacity .2s ease;-->
+<!--        }-->
+<!--        button:active { transform: scale(0.99); }-->
+<!--        .link { color: #38bdf8; text-decoration: none; font-size: 14px; }-->
+<!--        .muted { color: var(&#45;&#45;muted); font-size: 13px; }-->
+<!--        .msg { margin-top: 10px; font-size: 14px; padding: 10px; border-radius: 10px; display: none; }-->
+<!--        .msg.ok { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25); color: #bbf7d0; display: block; }-->
+<!--        .msg.err { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); color: #fecaca; display: block; }-->
+<!--        .test {-->
+<!--            margin-top: 16px; padding: 12px; border-radius: 10px; border: 1px dashed rgba(255,255,255,0.15);-->
+<!--            display: none; color: var(&#45;&#45;muted);-->
+<!--        }-->
+<!--        .test button { width: auto; background: #3b82f6; }-->
+<!--        .small { font-size: 12px; color: var(&#45;&#45;muted); }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="card">-->
+<!--    <h1>Sign In</h1>-->
+<!--    <p class="sub">Login karala JWT token ekak ganna.</p>-->
 
-<script src="lib/jquery-3.7.1.min.js"></script>
-<script src="js/signin.js"></script>
-</body>
-</html>
+<!--    <form id="loginForm" novalidate>-->
+<!--        <div class="field">-->
+<!--            <label for="email">Email</label>-->
+<!--            <input id="email" name="email" type="email" placeholder="you@example.com" required />-->
+<!--        </div>-->
+
+<!--        <div class="field">-->
+<!--            <label for="password">Password</label>-->
+<!--            <input id="password" name="password" type="password" placeholder="••••••••" required />-->
+<!--        </div>-->
+
+<!--        <div class="actions">-->
+<!--            <button type="submit">Sign In</button>-->
+<!--        </div>-->
+<!--    </form>-->
+
+<!--    <div id="msg" class="msg"></div>-->
+
+<!--    <div id="testBox" class="test">-->
+<!--        <div class="small">Login una nisa meka use karala USER-protected endpoint ekak test karanna puluwan.</div>-->
+<!--        <div style="display:flex; gap:8px; margin-top:8px;">-->
+<!--            <button id="btnTestUser">Test: GET /api/v1/admin/user</button>-->
+<!--            <button id="btnTestAdmin" style="background:#a855f7;">Test: GET /api/v1/admin/admin</button>-->
+<!--        </div>-->
+<!--        <div id="testRes" class="small" style="margin-top:8px;"></div>-->
+<!--    </div>-->
+
+<!--    <p class="muted" style="margin-top:16px;">-->
+<!--        Account ekak nadda? <a class="link" href="./signup.html">Sign Up</a>-->
+<!--    </p>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    const API_BASE = 'http://localhost:8080';-->
+
+<!--    function showMsg(text, ok = false) {-->
+<!--        const el = document.getElementById('msg');-->
+<!--        el.textContent = text;-->
+<!--        el.className = 'msg ' + (ok ? 'ok' : 'err');-->
+<!--    }-->
+
+<!--    function extractAuth(json) {-->
+<!--        // ResponseDTO field names vary: try common keys-->
+<!--        const data = json?.data ?? json?.content ?? json?.result ?? json?.payload ?? null;-->
+<!--        const token = data?.token ?? json?.token ?? null;-->
+<!--        const email = data?.email ?? json?.email ?? null;-->
+<!--        return { token, email };-->
+<!--    }-->
+
+<!--    document.getElementById('loginForm').addEventListener('submit', async (e) => {-->
+<!--        e.preventDefault();-->
+<!--        showMsg('', true); // reset-->
+<!--        const email = document.getElementById('email').value.trim();-->
+<!--        const password = document.getElementById('password').value;-->
+
+<!--        if (!email || !password) {-->
+<!--            showMsg('Email saha password danna.', false);-->
+<!--            return;-->
+<!--        }-->
+
+<!--        try {-->
+<!--            const res = await fetch(`${API_BASE}/api/v1/auth/authentication`, {-->
+<!--                method: 'POST',-->
+<!--                headers: { 'Content-Type': 'application/json' },-->
+<!--                body: JSON.stringify({ email, password })-->
+<!--            });-->
+
+<!--            const json = await res.json().catch(() => ({}));-->
+
+<!--            if (!res.ok) {-->
+<!--                const errMsg = json?.message ?? 'Login fail una (Unauthorized).';-->
+<!--                throw new Error(errMsg);-->
+<!--            }-->
+
+<!--            const { token, email: respEmail } = extractAuth(json);-->
+<!--            if (!token) throw new Error('Token labunane. Backend response structure eka balanna.');-->
+
+<!--            localStorage.setItem('token', token);-->
+<!--            localStorage.setItem('email', respEmail || email);-->
+
+<!--            showMsg('Login success! Token save kala.', true);-->
+
+<!--            // Show test box-->
+<!--            document.getElementById('testBox').style.display = 'block';-->
+
+<!--        } catch (err) {-->
+<!--            showMsg(err.message || 'Unexpected error.', false);-->
+<!--        }-->
+<!--    });-->
+
+<!--    async function callProtected(path) {-->
+<!--        const out = document.getElementById('testRes');-->
+<!--        out.textContent = 'Calling ' + path + ' ...';-->
+<!--        const token = localStorage.getItem('token');-->
+<!--        if (!token) {-->
+<!--            out.textContent = 'Token ne. Login karanna.';-->
+<!--            return;-->
+<!--        }-->
+<!--        try {-->
+<!--            const res = await fetch(`${API_BASE}${path}`, {-->
+<!--                headers: { 'Authorization': `Bearer ${token}` }-->
+<!--            });-->
+<!--            const text = await res.text();-->
+<!--            out.textContent = `Status ${res.status}: ${text}`;-->
+<!--        } catch (e) {-->
+<!--            out.textContent = e.message;-->
+<!--        }-->
+<!--    }-->
+
+<!--    document.getElementById('btnTestUser').addEventListener('click', () => {-->
+<!--        callProtected('/api/v1/admin/user'); // requires ROLE_USER-->
+<!--    });-->
+<!--    document.getElementById('btnTestAdmin').addEventListener('click', () => {-->
+<!--        callProtected('/api/v1/admin/admin'); // requires ROLE_ADMIN-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+<!--&lt;!&ndash; Package Section Start &ndash;&gt;-->
+<!--<div class="container-fluid py-5" id="packageSection">-->
+<!--    <div class="container pt-5 pb-3">-->
+<!--        <div class="text-center mb-3 pb-3">-->
+<!--            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>-->
+<!--            <h1>Our Treatment Packages</h1>-->
+<!--        </div>-->
+<!--        <div class="row" id="packageList">-->
+<!--            &lt;!&ndash; Package items will be appended here dynamically &ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash; Package Section End &ndash;&gt;-->
+
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // Function to load packages dynamically-->
+<!--        function loadPackages() {-->
+<!--            $.ajax({-->
+<!--                type: "GET",-->
+<!--                url: "http://localhost:8080/api/v1/package/getAll", // Endpoint for packages-->
+<!--                success: function (response) {-->
+<!--                    // Clear any existing content-->
+<!--                    $('#packageList').empty();-->
+
+<!--                    // Loop through the packages data and append it to the container-->
+<!--                    response.data.forEach(function (pkg) {-->
+<!--                        // Determine the image source, fallback to a placeholder if imageUrl is missing-->
+<!--                        const img = pkg.imageUrl-->
+<!--                            ? `<img src="/uploads/${pkg.imageUrl}" class="card-img-top" alt="${pkg.name || 'Unnamed Package'}">`-->
+<!--                            : '<img src="/uploads/placeholder.jpg" class="card-img-top" alt="Unnamed Package">';-->
+
+<!--                        // Create the HTML for each package with name, price, estimate days, and green button-->
+<!--                        var packageItem = `-->
+<!--                            <div class="col-lg-4 col-md-6 mb-4">-->
+<!--                                <div class="card h-100 shadow-sm" style="border: 2px solid #FFD700;">-->
+<!--                                    ${img}-->
+<!--                                    <div class="card-body text-center">-->
+<!--                                        <h5 class="card-title">${pkg.name || 'Unnamed Package'}</h5>-->
+<!--                                        <p class="card-text">Price: RS:${pkg.price || 'N/A'}</p>-->
+<!--                                        <p class="card-text">Est. Days: ${pkg.estimateDays || 'N/A'}</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
+<!--                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        `;-->
+
+<!--                        // Append the package item to the package list-->
+<!--                        $('#packageList').append(packageItem);-->
+<!--                    });-->
+<!--                },-->
+<!--                error: function (xhr, status, error) {-->
+<!--                    console.error("Error loading packages:", error);-->
+<!--                    alert("Error loading packages. Check console for details.");-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+<!--        // Call the loadPackages function when the page loads-->
+<!--        loadPackages();-->
+<!--    });-->
+<!--</script>-->

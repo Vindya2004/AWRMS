@@ -25,7 +25,7 @@ public class TreatPackageController {
     @Autowired
     private TreatPackageService treatPackageService;
 
-    private static final String UPLOAD_DIR = "src/main/resources/uploads/";
+    private static final String UPLOAD_DIR = System.getProperty("user.dir")+"/uploads/";
 
     @PostMapping("save")
     public ResponseEntity<ResponseDTO>savePackage(
