@@ -1359,21 +1359,80 @@
             <thead class="table-dark">
             <tr>
                 <th>Package Name</th>
-                <th>Guide Email</th>
-                <th>Vehicle No</th>
+                <th>Doctor Email</th>
+                <th>Accommodation No</th>
                 <th>User Email</th>
                 <th>Booking Date</th>
                 <th>Checkout Date</th>
-                <th>Estimated days</th>
-                <th>People</th>
-                <th>Guide Fee</th>
+                <th>Estimated Days</th>
+                <th>Doctor Fee</th>
                 <th>Base Price</th>
                 <th>Total Price</th>
             </tr>
             </thead>
-            <tbody id="bookingTableBody"></tbody>
+            <tbody id="bookingTableBody">
+            <tr><td colspan="10" class="text-center">Loading...</td></tr>
+            </tbody>
         </table>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const BASE_URL = "http://localhost:8080/api/v1/booking";
+
+            // Load All Bookings
+            function loadBookings() {
+                $.ajax({
+                    url: `${BASE_URL}/getAll`,
+                    method: "GET",
+                    success: function (response) {
+                        if (response.code === 201 || response.code === 200) {
+                            let bookings = response.data;
+                            let rows = "";
+
+                            bookings.forEach(b => {
+                                rows += `
+                            <tr>
+                                <td>${b.packageName}</td>
+                                <td>${b.doctorEmail}</td>
+                                <td>${b.accommodationName}</td>
+                                <td>${b.userEmail}</td>
+                                <td>${b.bookingDate}</td>
+                                <td>${b.checkoutDate}</td>
+                                <td>${b.estimateDays}</td>
+                                <td>${b.doctorFee}</td>
+                                <td>${b.packagePrice}</td>
+                                <td>${b.totalPrice}</td>
+                            </tr>
+                        `;
+                            });
+
+                            $("#bookingTableBody").html(rows);
+                        } else {
+                            $("#bookingTableBody").html(`<tr><td colspan="10" class="text-center">No bookings found</td></tr>`);
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error("Error loading bookings:", xhr);
+                        $("#bookingTableBody").html(`<tr><td colspan="10" class="text-center text-danger">Failed to load bookings</td></tr>`);
+                    }
+                });
+            }
+
+            // Search Functionality
+            $("#searchBooking").on("keyup", function () {
+                let value = $(this).val().toLowerCase();
+                $("#bookingTableBody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+
+            // Initial Load
+            loadBookings();
+        });
+
+    </script>
 
     <!-- Doctor Management Section -->
     <div id="doctors" class="hidden">

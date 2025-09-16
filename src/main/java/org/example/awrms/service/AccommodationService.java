@@ -12,4 +12,6 @@ public interface AccommodationService {
     int deleteAccommodation(Long id);
 
     List<AccommodationDTO> getAllAccommodation();
+
+    int getTotalAccommodationCount();
 }

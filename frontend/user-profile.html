@@ -507,7 +507,7 @@
             const noUserModal = new bootstrap.Modal(document.getElementById("noUserModal"));
             noUserModal.show();
             document.getElementById("redirectLogin").addEventListener("click", () => {
-                window.location.href = "signup.html";
+                window.location.href = "signin.html";
             });
             return;
         }
@@ -517,14 +517,7 @@
             $.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${encodeURIComponent(email)}`, function (response) {
                 $('#userName').text(response.data.name);
                 $('#userEmail').text(response.data.email);
-                $('#userPhone').text(response.data.contact);
-
-                let userRole = response.data.role;
-                // Show vehicle details only for VEHICLE role
-                if (userRole === "VEHICLE") {
-                    document.getElementById("vehicleDetails").classList.remove("d-none");
-                }
-                // Note: Removed vehicle registration warning section and related logic
+                $('#userPhone').text(response.data.contact || 'N/A');
             }).fail(function (error) {
                 console.error("Error fetching user data:", error);
             });
@@ -534,6 +527,7 @@
                 $.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${encodeURIComponent(email)}`, function (response) {
                     $('#editName').val(response.data.name);
                     $('#editEmail').val(response.data.email);
+                    $('#editPhone').val(response.data.contact || '');
                     let editModal = new bootstrap.Modal($('#editUserModal')[0]);
                     editModal.show();
                 }).fail(function (error) {
@@ -546,10 +540,10 @@
                 e.preventDefault();
                 const updatedUser = {
                     name: $('#editName').val(),
-                    email: $('#editEmail').val()
+                    email: $('#editEmail').val(),
+                    contact: $('#editPhone').val()
                 };
 
-                // TODO: userId not defined in snippet; set it from API/localStorage if needed
                 const userId = getFromLocalStorage("userId");
                 if (!userId) return alert("User ID not found.");
 
@@ -562,7 +556,9 @@
                         alert("Profile updated successfully!");
                         location.reload();
                     },
-                    error: function (error) { console.error("Error updating profile:", error); }
+                    error: function (error) {
+                        console.error("Error updating profile:", error);
+                    }
                 });
             });
 
@@ -577,11 +573,78 @@
                         success: function () {
                             alert("Account deleted successfully!");
                             localStorage.clear();
-                            window.location.href = "signup.html";
+                            window.location.href = "signin.html";
                         },
-                        error: function (error) { console.error("Error deleting account:", error); }
+                        error: function (error) {
+                            console.error("Error deleting account:", error);
+                        }
                     });
                 }
+            });
+
+            // View all users
+            $('#viewAllUsersButton').click(function () {
+                $.get("http://localhost:8080/api/v1/user/getAll", function (response) {
+                    const users = response.data;
+                    const tbody = $('#allUsersTable');
+                    tbody.empty();
+
+                    users.forEach(user => {
+                        const row = `<tr>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.contact || 'N/A'}</td>
+                            <td><button class="btn btn-sm btn-primary edit-user-btn" data-email="${user.email}">Edit</button></td>
+                        </tr>`;
+                        tbody.append(row);
+                    });
+
+                    // Add edit functionality to each user
+                    $('.edit-user-btn').click(function () {
+                        const email = $(this).data('email');
+                        $.get(`http://localhost:8080/api/v1/user/getUserByEmail?email=${encodeURIComponent(email)}`, function (response) {
+                            $('#editName').val(response.data.name);
+                            $('#editEmail').val(response.data.email);
+                            $('#editPhone').val(response.data.contact || '');
+                            let editModal = new bootstrap.Modal($('#editUserModal')[0]);
+                            editModal.show();
+
+                            // Override submit to update the selected user
+                            $('#editForm').off('submit').on('submit', function (e) {
+                                e.preventDefault();
+                                const updatedUser = {
+                                    name: $('#editName').val(),
+                                    email: $('#editEmail').val(),
+                                    contact: $('#editPhone').val()
+                                };
+
+                                const userId = getFromLocalStorage("userId"); // Assuming admin can update any user
+                                if (!userId) return alert("User ID not found.");
+
+                                $.ajax({
+                                    url: `http://localhost:8080/api/users/${userId}`, // Update API to use email or userId from response
+                                    method: 'PUT',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify(updatedUser),
+                                    success: function () {
+                                        alert("User updated successfully!");
+                                        $('#editUserModal').modal('hide');
+                                        $('#viewAllUsersButton').click(); // Refresh the table
+                                    },
+                                    error: function (error) {
+                                        console.error("Error updating user:", error);
+                                    }
+                                });
+                            });
+                        }).fail(function (error) {
+                            console.error("Error loading user details:", error);
+                        });
+                    });
+
+                    new bootstrap.Modal($('#allUsersModal')[0]).show();
+                }).fail(function (error) {
+                    console.error("Error fetching all users:", error);
+                });
             });
         });
     });
@@ -591,6 +654,7 @@
         window.location.href = page; // Redirects the browser to the selected page
     }
 </script>
+<!--///////-->
 </body>
 </html>
 

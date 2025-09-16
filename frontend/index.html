@@ -18,6 +18,28 @@
     <link href="css/index.css" rel="stylesheet">
     <link href="css/about.css" rel="stylesheet">
     <style>
+        /* Style for the Sign in/up button */
+        #signInUpLink {
+            background-color: white; /* Vibrant green matching btn-primary */
+            color: #FFD700; /* White text for contrast */
+            padding: 8px 15px; /* Padding for a button-like appearance */
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* Remove underline from link */
+            border: 2px solid #FFD700; /* Gold border to match card style */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+        }
+
+        #signInUpLink:hover {
+            background-color: #FFD700; /* Darker green on hover, matching btn-primary:hover */
+            transform: translateY(-2px); /* Slight lift effect */
+            color: #fff; /* Ensure text stays white on hover */
+        }
+
+        /* Ensure proper spacing within the navbar */
+        .navbar-nav .nav-item #signInUpLink {
+            margin-left: 10px; /* Space from other nav items */
+        }
+        /*//////////////*/
         .card {
             border-radius: 10px;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -50,6 +72,17 @@
             background-color: #218838; /* Darker green on hover */
             border-color: #218838;
         }
+        #main-icon {
+            color: #FFD700; /* Gold color */
+            font-size: 2.5rem; /* Larger size */
+            margin-right: 10px; /* Space between icon and brand logo */
+        }
+
+        /*Accommodations*/
+
+        /*doctors*/
+
+
     </style>
 </head>
 <body>
@@ -57,6 +90,7 @@
 <!-- Navbar -->
 <header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">
     <div class="container">
+        <i  id="main-icon" class="fas fa-spa"></i>
         <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
             <span class="navbar-toggler-icon"></span>
@@ -67,8 +101,8 @@
                 <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
-                <li class="nav-item"><a class="nav-link" href="#package">Packages</a></li>
-                <li class="nav-item"><a class="nav-link" href="#doctor">Doctor</a></li>
+                <li class="nav-item"><a class="nav-link" href="#packageSection">Packages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#doctorSection">Doctor</a></li>
                 <li class="nav-item"><a class="nav-link" href="#accommodation">Accommodation</a></li>
                 <li class="nav-item"><a class="nav-link" href="#accommodation">Programmes</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -100,7 +134,7 @@
                     </a>
                     <ul class="dropdown-menu border-0 rounded-0 m-0">
                         <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
-                        <li><a href="#" class="dropdown-item" onclick="loadPage('userBookings.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('booking.html')">Bookings</a></li>
                         <li><a href="#" class="dropdown-item text-danger" id="logoutBtn">Log out</a></li>
                     </ul>
                 </li>
@@ -178,22 +212,40 @@
             </div>
         </div>
 
-        <!-- Image Scroll Section -->
+<!--        &lt;!&ndash; Image Scroll Section &ndash;&gt;-->
+<!--        <div class="about-images-scroll position-relative">-->
+<!--            <div class="scroll-arrow left">&#8592;</div>-->
+<!--            <div class="scroll-arrow right">&#8594;</div>-->
+
+<!--            <div class="scroll-track d-flex">-->
+<!--                <img src="image/Our-Packages.webp" alt="Ayurveda 1">-->
+<!--                <img src="image/A.jpg" alt="Ayurveda 2">-->
+<!--                <img src="image/B.jpg" alt="Ayurveda 3">-->
+<!--                <img src="image/C.jpg" alt="Ayurveda 4">-->
+<!--                <img src="image/D.jpg" alt="Ayurveda 5">-->
+<!--            </div>-->
+
+<!--            <div class="scroll-dots text-center mt-3"></div>-->
         <div class="about-images-scroll position-relative">
             <div class="scroll-arrow left">&#8592;</div>
             <div class="scroll-arrow right">&#8594;</div>
 
             <div class="scroll-track d-flex">
                 <img src="image/Our-Packages.webp" alt="Ayurveda 1">
-                <img src="image/A.jpg" alt="Ayurveda 2">
-                <img src="image/B.jpg" alt="Ayurveda 3">
-                <img src="image/C.jpg" alt="Ayurveda 4">
+                <img src="image/G.webp" alt="Ayurveda 2">
+                <img src="image/E.webp" alt="Ayurveda 3">
+                <img src="image/F.webp" alt="Ayurveda 4">
+                <img src="image/D.jpg" alt="Ayurveda 5">
+                <img src="image/Our-Packages.webp" alt="Ayurveda 1">
+                <img src="image/G.webp" alt="Ayurveda 2">
+                <img src="image/E.webp" alt="Ayurveda 3">
+                <img src="image/F.webp" alt="Ayurveda 4">
                 <img src="image/D.jpg" alt="Ayurveda 5">
             </div>
 
             <div class="scroll-dots text-center mt-3"></div>
         </div>
-    </div>
+        </div>
 </section>
 
 <!-- Destination Start -->
@@ -328,7 +380,12 @@
                             ? `<img src="/uploads/${pkg.imageUrl}" class="card-img-top" alt="${pkg.name || 'Unnamed Package'}">`
                             : '<img src="/uploads/placeholder.jpg" class="card-img-top" alt="Unnamed Package">';
 
-                        // Create the HTML for each package with name, price, estimate days, and green button
+                        // Join activities into a single string for display (e.g., comma-separated)
+                        const activitiesText = pkg.activities && pkg.activities.length
+                            ? `<p class="card-text">Activities: ${pkg.activities.join(', ')}</p>`
+                            : '<p class="card-text">Activities: N/A</p>';
+
+                        // Create the HTML for each package with name, price, estimate days, activities, and green button
                         var packageItem = `
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100 shadow-sm" style="border: 2px solid #FFD700;">
@@ -337,6 +394,7 @@
                                         <h5 class="card-title">${pkg.name || 'Unnamed Package'}</h5>
                                         <p class="card-text">Price: RS:${pkg.price || 'N/A'}</p>
                                         <p class="card-text">Est. Days: ${pkg.estimateDays || 'N/A'}</p>
+                                        ${activitiesText}
                                     </div>
                                     <div class="card-footer bg-transparent border-0 text-center">
                                         <a href="#" class="btn btn-primary btn-sm">View Details</a>
@@ -360,7 +418,7 @@
         loadPackages();
     });
 </script>
-
+<!--////////////////////-->
 <!-- Doctor Section Start -->
 <div class="container-fluid py-5" id="doctorSection">
     <div class="container pt-5 pb-3">
@@ -394,7 +452,7 @@
                             ? `<img src="/uploads/${doctor.imageUrl}" class="card-img-top" alt="${doctor.fullName || 'Unnamed Doctor'}">`
                             : '<img src="/uploads/placeholder.jpg" class="card-img-top" alt="Unnamed Doctor">';
 
-                        // Create the HTML for each doctor with name and green button
+                        // Create the HTML for each doctor with name, email, fee, and green button
                         var doctorItem = `
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100 shadow-sm" style="border: 2px solid #FFD700;">
@@ -402,6 +460,7 @@
                                     <div class="card-body text-center">
                                         <h5 class="card-title">${doctor.fullName || 'Unnamed Doctor'}</h5>
                                         <p class="card-text">${doctor.email || 'No email'}</p>
+                                        <p class="card-text">Fee: RS:${doctor.paymentPerDay || 'N/A'}</p>
                                     </div>
                                     <div class="card-footer bg-transparent border-0 text-center">
                                         <a href="#" class="btn btn-primary btn-sm">View Details</a>
@@ -425,6 +484,7 @@
         loadDoctors();
     });
 </script>
+<!--/////////-->
 <!-- Activity Section Start -->
 <div class="container-fluid py-5" id="activitySection">
     <div class="container pt-5 pb-3">

@@ -14,4 +14,6 @@ public interface UserService {
     boolean deleteUserByEmail(String email);
 
     boolean updateUserRole(String email, String role);
+
+
 }

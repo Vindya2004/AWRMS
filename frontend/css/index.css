@@ -22,6 +22,7 @@ body, html {
 .navbar .navbar-toggler-icon,
 .navbar.scrolled .navbar-toggler-icon {
     color: #d4af37 !important; /* White color for links, brand, and toggler icon */
+    font-weight: bold;
 }
 
 .navbar .nav-link:hover {
@@ -409,7 +410,7 @@ body, html {
 .ayurveda-illustration {
     width: 100%;
     height: 500px;
-    background: url('/frontend/image/Adhitya-Anuradhapura.webp') center/cover;
+    background: url('/frontend/image/home-intro-img-desktop.webp') center/cover;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
@@ -979,7 +980,7 @@ textarea{
 .service-item {
     border-radius: 16px;
     transition: all 0.35s ease-in-out;
-    border: 1px solid rgba(212, 175, 55, 0.2); /* soft gold border */
+    border: 1px solid #d4af37; /* soft gold border */
     background: #ffffff;
     box-shadow: 0 8px 18px rgba(0,0,0,0.08);
     position: relative;

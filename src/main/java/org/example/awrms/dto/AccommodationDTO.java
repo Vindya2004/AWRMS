@@ -17,4 +17,5 @@ public class AccommodationDTO {
     private String location;
     private String category;
     private String costPerDay;
+    private String booked;  // Added booked field for status
 }

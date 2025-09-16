@@ -251,3 +251,21 @@
         padding: 5px 8px;
     }
 }
+
+/*////////////*/
+.scroll-track {
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 200%; /* Double width to accommodate duplicated images */
+}
+
+.scroll-track img {
+    margin-right: 10px; /* Maintain spacing between images */
+    width: calc(20% - 10px); /* Adjust width based on number of images (5 original + 5 duplicates) */
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .scroll-track img {
+        width: calc(50% - 10px); /* Adjust for smaller screens if needed */
+    }
+}

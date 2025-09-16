@@ -15,4 +15,5 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     void deleteById(Long id);
 
+    Optional<Accommodation> findByName(String name);
 }

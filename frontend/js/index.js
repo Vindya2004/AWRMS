@@ -1,7 +1,7 @@
 // Array of hero images (local or web URLs)
 const heroImages = [
     'image/C.jpg',
-    'image/A.jpg',
+    'image/H.jpg',
     'image/B.jpg',
     'image/D.jpg',
 

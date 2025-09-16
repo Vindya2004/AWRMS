@@ -107,5 +107,10 @@ public class DoctorServiceImpl implements DoctorService {
             return VarList.Not_Found;
         }
 
+    @Override
+    public int getTotalDoctorCount() {
+        return (int) doctorRepository.count();
+    }
+
 }
 

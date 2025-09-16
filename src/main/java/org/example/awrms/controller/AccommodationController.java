@@ -36,6 +36,7 @@ public class AccommodationController {
             @RequestParam("location") String location,
             @RequestParam("category") String category,
             @RequestParam("costPerDay") String costPerDay,
+            @RequestParam(value = "booked", defaultValue = "NO") String booked,
             @RequestParam(value = "imageUrl",required = false)MultipartFile image){
         try{
             AccommodationDTO accommodationDTO = new AccommodationDTO();
@@ -44,6 +45,7 @@ public class AccommodationController {
             accommodationDTO.setLocation(location);
             accommodationDTO.setCategory(category);
             accommodationDTO.setCostPerDay(costPerDay);
+            accommodationDTO.setBooked(booked);  // Set booked from param
 
             if (image != null && !image.isEmpty()) {
                 String imagePath = saveFile(image);
@@ -89,6 +91,7 @@ public class AccommodationController {
             @RequestParam("editAccommodationLocation") String location,
             @RequestParam("editAccommodationCategory") String category,
             @RequestParam("editAccommodationCostPerDay") String costPerDay,
+            @RequestParam(value = "editAccommodationBooked", defaultValue = "NO") String booked,  // Added with default "NO"
             @RequestParam(value = "editAccommodationImage", required = false) MultipartFile image) {
         System.out.println(id);
         try {
@@ -99,6 +102,7 @@ public class AccommodationController {
             accommodationDTO.setLocation(location);
             accommodationDTO.setCategory(category);
             accommodationDTO.setCostPerDay(costPerDay);
+            accommodationDTO.setBooked(booked);  // Set booked from param
 
             // Handle Image Upload
             if (image != null && !image.isEmpty()) {

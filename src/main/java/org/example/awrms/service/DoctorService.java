@@ -21,4 +21,6 @@ public interface DoctorService {
     List<DoctorDTO> getAvailableDoctors();
 
     int deleteDoctor(String email);
+
+    int getTotalDoctorCount();
 }

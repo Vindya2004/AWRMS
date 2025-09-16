@@ -70,4 +70,9 @@ public class AccommodationServiceImpl implements AccommodationService {
                 .map(accommodation -> modelMapper.map(accommodation, AccommodationDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public int getTotalAccommodationCount() {
+        return (int) accommodationRepository.count();
+    }
 }

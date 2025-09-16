@@ -268,7 +268,6 @@
             <th>Package</th>
             <th>Booking Date</th>
             <th>Checkout Date</th>
-            <th>People</th>
             <th>Doctor Email</th>
             <th>Accommodation No.</th>
             <th>Total</th>
@@ -381,33 +380,52 @@
 
 <!-- Page Scripts -->
 <script>
-    // Navbar scroll effect
-    document.addEventListener('scroll', function () {
-        const nav = document.querySelector('.navbar');
-        if (!nav) return;
-        if (window.scrollY > 10) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
-    });
+    $(document).ready(function () {
+        const BASE_URL = "http://localhost:8080/api/v1/booking";
 
-    // Back to top
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+        // Load User Bookings
+        function loadUserBookings() {
+            $.ajax({
+                url: `${BASE_URL}/getAll`,   // 👉 if you have a user-specific endpoint, replace with /getByUser/{email}
+                method: "GET",
+                success: function (response) {
+                    if (response.code === 200 || response.code === 201) {
+                        let bookings = response.data;
+                        let rows = "";
 
-    // Owl Carousel init (guarded)
-    $(function(){
-        if ($('.testimonial-carousel').length) {
-            $('.testimonial-carousel').owlCarousel({
-                items: 1,
-                loop: true,
-                autoplay: true,
-                autoplayTimeout: 4500,
-                smartSpeed: 800,
-                dots: true,
-                nav: false
+                        bookings.forEach(b => {
+                            rows += `
+                            <tr>
+                                <td>${b.packageName}</td>
+                                <td>${b.bookingDate}</td>
+                                <td>${b.checkoutDate}</td>
+                                <td>${b.doctorEmail}</td>
+                                <td>${b.accommodationName}</td>
+                                <td>${b.totalPrice}</td>
+                            </tr>
+                        `;
+                        });
+
+                        $("#userBookingTableBody").html(rows);
+                    } else {
+                        $("#userBookingTableBody").html(`
+                        <tr><td colspan="6" class="text-center">No bookings found</td></tr>
+                    `);
+                    }
+                },
+                error: function (xhr) {
+                    console.error("Error loading user bookings:", xhr);
+                    $("#userBookingTableBody").html(`
+                    <tr><td colspan="6" class="text-center text-danger">Failed to load bookings</td></tr>
+                `);
+                }
             });
         }
+
+        // Load on page ready
+        loadUserBookings();
     });
 </script>
+
 </body>
 </html>

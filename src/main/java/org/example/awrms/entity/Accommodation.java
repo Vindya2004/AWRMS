@@ -29,4 +29,6 @@ public class Accommodation {
     private String category;
 
     private String CostPerDay;
+
+    private String booked;     //parse booking
 }
