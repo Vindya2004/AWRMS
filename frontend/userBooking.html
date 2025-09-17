@@ -21,6 +21,7 @@
     <!-- Owl Carousel 2 (optional, for testimonials if used) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/index.css">
 
     <style>
         /* Reset & Font */
@@ -41,25 +42,25 @@
         }
 
         /* Bootstrap override */
-        .text-primary { color: var(--primary) !important; }
+        /*.text-primary { color: var(--primary) !important; }*/
 
-        /* Navbar (styled) */
-        .navbar { transition: background 0.3s ease-in-out, box-shadow .3s ease-in-out; }
-        .navbar.scrolled {
-            background: rgba(0, 0, 0, 0.85) !important;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-        }
-        .brand-logo {
-            font-family: "Abhaya Libre","Noto Sans Sinhala", system-ui, sans-serif;
-            font-weight: 800;
-            font-size: 1.8rem;
-            letter-spacing: 0.02em;
-            background: linear-gradient(180deg, #c79a57 0%, #9b6a2c 55%, #7a4d1a 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent !important;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);
-        }
+        /*!* Navbar (styled) *!*/
+        /*.navbar { transition: background 0.3s ease-in-out, box-shadow .3s ease-in-out; }*/
+        /*.navbar.scrolled {*/
+        /*    background: rgba(0, 0, 0, 0.85) !important;*/
+        /*    box-shadow: 0 6px 18px rgba(0,0,0,0.25);*/
+        /*}*/
+        /*.brand-logo {*/
+        /*    font-family: "Abhaya Libre","Noto Sans Sinhala", system-ui, sans-serif;*/
+        /*    font-weight: 800;*/
+        /*    font-size: 1.8rem;*/
+        /*    letter-spacing: 0.02em;*/
+        /*    background: linear-gradient(180deg, #c79a57 0%, #9b6a2c 55%, #7a4d1a 100%);*/
+        /*    -webkit-background-clip: text;*/
+        /*    background-clip: text;*/
+        /*    color: transparent !important;*/
+        /*    text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);*/
+        /*}*/
 
         /* PAGE HEADER / HERO */
         .page-header{
@@ -214,8 +215,9 @@
 <!-- Navbar -->
 <header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">
     <div class="container">
+        <!--        <i  id="main-icon" class="fas fa-spa"></i>-->
         <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -223,27 +225,45 @@
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>
-                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="userBooking.html">View Your Booking</a></li>
 
+                <!--                &lt;!&ndash; ✅ FIXED: Sign in/up &ndash;&gt;-->
+                <!--                <li class="nav-item">-->
+                <!--                    <a href="signup.html" class="nav-link">Sign in</a>-->
+                <!--                </li>-->
+
+                <!--                &lt;!&ndash; ✅ FIXED: Dropdown &ndash;&gt;-->
+                <!--                <li class="nav-item dropdown d-none" id="userDropdown">-->
+                <!--                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">-->
+                <!--                        Hi, User Name-->
+                <!--                    </a>-->
+                <!--                    <ul class="dropdown-menu border-0 rounded-0 m-0">-->
+                <!--                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>-->
+                <!--                        <li><a href="#" class="dropdown-item" onclick="loadPage('userBookings.html')">Bookings</a></li>-->
+                <!--                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>-->
+                <!--                    </ul>-->
+                <!--                </li>-->
+                <!-- Sign in/up Link -->
                 <li class="nav-item">
-                    <a href="signin.html" class="nav-link">Sign in</a>
+                    <a href="signup.html" class="nav-link" id="signInUpLink">Sign in</a>
                 </li>
-
+                <!-- User Dropdown -->
                 <li class="nav-item dropdown d-none" id="userDropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hi, User Name</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <span>Hi, User Name</span>
+                    </a>
                     <ul class="dropdown-menu border-0 rounded-0 m-0">
                         <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
-                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>
-                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('booking.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item text-danger" id="logoutBtn">Log out</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </div>
 </header>
-
 <!-- Header Start -->
 <div class="container-fluid page-header" id="home" style="padding-top: 70px;">
     <div class="container">
@@ -381,51 +401,128 @@
 <!-- Page Scripts -->
 <script>
     $(document).ready(function () {
-        const BASE_URL = "http://localhost:8080/api/v1/booking";
+        // Get Data from Local Storage with Expiration Check
+        function getFromLocalStorage(key) {
+            const data = localStorage.getItem(key);
+            if (!data) return null;
+
+            try {
+                const parsedData = JSON.parse(data);
+                const now = new Date().getTime();
+
+                if (now > parsedData.expiry) {
+                    localStorage.removeItem(key);
+                    return null;
+                }
+                return parsedData.value;
+            } catch (e) {
+                console.error("LocalStorage parse error:", e);
+                localStorage.removeItem(key);
+                return null;
+            }
+        }
+
+        // Format date to DD-MM-YYYY with local time zone
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('en-GB', {
+                    timeZone: 'Asia/Colombo',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+            } catch (e) {
+                return '';
+            }
+        }
 
         // Load User Bookings
         function loadUserBookings() {
-            $.ajax({
-                url: `${BASE_URL}/getAll`,   // 👉 if you have a user-specific endpoint, replace with /getByUser/{email}
-                method: "GET",
-                success: function (response) {
-                    if (response.code === 200 || response.code === 201) {
-                        let bookings = response.data;
-                        let rows = "";
+            const userEmail = getFromLocalStorage("email");
 
+            if (!userEmail) {
+                $("#userBookingTableBody").html(`
+                <tr><td colspan="9" class="text-center">Please sign in to view bookings</td></tr>
+            `);
+                return;
+            }
+
+            // Show loading state
+            $("#userBookingTableBody").html(`
+            <tr><td colspan="9" class="text-center">Loading bookings...</td></tr>
+        `);
+
+            $.ajax({
+                url: `http://localhost:8080/api/v1/booking/getBooking/${userEmail}`,
+                method: "GET",
+                success: function (bookings) {
+                    $("#userBookingTableBody").empty();
+
+                    if (bookings && Array.isArray(bookings) && bookings.length > 0) {
+                        let hasValidBookings = false;
                         bookings.forEach(b => {
-                            rows += `
-                            <tr>
-                                <td>${b.packageName}</td>
-                                <td>${b.bookingDate}</td>
-                                <td>${b.checkoutDate}</td>
-                                <td>${b.doctorEmail}</td>
-                                <td>${b.accommodationName}</td>
-                                <td>${b.totalPrice}</td>
-                            </tr>
-                        `;
+                            // Check if there’s at least one valid field to display
+                            const hasData = [
+                                b.packageName,
+                                b.bookingDate,
+                                b.checkoutDate,
+                                b.doctorEmail,
+                                b.accommodationName,
+
+                                b.totalPrice
+                            ].some(field => field);
+
+                            if (hasData) {
+                                hasValidBookings = true;
+                                $("#userBookingTableBody").append(`
+                                <tr>
+                                    <td>${b.packageName || ''}</td>
+                                    <td>${formatDate(b.bookingDate)}</td>
+                                    <td>${formatDate(b.checkoutDate)}</td>
+                                    <td>${b.doctorEmail || ''}</td>
+                                    <td>${b.accommodationName || ''}</td>
+
+                                    <td>LKR ${b.totalPrice ? b.totalPrice.toFixed(2) : ''}</td>
+                                </tr>
+                            `);
+                            }
                         });
 
-                        $("#userBookingTableBody").html(rows);
+                        if (!hasValidBookings) {
+                            $("#userBookingTableBody").html(`
+                            <tr><td colspan="9" class="text-center">No valid bookings found</td></tr>
+                        `);
+                        }
                     } else {
                         $("#userBookingTableBody").html(`
-                        <tr><td colspan="6" class="text-center">No bookings found</td></tr>
+                        <tr><td colspan="9" class="text-center">No bookings found or error occurred</td></tr>
                     `);
                     }
                 },
                 error: function (xhr) {
-                    console.error("Error loading user bookings:", xhr);
+                    console.error("Error fetching user bookings:", xhr.responseText);
+                    let errorMsg = "Failed to load bookings";
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    }
                     $("#userBookingTableBody").html(`
-                    <tr><td colspan="6" class="text-center text-danger">Failed to load bookings</td></tr>
+                    <tr><td colspan="9" class="text-center text-danger">${errorMsg}</td></tr>
                 `);
                 }
             });
         }
 
-        // Load on page ready
+        // Load bookings on page load
         loadUserBookings();
+
+        // Refresh bookings manually
+        window.refreshBookings = function () {
+            loadUserBookings();
+        };
     });
 </script>
-
+<script src="js/load.js"></script>
 </body>
 </html>

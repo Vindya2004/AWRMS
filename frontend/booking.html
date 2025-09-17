@@ -1,969 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8" />-->
-<!--    <title>Ayurveda Wellness</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
-
-<!--    &lt;!&ndash; Google Fonts &ndash;&gt;-->
-<!--    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">-->
-
-<!--    &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
-
-<!--    &lt;!&ndash; Icons &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">-->
-
-<!--    &lt;!&ndash; Custom CSS (if you have them) &ndash;&gt;-->
-<!--    <link href="css/index.css" rel="stylesheet">-->
-<!--    <link href="css/about.css" rel="stylesheet">-->
-
-<!--    <style>-->
-<!--        /* ===============================-->
-<!--           Ayurveda Booking Page Styles-->
-<!--           NOTE: Navbar untouched.-->
-<!--           Scope: #bookingPage only-->
-<!--           =============================== */-->
-
-<!--        /* Theme tokens */-->
-<!--        :root {-->
-<!--            &#45;&#45;ay-primary: #2e7d64;     /* Herbal green */-->
-<!--            &#45;&#45;ay-primary-600: #256f59; /* Darker green */-->
-<!--            &#45;&#45;ay-accent: #e8a842;      /* Warm turmeric */-->
-<!--            &#45;&#45;ay-bg: #f7f6f2;          /* Sand */-->
-<!--            &#45;&#45;ay-text: #1f2937;        /* Slate */-->
-<!--            &#45;&#45;ay-muted: #6b7280;       /* Muted text */-->
-<!--            &#45;&#45;ay-success: #21a179;-->
-<!--            &#45;&#45;ay-danger: #ef4444;-->
-<!--            &#45;&#45;ay-shadow: 0 8px 24px rgba(16,24,40,0.08);-->
-<!--        }-->
-
-<!--        /* Wrap only the booking area so navbar won't change */-->
-<!--        #bookingPage {-->
-<!--            padding-top: 6.5rem; /* space for fixed navbar */-->
-<!--            background: linear-gradient(180deg, var(&#45;&#45;ay-bg) 0%, #ffffff 100%);-->
-<!--            min-height: 100vh;-->
-<!--        }-->
-
-<!--        /* Titles */-->
-<!--        #bookingPage h2,-->
-<!--        #bookingPage h4,-->
-<!--        #bookingPage .form-label {-->
-<!--            color: #243b36;-->
-<!--        }-->
-<!--        #bookingPage h2 {-->
-<!--            font-family: 'Playfair Display', serif;-->
-<!--            letter-spacing: .3px;-->
-<!--        }-->
-
-<!--        /* Cards */-->
-<!--        #bookingPage .card {-->
-<!--            border: 1px solid rgba(16,24,40,.06);-->
-<!--            border-radius: 16px;-->
-<!--            box-shadow: var(&#45;&#45;ay-shadow);-->
-<!--            overflow: hidden;-->
-<!--            background: #ffffff;-->
-<!--        }-->
-<!--        #bookingPage .rounded-4 { border-radius: 16px !important; }-->
-
-<!--        /* Form fields */-->
-<!--        #bookingPage .form-label {-->
-<!--            font-weight: 600;-->
-<!--            margin-bottom: .35rem;-->
-<!--        }-->
-<!--        #bookingPage .form-control {-->
-<!--            border: 1.2px solid #e2e8f0;-->
-<!--            border-radius: 12px;-->
-<!--            padding: 10px 14px;-->
-<!--            box-shadow: none !important;-->
-<!--            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;-->
-<!--        }-->
-<!--        #bookingPage .form-control:focus {-->
-<!--            border-color: var(&#45;&#45;ay-primary);-->
-<!--            box-shadow: 0 0 0 .2rem rgba(46,125,100,.15) !important;-->
-<!--        }-->
-<!--        /* Remove number spinners (webkit) */-->
-<!--        #bookingPage input[type=number]::-webkit-outer-spin-button,-->
-<!--        #bookingPage input[type=number]::-webkit-inner-spin-button {-->
-<!--            -webkit-appearance: none; margin: 0;-->
-<!--        }-->
-<!--        #bookingPage input[type=number] { -moz-appearance: textfield; } /* firefox */-->
-
-<!--        /* Buttons */-->
-<!--        #bookingPage .btn-primary {-->
-<!--            background: linear-gradient(135deg, var(&#45;&#45;ay-primary) 0%, #268f78 100%);-->
-<!--            border: 0;-->
-<!--            border-radius: 12px;-->
-<!--            padding: 12px 18px;-->
-<!--            font-weight: 600;-->
-<!--            letter-spacing: .2px;-->
-<!--            box-shadow: 0 10px 22px rgba(38,143,120,.28);-->
-<!--            transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;-->
-<!--        }-->
-<!--        #bookingPage .btn-primary:hover {-->
-<!--            transform: translateY(-1px);-->
-<!--            box-shadow: 0 14px 26px rgba(38,143,120,.32);-->
-<!--            filter: brightness(1.03);-->
-<!--        }-->
-<!--        #bookingPage .btn-primary:active {-->
-<!--            transform: translateY(0);-->
-<!--            box-shadow: 0 8px 20px rgba(38,143,120,.25);-->
-<!--        }-->
-
-<!--        /* Back to top button */-->
-<!--        .back-to-top {-->
-<!--            background: var(&#45;&#45;ay-primary);-->
-<!--            border: 0;-->
-<!--            box-shadow: 0 8px 16px rgba(46,125,100,.3);-->
-<!--        }-->
-<!--        .back-to-top:hover { background: var(&#45;&#45;ay-primary-600); }-->
-
-<!--        /* Sticky booking summary (right panel) */-->
-<!--        @media (min-width: 992px) {-->
-<!--            #bookingPage .col-md-4 > .card.bg-light {-->
-<!--                position: sticky;-->
-<!--                top: 6.75rem;-->
-<!--            }-->
-<!--        }-->
-<!--        #bookingPage .card.bg-light {-->
-<!--            background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%) !important;-->
-<!--        }-->
-
-<!--        /* Summary list styles */-->
-<!--        #bookingPage .list-group-item {-->
-<!--            background: transparent;-->
-<!--            border: none;-->
-<!--            padding: 10px 0;-->
-<!--            color: #334155;-->
-<!--            display: flex;-->
-<!--            justify-content: space-between;-->
-<!--            align-items: center;-->
-<!--        }-->
-<!--        #bookingPage .list-group-item strong {-->
-<!--            font-weight: 600;-->
-<!--            color: #1f2937;-->
-<!--        }-->
-<!--        #bookingPage #summaryTotal {-->
-<!--            color: var(&#45;&#45;ay-primary) !important;-->
-<!--            font-weight: 800;-->
-<!--        }-->
-
-<!--        /* Selectable cards (Packages / Vehicles / Guides) */-->
-<!--        #packageCards .card,-->
-<!--        #availableVehicles .card,-->
-<!--        #guideCards .card,-->
-<!--        #packageCards .selectable-card,-->
-<!--        #availableVehicles .selectable-card,-->
-<!--        #guideCards .selectable-card {-->
-<!--            border: 1px solid #e5e7eb;-->
-<!--            background: #fff;-->
-<!--            border-radius: 14px;-->
-<!--            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;-->
-<!--            cursor: pointer;-->
-<!--        }-->
-<!--        #packageCards .card:hover,-->
-<!--        #availableVehicles .card:hover,-->
-<!--        #guideCards .card:hover,-->
-<!--        #packageCards .selectable-card:hover,-->
-<!--        #availableVehicles .selectable-card:hover,-->
-<!--        #guideCards .selectable-card:hover {-->
-<!--            border-color: var(&#45;&#45;ay-primary);-->
-<!--            box-shadow: 0 10px 22px rgba(46,125,100,.12);-->
-<!--            transform: translateY(-1px);-->
-<!--        }-->
-<!--        #packageCards .card.selected,-->
-<!--        #availableVehicles .card.selected,-->
-<!--        #guideCards .card.selected,-->
-<!--        #packageCards .selectable-card.selected,-->
-<!--        #availableVehicles .selectable-card.selected,-->
-<!--        #guideCards .selectable-card.selected {-->
-<!--            border-color: var(&#45;&#45;ay-primary);-->
-<!--            box-shadow: 0 12px 26px rgba(46,125,100,.18);-->
-<!--            outline: 3px solid rgba(46,125,100,.08);-->
-<!--        }-->
-
-<!--        /* Mini badges */-->
-<!--        #bookingPage .badge-soft {-->
-<!--            color: #0f5132;-->
-<!--            background: rgba(46,125,100,.12);-->
-<!--            border: 1px solid rgba(46,125,100,.22);-->
-<!--            border-radius: 999px;-->
-<!--            padding: .25rem .5rem;-->
-<!--            font-weight: 600;-->
-<!--            font-size: .8rem;-->
-<!--        }-->
-
-<!--        /* Payment modal */-->
-<!--        #paymentModal .modal-content {-->
-<!--            border-radius: 16px;-->
-<!--            border: 1px solid #e5e7eb;-->
-<!--            box-shadow: 0 18px 40px rgba(16,24,40,.2);-->
-<!--        }-->
-<!--        #paymentModal .btn-success {-->
-<!--            background: linear-gradient(135deg, var(&#45;&#45;ay-success), #1a8a65);-->
-<!--            border: 0;-->
-<!--            border-radius: 12px;-->
-<!--            padding: 12px 18px;-->
-<!--            font-weight: 700;-->
-<!--            box-shadow: 0 10px 22px rgba(33,161,121,.28);-->
-<!--        }-->
-<!--        #paymentModal .btn-success:hover {-->
-<!--            filter: brightness(1.03);-->
-<!--            transform: translateY(-1px);-->
-<!--        }-->
-
-<!--        /* Inputs inside modal use same style */-->
-<!--        #paymentModal .form-control {-->
-<!--            border-radius: 12px;-->
-<!--            border: 1.2px solid #e2e8f0;-->
-<!--        }-->
-<!--        #paymentModal .form-control:focus {-->
-<!--            border-color: var(&#45;&#45;ay-primary);-->
-<!--            box-shadow: 0 0 0 .2rem rgba(46,125,100,.15) !important;-->
-<!--        }-->
-
-<!--        /* Small helpers */-->
-<!--        #bookingPage .text-success { color: var(&#45;&#45;ay-success) !important; }-->
-<!--        #bookingPage .text-danger { color: var(&#45;&#45;ay-danger) !important; }-->
-
-<!--        /* Spacing tweaks */-->
-<!--        #bookingPage .g-2 > [class*='col'],-->
-<!--        #bookingPage .g-3 > [class*='col'] { display: flex; }-->
-<!--        #bookingPage .g-2 .card,-->
-<!--        #bookingPage .g-3 .card { width: 100%; }-->
-
-
-
-<!--        /* Enhanced Booking Page Styles */-->
-
-<!--        /* Header and Section Spacing */-->
-<!--        #bookingPage .card.shadow-lg {-->
-<!--            border-radius: 20px;-->
-<!--            padding: 2rem;-->
-<!--            background: rgba(255, 255, 255, 0.95);-->
-<!--            backdrop-filter: blur(5px); /* Subtle glass effect */-->
-<!--        }-->
-
-<!--        #bookingPage h2 {-->
-<!--            font-size: 2.25rem;-->
-<!--            color: var(&#45;&#45;ay-primary-600);-->
-<!--            text-shadow: 1px 1px 3px rgba(46, 125, 100, 0.2);-->
-<!--        }-->
-
-<!--        /* Left Panel Enhancements */-->
-<!--        #bookingPage .col-md-7 .card {-->
-<!--            border: none;-->
-<!--            background: linear-gradient(135deg, #ffffff 70%, var(&#45;&#45;ay-bg) 100%);-->
-<!--            padding: 1.5rem;-->
-<!--            border-radius: 18px;-->
-<!--        }-->
-
-<!--        #bookingPage .form-label {-->
-<!--            color: var(&#45;&#45;ay-text);-->
-<!--            font-size: 1.1rem;-->
-<!--        }-->
-
-<!--        #bookingPage .form-control {-->
-<!--            background: #fafafa;-->
-<!--            font-size: 1rem;-->
-<!--            transition: all 0.3s ease;-->
-<!--        }-->
-<!--        #bookingPage .form-control:focus {-->
-<!--            transform: scale(1.02);-->
-<!--            background: #ffffff;-->
-<!--        }-->
-
-<!--        /* Selectable Cards Animation */-->
-<!--        #packageCards .card,-->
-<!--        #availableVehicles .card,-->
-<!--        #guideCards .card {-->
-<!--            transition: all 0.3s ease-in-out;-->
-<!--        }-->
-<!--        #packageCards .card.selected,-->
-<!--        #availableVehicles .card.selected,-->
-<!--        #guideCards .card.selected {-->
-<!--            background: linear-gradient(135deg, rgba(46, 125, 100, 0.05), #ffffff);-->
-<!--            transform: translateY(-2px);-->
-<!--        }-->
-
-<!--        /* Card Content Styling */-->
-<!--        #bookingPage .card-body {-->
-<!--            padding: 1.5rem;-->
-<!--        }-->
-<!--        #bookingPage .card-title {-->
-<!--            font-size: 1.25rem;-->
-<!--            color: var(&#45;&#45;ay-primary);-->
-<!--            font-weight: 600;-->
-<!--        }-->
-<!--        #bookingPage .card-text {-->
-<!--            color: var(&#45;&#45;ay-muted);-->
-<!--            font-size: 0.95rem;-->
-<!--        }-->
-
-<!--        /* Right Panel Enhancements */-->
-<!--        #bookingPage .col-md-4 .card.bg-light {-->
-<!--            border-left: 4px solid var(&#45;&#45;ay-primary);-->
-<!--            padding: 1.5rem;-->
-<!--            border-radius: 18px;-->
-<!--        }-->
-
-<!--        #bookingPage .list-group-item {-->
-<!--            border-bottom: 1px solid rgba(46, 125, 100, 0.1);-->
-<!--        }-->
-<!--        #bookingPage #summaryTotal {-->
-<!--            font-size: 1.3rem;-->
-<!--            transition: color 0.3s ease;-->
-<!--        }-->
-<!--        #bookingPage #summaryTotal:hover {-->
-<!--            color: var(&#45;&#45;ay-success);-->
-<!--        }-->
-
-<!--        #bookingPage #confirmBookingBtn {-->
-<!--            border-radius: 15px;-->
-<!--            font-size: 1.1rem;-->
-<!--            padding: 0.75rem;-->
-<!--            transition: all 0.3s ease;-->
-<!--        }-->
-<!--        #bookingPage #confirmBookingBtn:hover {-->
-<!--            background: linear-gradient(135deg, #256f59 0%, #2e7d64 100%);-->
-<!--            transform: translateY(-2px);-->
-<!--        }-->
-
-<!--        /* Payment Modal Enhancements */-->
-<!--        #paymentModal .modal-content {-->
-<!--            border: none;-->
-<!--            background: linear-gradient(135deg, #ffffff 70%, #f9f8f4 100%);-->
-<!--        }-->
-<!--        #paymentModal .modal-title {-->
-<!--            color: var(&#45;&#45;ay-primary-600);-->
-<!--            font-size: 1.5rem;-->
-<!--        }-->
-<!--        #paymentModal .btn-success {-->
-<!--            transition: all 0.3s ease;-->
-<!--        }-->
-<!--        #paymentModal .btn-success:hover {-->
-<!--            background: linear-gradient(135deg, #1a8a65 0%, #21a179 100%);-->
-<!--            transform: translateY(-2px);-->
-<!--        }-->
-
-<!--        /* Responsive Adjustments */-->
-<!--        @media (max-width: 991px) {-->
-<!--            #bookingPage .col-md-4 > .card.bg-light {-->
-<!--                position: static;-->
-<!--                margin-top: 2rem;-->
-<!--            }-->
-<!--            #bookingPage .col-md-7 .card {-->
-<!--                padding: 1rem;-->
-<!--            }-->
-<!--            #bookingPage h2 {-->
-<!--                font-size: 1.75rem;-->
-<!--            }-->
-<!--        }-->
-
-<!--        /* Animation for Page Load */-->
-<!--        @keyframes fadeInUp {-->
-<!--            from {-->
-<!--                opacity: 0;-->
-<!--                transform: translateY(20px);-->
-<!--            }-->
-<!--            to {-->
-<!--                opacity: 1;-->
-<!--                transform: translateY(0);-->
-<!--            }-->
-<!--        }-->
-<!--        #bookingPage .card {-->
-<!--            animation: fadeInUp 0.6s ease-out;-->
-<!--        }-->
-
-<!--        #packageCards .selectable-card,-->
-<!--        #availableVehicles .selectable-card,-->
-<!--        #guideCards .selectable-card {-->
-<!--            border: 1px solid #e5e7eb;-->
-<!--            background: #fff;-->
-<!--            border-radius: 14px;-->
-<!--            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;-->
-<!--            cursor: pointer;-->
-<!--        }-->
-<!--        #packageCards .selectable-card:hover,-->
-<!--        #availableVehicles .selectable-card:hover,-->
-<!--        #guideCards .selectable-card:hover {-->
-<!--            border-color: var(&#45;&#45;ay-primary);-->
-<!--            box-shadow: 0 10px 22px rgba(46,125,100,.12);-->
-<!--            transform: translateY(-1px);-->
-<!--        }-->
-<!--        #packageCards .selectable-card.selected,-->
-<!--        #availableVehicles .selectable-card.selected,-->
-<!--        #guideCards .selectable-card.selected {-->
-<!--            border-color: var(&#45;&#45;ay-primary);-->
-<!--            box-shadow: 0 12px 26px rgba(46,125,100,.18);-->
-<!--            outline: 3px solid rgba(46,125,100,.08);-->
-<!--        }-->
-
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--&lt;!&ndash; Navbar &ndash;&gt;-->
-<!--<header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">-->
-<!--    <div class="container">-->
-<!--        <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-
-<!--        <nav class="collapse navbar-collapse" id="navmenu">-->
-<!--            <ul class="navbar-nav ms-auto align-items-lg-center">-->
-<!--                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>-->
-<!--                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>-->
-<!--                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>-->
-<!--                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>-->
-<!--                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>-->
-
-<!--                &lt;!&ndash; Sign in/up &ndash;&gt;-->
-<!--                <li class="nav-item">-->
-<!--                    <a href="signin.html" class="nav-link">Sign in/up</a>-->
-<!--                </li>-->
-
-<!--                &lt;!&ndash; Dropdown (hidden until login) &ndash;&gt;-->
-<!--                <li class="nav-item dropdown d-none" id="userDropdown">-->
-<!--                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">-->
-<!--                        Hi, User Name-->
-<!--                    </a>-->
-<!--                    <ul class="dropdown-menu border-0 rounded-0 m-0">-->
-<!--                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>-->
-<!--                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>-->
-<!--                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--    </div>-->
-<!--</header>-->
-
-<!--&lt;!&ndash; Booking Page Wrapper &ndash;&gt;-->
-<!--<main id="bookingPage">-->
-<!--    <div class="container py-5">-->
-<!--        <div class="card shadow-lg p-4 mx-auto">-->
-<!--            <h2 class="mb-4 text-center">Create a New Booking</h2>-->
-
-<!--            <div class="row g-4">-->
-<!--                &lt;!&ndash; Left Panel &ndash;&gt;-->
-<!--                <div class="col-md-7">-->
-<!--                    <div class="card p-4 shadow-sm rounded-4">-->
-
-<!--                        &lt;!&ndash; Booking Date &ndash;&gt;-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="bookingDate" class="form-label">Booking Start Date</label>-->
-<!--                            <input type="date" id="bookingDate" class="form-control" required>-->
-<!--                        </div>-->
-
-<!--&lt;!&ndash;                        &lt;!&ndash; Number of People &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="numPeople" class="form-label">Number of People</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <input type="number" id="numPeople" class="form-control" value="1" min="1" required>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-
-<!--                        &lt;!&ndash; Package Cards &ndash;&gt;-->
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label">Select Package</label>-->
-<!--                            <div id="packageCards" class="row g-3">-->
-<!--                                &lt;!&ndash; Packages will render here &ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--                        <script>-->
-
-
-<!--                            ////////////////-->
-<!--                            $(document).ready(function () {-->
-<!--                                // Function to load packages dynamically-->
-<!--                                function loadPackages() {-->
-<!--                                    $.ajax({-->
-<!--                                        type: "GET",-->
-<!--                                        url: "http://localhost:8080/api/v1/package/getAll", // Endpoint for packages-->
-<!--                                        success: function (response) {-->
-<!--                                            // Clear any existing content-->
-<!--                                            $('#packageCards').empty();-->
-
-<!--                                            // Loop through the packages data and append it to the container-->
-<!--                                            response.data.forEach(function (pkg) {-->
-<!--                                                // Determine the image source, fallback to a placeholder if imageUrl is missing-->
-<!--                                                const img = pkg.imageUrl-->
-<!--                                                    ? `<img src="/uploads/${pkg.imageUrl}" class="card-img-top" alt="${pkg.name || 'Unnamed Package'}">`-->
-<!--                                                    : '<img src="/uploads/placeholder.jpg" class="card-img-top" alt="Unnamed Package">';-->
-
-<!--                                                // Join activities into a single string for display (e.g., comma-separated)-->
-<!--                                                const activitiesText = pkg.activities && pkg.activities.length-->
-<!--                                                    ? `<p class="card-text">Activities: ${pkg.activities.join(', ')}</p>`-->
-<!--                                                    : '<p class="card-text">Activities: N/A</p>';-->
-
-<!--                                                // Create the HTML for each package with selectable class-->
-<!--                                                var packageItem = `-->
-<!--                        <div class="col-lg-4 col-md-6 mb-4">-->
-<!--                            <div class="card h-100 selectable-card" data-price="${pkg.price || 0}" data-days="${pkg.estimateDays || 0}" data-name="${pkg.name || 'Unnamed Package'}">-->
-<!--                                ${img}-->
-<!--                                <div class="card-body text-center">-->
-<!--                                    <h5 class="card-title">${pkg.name || 'Unnamed Package'}</h5>-->
-<!--                                    <p class="card-text">Price: RS:${pkg.price || 'N/A'}</p>-->
-<!--                                    <p class="card-text">Est. Days: ${pkg.estimateDays || 'N/A'}</p>-->
-<!--                                    ${activitiesText}-->
-<!--                                </div>-->
-<!--                                <div class="card-footer bg-transparent border-0 text-center">-->
-<!--                                    <button class="btn btn-primary btn-sm select-package">Select</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    `;-->
-
-<!--                                                // Append the package item to the package cards-->
-<!--                                                $('#packageCards').append(packageItem);-->
-<!--                                            });-->
-
-<!--                                            // Add click event for selecting packages-->
-<!--                                            $('.select-package').on('click', function () {-->
-<!--                                                const card = $(this).closest('.selectable-card');-->
-<!--                                                const price = parseFloat(card.data('price'));-->
-<!--                                                const days = parseInt(card.data('days'));-->
-<!--                                                const name = card.data('name');-->
-
-<!--                                                // Remove selected class from all cards-->
-<!--                                                $('.selectable-card').removeClass('selected');-->
-<!--                                                // Add selected class to the clicked card-->
-<!--                                                card.addClass('selected');-->
-
-<!--                                                // Update summary-->
-<!--                                                $('#summaryPackage').text(name);-->
-<!--                                                $('#summaryDays').text(days);-->
-<!--                                                $('#summaryBase').text(`LKR ${price.toFixed(2)}`);-->
-<!--                                                updateTotalPrice();-->
-<!--                                            });-->
-<!--                                        },-->
-<!--                                        error: function (xhr, status, error) {-->
-<!--                                            console.error("Error loading packages:", error);-->
-<!--                                            alert("Error loading packages. Check console for details.");-->
-<!--                                        }-->
-<!--                                    });-->
-<!--                                }-->
-
-<!--                                // Function to update total price-->
-<!--                                function updateTotalPrice() {-->
-<!--                                    const basePrice = parseFloat($('#summaryBase').text().replace('LKR ', '')) || 0;-->
-<!--                                    const guideFee = parseFloat($('#summaryGuideFee').text().replace('LKR ', '')) || 0;-->
-<!--                                    const total = basePrice + guideFee;-->
-<!--                                    $('#summaryTotal').text(`LKR ${total.toFixed(2)}`);-->
-<!--                                    $('#paymentTotal').text(`LKR ${total.toFixed(2)}`);-->
-<!--                                }-->
-
-<!--                                // Initial load-->
-<!--                                loadPackages();-->
-<!--                            });-->
-<!--                        </script>-->
-
-<!--                        &lt;!&ndash; Available Accommodation &ndash;&gt;-->
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label">Available Accommodation</label>-->
-<!--                            <div id="availableVehicles" class="row g-3">-->
-<!--                                &lt;!&ndash; Accommodation will be loaded here dynamically &ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--                        <script>-->
-<!--                            $(document).ready(function () {-->
-<!--                                // Function to load accommodations dynamically-->
-<!--                                function loadAccommodations() {-->
-<!--                                    $.ajax({-->
-<!--                                        type: "GET",-->
-<!--                                        url: "http://localhost:8080/api/v1/accommodation/getAll", // Correct API endpoint-->
-<!--                                        success: function (response) {-->
-<!--                                            // Clear any existing content-->
-<!--                                            $('#availableVehicles').empty();-->
-
-<!--                                            // Loop through the accommodations data and append it to the container-->
-<!--                                            response.data.forEach(function (accommodation) {-->
-<!--                                                // Determine the image source, fallback to a placeholder if imageUrl is missing-->
-<!--                                                const img = accommodation.imageUrl-->
-<!--                                                    ? `<img src="/uploads/${accommodation.imageUrl}" class="card-img-top" alt="${accommodation.name || 'Unnamed Accommodation'}">`-->
-<!--                                                    : '<img src="/uploads/placeholder.jpg" class="card-img-top" alt="Unnamed Accommodation">';-->
-
-<!--                                                // Create the HTML for each accommodation with selectable class-->
-<!--                                                var accommodationItem = `-->
-<!--                        <div class="col-lg-4 col-md-6 mb-4">-->
-<!--                            <div class="card h-100 selectable-card" data-cost="${accommodation.costPerDay || 0}" data-name="${accommodation.name || 'Unnamed Accommodation'}">-->
-<!--                                ${img}-->
-<!--                                <div class="card-body text-center">-->
-<!--                                    <h5 class="card-title">${accommodation.name || 'Unnamed Accommodation'}</h5>-->
-<!--                                    <p class="card-text">Location: ${accommodation.location || 'N/A'}</p>-->
-<!--                                    <p class="card-text">Category: ${accommodation.category || 'N/A'}</p>-->
-<!--                                    <p class="card-text">Cost/Day: RS:${accommodation.costPerDay || 'N/A'}</p>-->
-
-<!--                                </div>-->
-<!--                                <div class="card-footer bg-transparent border-0 text-center">-->
-<!--                                    <button class="btn btn-primary btn-sm select-accommodation">Select</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    `;-->
-
-<!--                                                // Append the accommodation item to the available vehicles container-->
-<!--                                                $('#availableVehicles').append(accommodationItem);-->
-<!--                                            });-->
-
-<!--                                            // Add click event for selecting accommodations-->
-<!--                                            $('.select-accommodation').on('click', function () {-->
-<!--                                                const card = $(this).closest('.selectable-card');-->
-<!--                                                const cost = parseFloat(card.data('cost'));-->
-<!--                                                const name = card.data('name');-->
-
-<!--                                                // Remove selected class from all cards-->
-<!--                                                $('.selectable-card').removeClass('selected');-->
-<!--                                                // Add selected class to the clicked card-->
-<!--                                                card.addClass('selected');-->
-
-<!--                                                // Update summary-->
-<!--                                                $('#summaryVehicle').text(name);-->
-<!--                                                $('#summaryVehicleNumber').text(cost > 0 ? `LKR ${cost.toFixed(2)}` : 'N/A');-->
-<!--                                                updateTotalPrice();-->
-<!--                                            });-->
-<!--                                        },-->
-<!--                                        error: function (xhr, status, error) {-->
-<!--                                            console.error("Error loading accommodations:", error);-->
-<!--                                            alert("Error loading accommodations. Check console for details.");-->
-<!--                                        }-->
-<!--                                    });-->
-<!--                                }-->
-
-<!--                                // Function to update total price-->
-<!--                                function updateTotalPrice() {-->
-<!--                                    const basePrice = parseFloat($('#summaryBase').text().replace('LKR ', '')) || 0;-->
-<!--                                    const guideFee = parseFloat($('#summaryGuideFee').text().replace('LKR ', '')) || 0;-->
-<!--                                    const vehicleCost = parseFloat($('#summaryVehicleNumber').text().replace('LKR ', '')) || 0;-->
-<!--                                    const total = basePrice + guideFee + vehicleCost;-->
-<!--                                    $('#summaryTotal').text(`LKR ${total.toFixed(2)}`);-->
-<!--                                    $('#paymentTotal').text(`LKR ${total.toFixed(2)}`);-->
-<!--                                }-->
-
-<!--                                // Initial load-->
-<!--                                loadAccommodations();-->
-<!--                            });-->
-<!--                        </script>-->
-
-<!--                        &lt;!&ndash; Available Doctors &ndash;&gt;-->
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label">Available Doctors</label>-->
-<!--                            <div id="guideCards" class="row g-2">-->
-<!--                                &lt;!&ndash; Doctors will be loaded here dynamically &ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--                        <script>-->
-<!--                            $(document).ready(function () {-->
-<!--                                // Function to load doctors dynamically-->
-<!--                                function loadDoctors() {-->
-<!--                                    $.ajax({-->
-<!--                                        type: "GET",-->
-<!--                                        url: "http://localhost:8080/api/v1/doctor/getAll", // Correct API endpoint for doctors-->
-<!--                                        success: function (response) {-->
-<!--                                            // Clear any existing content-->
-<!--                                            $('#guideCards').empty();-->
-
-<!--                                            // Loop through the doctors data and append only ACTIVE doctors to the container-->
-<!--                                            response.data.forEach(function (doctor) {-->
-<!--                                                // Only proceed if the doctor is ACTIVE-->
-<!--                                                if (doctor.status === "ACTIVE") {-->
-<!--                                                    // Determine the image source, fallback to a placeholder if imageUrl is missing-->
-<!--                                                    const img = doctor.imageUrl-->
-<!--                                                        ? `<img src="/uploads/${doctor.imageUrl}" class="card-img-top" alt="${doctor.fullName || 'Unnamed Doctor'}">`-->
-<!--                                                        : '<img src="/uploads/placeholder.jpg" class="card-img-top" alt="Unnamed Doctor">';-->
-
-<!--                                                    // Set status badge class and text based on doctor status-->
-<!--                                                    const statusClass = doctor.status === "ACTIVE" ? "badge-soft" : "badge badge-danger";-->
-<!--                                                    const statusText = doctor.status || 'N/A';-->
-
-<!--                                                    // Create the HTML for each doctor with selectable class and status-->
-<!--                                                    var doctorItem = `-->
-<!--                            <div class="col-lg-4 col-md-6 mb-4">-->
-<!--                                <div class="card h-100 selectable-card" data-fee="${doctor.paymentPerDay || 0}" data-name="${doctor.fullName || 'Unnamed Doctor'}" data-email="${doctor.email || 'No email'}">-->
-<!--                                    ${img}-->
-<!--                                    <div class="card-body text-center">-->
-<!--                                        <h5 class="card-title">${doctor.fullName || 'Unnamed Doctor'}</h5>-->
-<!--                                        <p class="card-text">${doctor.email || 'No email'}</p>-->
-<!--                                        <p class="card-text">Fee: RS:${doctor.paymentPerDay || 'N/A'}</p>-->
-<!--                                        <p class="card-text"><span class="${statusClass}">${statusText}</span></p>-->
-<!--                                    </div>-->
-<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
-<!--                                        <button class="btn btn-primary btn-sm select-doctor">Select</button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        `;-->
-
-<!--                                                    // Append the doctor item to the guide cards container-->
-<!--                                                    $('#guideCards').append(doctorItem);-->
-<!--                                                }-->
-<!--                                            });-->
-
-<!--                                            // Add click event for selecting doctors-->
-<!--                                            $('.select-doctor').on('click', function () {-->
-<!--                                                const card = $(this).closest('.selectable-card');-->
-<!--                                                const fee = parseFloat(card.data('fee'));-->
-<!--                                                const name = card.data('name');-->
-<!--                                                const email = card.data('email');-->
-
-<!--                                                // Remove selected class from all cards-->
-<!--                                                $('.selectable-card').removeClass('selected');-->
-<!--                                                // Add selected class to the clicked card-->
-<!--                                                card.addClass('selected');-->
-
-<!--                                                // Update summary-->
-<!--                                                $('#summaryGuide').text(name);-->
-<!--                                                $('#summaryGuideEmail').text(email);-->
-<!--                                                $('#summaryGuideFee').text(`LKR ${fee.toFixed(2)}`);-->
-<!--                                                updateTotalPrice();-->
-<!--                                            });-->
-<!--                                        },-->
-<!--                                        error: function (xhr, status, error) {-->
-<!--                                            console.error("Error loading doctors:", error);-->
-<!--                                            alert("Error loading doctors. Check console for details.");-->
-<!--                                        }-->
-<!--                                    });-->
-<!--                                }-->
-
-<!--                                // Function to update total price-->
-<!--                                function updateTotalPrice() {-->
-<!--                                    const basePrice = parseFloat($('#summaryBase').text().replace('LKR ', '')) || 0;-->
-<!--                                    const guideFee = parseFloat($('#summaryGuideFee').text().replace('LKR ', '')) || 0;-->
-<!--                                    const vehicleCost = parseFloat($('#summaryVehicleNumber').text().replace('LKR ', '')) || 0;-->
-<!--                                    const total = basePrice + guideFee + vehicleCost;-->
-<!--                                    $('#summaryTotal').text(`LKR ${total.toFixed(2)}`);-->
-<!--                                    $('#paymentTotal').text(`LKR ${total.toFixed(2)}`);-->
-<!--                                }-->
-
-<!--                                // Initial load-->
-<!--                                loadDoctors();-->
-<!--                            });-->
-<!--                        </script>-->
-<!--&lt;!&ndash;///////////&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Right Panel &ndash;&gt;-->
-<!--                <div class="col-md-4 offset-md-1 offset-lg-1 offset-xl-1">-->
-<!--                    <div class="card shadow-sm rounded-4 p-4 bg-light">-->
-<!--                        <h4 class="mb-3 text-center">Booking Summary</h4>-->
-
-<!--                        <div class="mb-3">-->
-<!--                            <label for="userEmail" class="form-label">User email</label>-->
-<!--                            <input type="text" id="userEmail" name="userEmail" class="form-control" readonly>-->
-<!--                        </div>-->
-
-<!--                        &lt;!&ndash; Booking Date&ndash;&gt;-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="summaryBookingDate" class="form-label">Booking Date</label>-->
-<!--                            <input type="text" id="summaryBookingDate" class="form-control" readonly>-->
-<!--                        </div>-->
-
-<!--                        &lt;!&ndash; Checkout Date (calculated) &ndash;&gt;-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="checkoutDate" class="form-label">Checkout Date</label>-->
-<!--                            <input type="text" id="checkoutDate" class="form-control" readonly>-->
-<!--                        </div>-->
-
-<!--                        <ul class="list-group list-group-flush">-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Estimated Days:</strong> <span id="summaryDays">&#45;&#45;</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Selected Package:</strong> <span id="summaryPackage">&#45;&#45;</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>People:</strong> <span id="summaryPeople">1</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Location:</strong> <span id="summaryVehicle">&#45;&#45;</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Doctor:</strong> <span id="summaryGuide">&#45;&#45;</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Doctor Email:</strong> <span id="summaryGuideEmail">&#45;&#45;</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item ">-->
-<!--                                <strong>Location No:</strong> <span id="summaryVehicleNumber">&#45;&#45;</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Base Price:</strong> <span id="summaryBase">LKR 0.00</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Doctor Fee:</strong> <span id="summaryGuideFee">LKR 0.00</span>-->
-<!--                            </li>-->
-<!--                            <li class="list-group-item">-->
-<!--                                <strong>Total Price:</strong>-->
-<!--                                <span id="summaryTotal" class="text-success fw-bold">LKR 0.00</span>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-
-<!--                        <div class="d-grid mt-4">-->
-<!--                            <button class="btn btn-primary btn-lg" id="confirmBookingBtn" type="button">Confirm Booking</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div> &lt;!&ndash; /row &ndash;&gt;-->
-<!--        </div> &lt;!&ndash; /card &ndash;&gt;-->
-<!--    </div> &lt;!&ndash; /container &ndash;&gt;-->
-
-<!--    &lt;!&ndash; Payment Modal &ndash;&gt;-->
-<!--    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog modal-dialog-centered">-->
-<!--            <div class="modal-content p-4">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="paymentModalLabel">Complete Your Payment</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-
-<!--                <div class="modal-body">-->
-<!--                    <p><strong>Email:</strong> <span id="paymentEmail"></span></p>-->
-<!--                    <p><strong>Total Amount:</strong> <span class="text-success fw-bold"><span id="paymentTotal">LKR 0.00</span></span></p>-->
-
-<!--                    <form id="cardPaymentForm" novalidate>-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="cardNumber" class="form-label">Card Number</label>-->
-<!--                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>-->
-<!--                        </div>-->
-
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-6 mb-3">-->
-<!--                                <label for="expiryDate" class="form-label">Expiry Date</label>-->
-<!--                                <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6 mb-3">-->
-<!--                                <label for="cvv" class="form-label">CVV</label>-->
-<!--                                <input type="password" class="form-control" id="cvv" placeholder="123" required>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div class="mb-3">-->
-<!--                            <label for="cardHolderName" class="form-label">Card Holder Name</label>-->
-<!--                            <input type="text" class="form-control" id="cardHolderName" placeholder="Vindya Madubhashini" required>-->
-<!--                        </div>-->
-
-<!--                        <button type="submit" id="makePaymentBtn" class="btn btn-success w-100 mt-3">Pay Now</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</main>-->
-
-<!--&lt;!&ndash; Footer Section &ndash;&gt;-->
-<!--<footer class="footer">-->
-<!--    <div class="footer-content">-->
-<!--        <div class="footer-section contact-details">-->
-<!--            <h3>CONTACT DETAILS</h3>-->
-
-<!--            <div class="contact-item">-->
-<!--                <h4>ADDRESS</h4>-->
-<!--                <p>395/4,<br>-->
-<!--                    Harischandra Mawatha,<br>-->
-<!--                    Anuradhapura,<br>-->
-<!--                    Sri Lanka</p>-->
-<!--            </div>-->
-
-<!--            <div class="contact-item">-->
-<!--                <h4>GENERAL NUMBER</h4>-->
-<!--                <p>+94 25 2030200</p>-->
-<!--                <p>+94 704 725 634</p>-->
-<!--            </div>-->
-
-<!--            <div class="contact-item">-->
-<!--                <h4>EMAIL ADDRESS</h4>-->
-<!--                <p>reservations@helasuwaya.lk</p>-->
-<!--            </div>-->
-
-<!--            <div class="social-icons">-->
-<!--                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>-->
-<!--                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>-->
-<!--                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>-->
-<!--                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>-->
-<!--                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="footer-section menu-section">-->
-<!--            <h3>Hela Suwaya MENU</h3>-->
-
-<!--            <div class="menu-columns">-->
-<!--                <div class="menu-column">-->
-<!--                    <ul>-->
-<!--                        <li><a href="#">HOME</a></li>-->
-<!--                        <li><a href="#">OUR DOCTORS</a></li>-->
-<!--                        <li><a href="#">OUR PACKAGES</a></li>-->
-<!--                        <li><a href="#">OUR FACILITIES</a></li>-->
-<!--                        <li><a href="#">AYURVEDA</a></li>-->
-<!--                        <li><a href="#">OUR BLOG</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--                <div class="menu-column">-->
-<!--                    <ul>-->
-<!--                        <li><a href="#">ABOUT US</a></li>-->
-<!--                        <li><a href="#">OUR TREATMENTS</a></li>-->
-<!--                        <li><a href="#">ACCOMMODATION</a></li>-->
-<!--                        <li><a href="#">DESTINATIONS AND EXCURSIONS</a></li>-->
-<!--                        <li><a href="#">HELA WEDAKAMA</a></li>-->
-<!--                        <li><a href="#">CONTACT US</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="footer-section logos-section">-->
-<!--            <div class="logo-container">-->
-<!--                <div class="main-logo">-->
-<!--                    <div class="logo-placeholder">-->
-<!--                        <i class="fas fa-leaf" style="font-size: 2rem; color: #d4af37;"></i>-->
-<!--                        <h4>Hela Suwaya<br>AYURVEDA</h4>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="certification-logo">-->
-<!--                    <div class="cert-placeholder">-->
-<!--                        <i class="fas fa-certificate" style="font-size: 1.5rem; color: #4a7c59;"></i>-->
-<!--                        <small>Certification<br>Partner</small>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div class="footer-bottom">-->
-<!--        <p>&copy;2024 Hela Suwaya Ayurveda Private Limited</p>-->
-<!--        <p>Website Design and Development by <a href="#">Athwa Solutions</a></p>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; Back to top button &ndash;&gt;-->
-<!--    <button class="back-to-top" onclick="scrollToTop()">-->
-<!--        <i class="fas fa-chevron-up"></i>-->
-<!--        <span>Back to top</span>-->
-<!--    </button>-->
-
-<!--    &lt;!&ndash; WhatsApp button &ndash;&gt;-->
-<!--    <a href="https://wa.me/94704725634" class="whatsapp-btn" target="_blank">-->
-<!--        <i class="fab fa-whatsapp"></i>-->
-<!--    </a>-->
-<!--</footer>-->
-
-<!--&lt;!&ndash; Back to Top &ndash;&gt;-->
-<!--<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" id="backToTop" style="position: fixed; bottom: 24px; right: 24px; display: none;"><i class="fa fa-angle-double-up"></i></a>-->
-
-<!--&lt;!&ndash; Bootstrap JS &ndash;&gt;-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>-->
-<!--<script src="js/load.js"></script>-->
-
-
-<!--</body>-->
-<!--</html>-->
-
-<!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -986,398 +20,543 @@
 
     <style>
         /* ===============================
-           Ayurveda Booking Page Styles
-           NOTE: Navbar untouched.
-           Scope: #bookingPage only
-           =============================== */
+     Modern Ayurveda Booking Page Styles
+     =============================== */
 
-        /* Theme tokens */
+        /* Modern color palette with Ayurvedic inspiration */
         :root {
-            --ay-primary: #2e7d64;     /* Herbal green */
-            --ay-primary-600: #256f59; /* Darker green */
-            --ay-accent: #e8a842;      /* Warm turmeric */
-            --ay-bg: #f7f6f2;          /* Sand */
-            --ay-text: #1f2937;        /* Slate */
-            --ay-muted: #6b7280;       /* Muted text */
-            --ay-success: #21a179;
-            --ay-danger: #ef4444;
-            --ay-shadow: 0 8px 24px rgba(16,24,40,0.08);
+            --ay-primary: #2a6e5d;     /* Deep herbal green - more sophisticated */
+            --ay-primary-light: #3a8d77; /* Lighter green for accents */
+            --ay-primary-dark: #1d4f42;  /* Darker green for depth */
+            --ay-accent: #d4af37;      /* Warm golden turmeric */
+            --ay-accent-light: #e6c862; /* Lighter gold */
+            --ay-bg: #f8f6f2;          /* Soft warm beige */
+            --ay-card-bg: #ffffff;     /* Pure white for cards */
+            --ay-text: #1a2e2b;        /* Deep slate - improved contrast */
+            --ay-text-light: #5a6a64;  /* Muted text */
+            --ay-success: #2a8c6d;     /* Vibrant success green */
+            --ay-danger: #e63946;      /* Modern red for errors */
+            --ay-border: #e0e7eb;      /* Light border color */
+            --ay-shadow-sm: 0 4px 12px rgba(16, 24, 40, 0.08);
+            --ay-shadow-md: 0 8px 24px rgba(16, 24, 40, 0.12);
+            --ay-shadow-lg: 0 12px 36px rgba(16, 24, 40, 0.15);
+            --ay-gradient-border: linear-gradient(135deg, var(--ay-primary-light), var(--ay-accent-light)); /* New gradient for card style */
         }
 
-        /* Wrap only the booking area so navbar won't change */
+        /* Navbar with background */
+        .navbar {
+            background: linear-gradient(135deg, var(--ay-primary) 0%, var(--ay-primary-dark) 100%) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--ay-shadow-md);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Booking Page Wrapper - Modern gradient background */
         #bookingPage {
-            padding-top: 6.5rem; /* space for fixed navbar */
-            background: linear-gradient(180deg, var(--ay-bg) 0%, #ffffff 100%);
+            padding-top: 6.5rem;
+            background: linear-gradient(135deg, var(--ay-bg) 0%, #f5f2eb 100%);
             min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Titles */
-        #bookingPage h2,
-        #bookingPage h4,
-        #bookingPage .form-label {
-            color: #243b36;
-        }
+        /* Typography Enhancements with better hierarchy */
         #bookingPage h2 {
             font-family: 'Playfair Display', serif;
-            letter-spacing: .3px;
-        }
-
-        /* Cards */
-        #bookingPage .card {
-            border: 1px solid rgba(16,24,40,.06);
-            border-radius: 16px;
-            box-shadow: var(--ay-shadow);
-            overflow: hidden;
-            background: #ffffff;
-        }
-        #bookingPage .rounded-4 { border-radius: 16px !important; }
-
-        /* Form fields */
-        #bookingPage .form-label {
-            font-weight: 600;
-            margin-bottom: .35rem;
-        }
-        #bookingPage .form-control {
-            border: 1.2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 10px 14px;
-            box-shadow: none !important;
-            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;
-        }
-        #bookingPage .form-control:focus {
-            border-color: var(--ay-primary);
-            box-shadow: 0 0 0 .2rem rgba(46,125,100,.15) !important;
-        }
-        /* Remove number spinners (webkit) */
-        #bookingPage input[type=number]::-webkit-outer-spin-button,
-        #bookingPage input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none; margin: 0;
-        }
-        #bookingPage input[type=number] { -moz-appearance: textfield; } /* firefox */
-
-        /* Buttons */
-        #bookingPage .btn-primary {
-            background: linear-gradient(135deg, var(--ay-primary) 0%, #268f78 100%);
-            border: 0;
-            border-radius: 12px;
-            padding: 12px 18px;
-            font-weight: 600;
-            letter-spacing: .2px;
-            box-shadow: 0 10px 22px rgba(38,143,120,.28);
-            transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
-        }
-        #bookingPage .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 14px 26px rgba(38,143,120,.32);
-            filter: brightness(1.03);
-        }
-        #bookingPage .btn-primary:active {
-            transform: translateY(0);
-            box-shadow: 0 8px 20px rgba(38,143,120,.25);
-        }
-
-        /* Back to top button */
-        .back-to-top {
-            background: var(--ay-primary);
-            border: 0;
-            box-shadow: 0 8px 16px rgba(46,125,100,.3);
-        }
-        .back-to-top:hover { background: var(--ay-primary-600); }
-
-        /* Sticky booking summary (right panel) */
-        @media (min-width: 992px) {
-            #bookingPage .col-md-4 > .card.bg-light {
-                position: sticky;
-                top: 6.75rem;
-            }
-        }
-        #bookingPage .card.bg-light {
-            background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%) !important;
-        }
-
-        /* Summary list styles */
-        #bookingPage .list-group-item {
-            background: transparent;
-            border: none;
-            padding: 10px 0;
-            color: #334155;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #bookingPage .list-group-item strong {
-            font-weight: 600;
-            color: #1f2937;
-        }
-        #bookingPage #summaryTotal {
-            color: var(--ay-primary) !important;
-            font-weight: 800;
-        }
-
-        /* Selectable cards (Packages / Vehicles / Guides) */
-        #packageCards .card,
-        #availableVehicles .card,
-        #guideCards .card,
-        #packageCards .selectable-card,
-        #availableVehicles .selectable-card,
-        #guideCards .selectable-card {
-            border: 1px solid #e5e7eb;
-            background: #fff;
-            border-radius: 14px;
-            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;
-            cursor: pointer;
-        }
-        #packageCards .card:hover,
-        #availableVehicles .card:hover,
-        #guideCards .card:hover,
-        #packageCards .selectable-card:hover,
-        #availableVehicles .selectable-card:hover,
-        #guideCards .selectable-card:hover {
-            border-color: var(--ay-primary);
-            box-shadow: 0 10px 22px rgba(46,125,100,.12);
-            transform: translateY(-1px);
-        }
-        #packageCards .card.selected,
-        #availableVehicles .card.selected,
-        #guideCards .card.selected,
-        #packageCards .selectable-card.selected,
-        #availableVehicles .selectable-card.selected,
-        #guideCards .selectable-card.selected {
-            border-color: var(--ay-primary);
-            box-shadow: 0 12px 26px rgba(46,125,100,.18);
-            outline: 3px solid rgba(46,125,100,.08);
-        }
-
-        /* Mini badges */
-        #bookingPage .badge-soft {
-            color: #0f5132;
-            background: rgba(46,125,100,.12);
-            border: 1px solid rgba(46,125,100,.22);
-            border-radius: 999px;
-            padding: .25rem .5rem;
-            font-weight: 600;
-            font-size: .8rem;
-        }
-
-        /* Payment modal */
-        #paymentModal .modal-content {
-            border-radius: 16px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 18px 40px rgba(16,24,40,.2);
-        }
-        #paymentModal .btn-success {
-            background: linear-gradient(135deg, var(--ay-success), #1a8a65);
-            border: 0;
-            border-radius: 12px;
-            padding: 12px 18px;
+            font-size: 2.75rem;
+            color: var(--ay-primary-dark);
+            margin-bottom: 2rem;
             font-weight: 700;
-            box-shadow: 0 10px 22px rgba(33,161,121,.28);
-        }
-        #paymentModal .btn-success:hover {
-            filter: brightness(1.03);
-            transform: translateY(-1px);
+            position: relative;
+            text-align: center;
         }
 
-        /* Inputs inside modal use same style */
-        #paymentModal .form-control {
-            border-radius: 12px;
-            border: 1.2px solid #e2e8f0;
-        }
-        #paymentModal .form-control:focus {
-            border-color: var(--ay-primary);
-            box-shadow: 0 0 0 .2rem rgba(46,125,100,.15) !important;
-        }
-
-        /* Small helpers */
-        #bookingPage .text-success { color: var(--ay-success) !important; }
-        #bookingPage .text-danger { color: var(--ay-danger) !important; }
-
-        /* Spacing tweaks */
-        #bookingPage .g-2 > [class*='col'],
-        #bookingPage .g-3 > [class*='col'] { display: flex; }
-        #bookingPage .g-2 .card,
-        #bookingPage .g-3 .card { width: 100%; }
-
-        /* Enhanced Booking Page Styles */
-        #bookingPage .card.shadow-lg {
-            border-radius: 20px;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
+        #bookingPage h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--ay-accent);
+            margin: 1rem auto 0;
+            border-radius: 2px;
         }
 
-        #bookingPage h2 {
-            font-size: 2.25rem;
-            color: var(--ay-primary-600);
-            text-shadow: 1px 1px 3px rgba(46, 125, 100, 0.2);
-        }
-
-        /* Left Panel Enhancements */
-        #bookingPage .col-md-7 .card {
-            border: none;
-            background: linear-gradient(135deg, #ffffff 70%, var(--ay-bg) 100%);
-            padding: 1.5rem;
-            border-radius: 18px;
+        #bookingPage h4 {
+            color: var(--ay-primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
         }
 
         #bookingPage .form-label {
             color: var(--ay-text);
-            font-size: 1.1rem;
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            display: block;
         }
 
+        /* Modern Card Styling - WIDER and SHORTER */
+        #bookingPage .card {
+            border: none;
+            border-radius: 16px;
+            background: var(--ay-card-bg);
+            box-shadow: var(--ay-shadow-sm);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            width: 100%; /* Ensure full width */
+            min-height: 280px; /* Reduced height */
+        }
+
+        #bookingPage .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--ay-shadow-md);
+        }
+
+        #bookingPage .rounded-4 {
+            border-radius: 16px !important;
+        }
+
+        /* Main container card - wider */
+        #bookingPage > .container > .card {
+            max-width: 98%; /* Increased width for main card */
+            margin: 0 auto;
+        }
+
+        /* Card body - wider */
+        #bookingPage .card-body {
+            width: 100%; /* Full width within card */
+            padding: 1.5rem; /* Adjusted padding for better spacing */
+        }
+
+        /* New card style variation with gradient border */
+        #bookingPage .card.variant-gradient {
+            border: 2px solid transparent;
+            background: var(--ay-card-bg);
+            background-clip: padding-box;
+            position: relative;
+            z-index: 1;
+        }
+
+        #bookingPage .card.variant-gradient::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--ay-gradient-border);
+            border-radius: 18px;
+            z-index: -1;
+        }
+
+        #bookingPage .card.variant-gradient:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--ay-shadow-lg);
+        }
+
+        /* Form Inputs with modern styling */
         #bookingPage .form-control {
-            background: #fafafa;
+            border: 2px solid var(--ay-border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            background: #ffffff;
             font-size: 1rem;
             transition: all 0.3s ease;
+            color: var(--ay-text);
+            width: 100%; /* Full width inputs */
         }
+
         #bookingPage .form-control:focus {
-            transform: scale(1.02);
+            border-color: var(--ay-primary);
+            box-shadow: 0 0 0 3px rgba(42, 110, 93, 0.15);
             background: #ffffff;
         }
 
-        /* Selectable Cards Animation */
-        #packageCards .card,
-        #availableVehicles .card,
-        #guideCards .card {
-            transition: all 0.3s ease-in-out;
-        }
-        #packageCards .card.selected,
-        #availableVehicles .card.selected,
-        #guideCards .card.selected {
-            background: linear-gradient(135deg, rgba(46, 125, 100, 0.05), #ffffff);
-            transform: translateY(-2px);
+        #bookingPage input[type="date"] {
+            cursor: pointer;
         }
 
-        /* Card Content Styling */
-        #bookingPage .card-body {
-            padding: 1.5rem;
+        /* Remove number spinners */
+        #bookingPage input[type=number]::-webkit-outer-spin-button,
+        #bookingPage input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        #bookingPage .card-title {
-            font-size: 1.25rem;
-            color: var(--ay-primary);
+        #bookingPage input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* Modern Buttons with subtle gradient - WIDER BUTTONS */
+        #bookingPage .btn-primary {
+            background: linear-gradient(135deg, var(--ay-primary) 0%, var(--ay-primary-dark) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 28px;
             font-weight: 600;
-        }
-        #bookingPage .card-text {
-            color: var(--ay-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Right Panel Enhancements */
-        #bookingPage .col-md-4 .card.bg-light {
-            border-left: 4px solid var(--ay-primary);
-            padding: 1.5rem;
-            border-radius: 18px;
+            letter-spacing: 0.5px;
+            box-shadow: var(--ay-shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Full width buttons */
+            max-width: 300px; /* But not too wide */
+            margin: 0 auto; /* Center align */
+            display: block;
         }
 
+        #bookingPage .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        #bookingPage .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--ay-shadow-md);
+        }
+
+        #bookingPage .btn-primary:hover:before {
+            left: 100%;
+        }
+
+        #bookingPage .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: var(--ay-shadow-sm);
+        }
+
+        /* Select buttons - wider */
+        #bookingPage .btn-primary.btn-sm {
+            width: auto; /* Auto width for small buttons */
+            padding: 8px 20px;
+            max-width: 120px;
+        }
+
+        /* Sticky Booking Summary with modern design */
+        @media (min-width: 992px) {
+            #bookingPage .col-md-4 > .card.bg-light {
+                position: sticky;
+                top: 8rem;
+                border-left: 4px solid var(--ay-primary);
+            }
+        }
+
+        #bookingPage .card.bg-light {
+            background: var(--ay-card-bg) !important;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--ay-shadow-md);
+        }
+
+        /* Summary List with improved spacing */
         #bookingPage .list-group-item {
-            border-bottom: 1px solid rgba(46, 125, 100, 0.1);
-        }
-        #bookingPage #summaryTotal {
-            font-size: 1.3rem;
-            transition: color 0.3s ease;
-        }
-        #bookingPage #summaryTotal:hover {
-            color: var(--ay-success);
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(42, 110, 93, 0.1);
+            padding: 14px 0;
+            color: var(--ay-text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
         }
 
-        #bookingPage #confirmBookingBtn {
-            border-radius: 15px;
-            font-size: 1.1rem;
-            padding: 0.75rem;
+        #bookingPage .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+        #bookingPage .list-group-item:hover {
+            background: rgba(42, 110, 93, 0.03);
+        }
+
+        #bookingPage .list-group-item strong {
+            font-weight: 600;
+            color: var(--ay-text);
+        }
+
+        #bookingPage #summaryTotal {
+            color: var(--ay-success);
+            font-weight: 700;
+            font-size: 1.35rem;
             transition: all 0.3s ease;
         }
-        #bookingPage #confirmBookingBtn:hover {
-            background: linear-gradient(135deg, #256f59 0%, #2e7d64 100%);
-            transform: translateY(-2px);
+
+        /* Selectable Cards with modern design - WIDER and SHORTER */
+        #packageCards .selectable-card,
+        #availableVehicles .selectable-card,
+        #guideCards .selectable-card {
+            border: 2px solid var(--ay-border);
+            border-radius: 14px;
+            background: var(--ay-card-bg);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+            height: 320px; /* Reduced height */
+            width: 100%; /* Full width */
         }
 
-        /* Payment Modal Enhancements */
+        #packageCards .selectable-card:hover,
+        #availableVehicles .selectable-card:hover,
+        #guideCards .selectable-card:hover {
+            border-color: var(--ay-primary-light);
+            box-shadow: var(--ay-shadow-md);
+            transform: translateY(-5px);
+        }
+
+        #packageCards .selectable-card.selected,
+        #availableVehicles .selectable-card.selected,
+        #guideCards .selectable-card.selected {
+            border-color: var(--ay-primary);
+            box-shadow: var(--ay-shadow-md);
+            background: linear-gradient(135deg, rgba(42, 110, 93, 0.05), #ffffff);
+            transform: translateY(-5px);
+            position: relative;
+        }
+
+        #packageCards .selectable-card.selected:after,
+        #availableVehicles .selectable-card.selected:after,
+        #guideCards .selectable-card.selected:after {
+            content: '✓';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background: var(--ay-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .card-img-top {
+            height: 140px; /* Slightly reduced image height */
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .selectable-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        /* Card body adjustments for shorter cards */
+        .selectable-card .card-body {
+            padding: 1rem;
+            width: 100%; /* Ensure full width for selectable card bodies */
+        }
+
+        .selectable-card .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .selectable-card .card-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mini Badges with modern style */
+        #bookingPage .badge-soft {
+            color: var(--ay-primary);
+            background: rgba(42, 110, 93, 0.1);
+            border-radius: 20px;
+            padding: 0.4rem 0.8rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Payment Modal with modern design */
         #paymentModal .modal-content {
             border: none;
-            background: linear-gradient(135deg, #ffffff 70%, #f9f8f4 100%);
-        }
-        #paymentModal .modal-title {
-            color: var(--ay-primary-600);
-            font-size: 1.5rem;
-        }
-        #paymentModal .btn-success {
-            transition: all 0.3s ease;
-        }
-        #paymentModal .btn-success:hover {
-            background: linear-gradient(135deg, #1a8a65 0%, #21a179 100%);
-            transform: translateY(-2px);
+            border-radius: 16px;
+            background: var(--ay-card-bg);
+            box-shadow: var(--ay-shadow-lg);
+            overflow: hidden;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 991px) {
-            #bookingPage .col-md-4 > .card.bg-light {
-                position: static;
-                margin-top: 2rem;
-            }
-            #bookingPage .col-md-7 .card {
-                padding: 1rem;
-            }
-            #bookingPage h2 {
-                font-size: 1.75rem;
-            }
+        #paymentModal .modal-header {
+            background: linear-gradient(135deg, var(--ay-primary) 0%, var(--ay-primary-dark) 100%);
+            color: white;
+            border-bottom: none;
+            padding: 1.5rem 2rem;
+        }
+
+        #paymentModal .modal-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        #paymentModal .btn-close {
+            filter: invert(1);
+        }
+
+        #paymentModal .modal-body {
+            padding: 2rem;
+        }
+
+        #paymentModal .btn-success {
+            background: linear-gradient(135deg, var(--ay-success) 0%, #237a5f 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 28px;
+            font-weight: 700;
+            box-shadow: var(--ay-shadow-sm);
+            transition: all 0.3s ease;
+            width: 100%; /* Full width payment button */
+        }
+
+        #paymentModal .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--ay-shadow-md);
+            filter: brightness(1.05);
+        }
+
+        #paymentModal .form-control {
+            border-radius: 10px;
+            border: 2px solid var(--ay-border);
+            background: #ffffff;
+            transition: all 0.3s ease;
+            padding: 12px 16px;
+        }
+
+        #paymentModal .form-control:focus {
+            border-color: var(--ay-primary);
+            box-shadow: 0 0 0 3px rgba(42, 110, 93, 0.15);
+        }
+
+        /* Card Option Styling */
+        .card-option {
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-option:hover {
+            border-color: var(--ay-primary-light);
+            background: rgba(42, 110, 93, 0.03);
+        }
+
+        .card-option.selected {
+            border-color: var(--ay-primary);
+            background: rgba(42, 110, 93, 0.08);
         }
 
         /* Animation for Page Load */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         #bookingPage .card {
-            animation: fadeInUp 0.6s ease-out;
+            animation: fadeInUp 0.6s ease-out backwards;
         }
 
-        #packageCards .selectable-card,
-        #availableVehicles .selectable-card,
-        #guideCards .selectable-card {
-            border: 1px solid #e5e7eb;
-            background: #fff;
-            border-radius: 14px;
-            transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;
-            cursor: pointer;
-        }
-        #packageCards .selectable-card:hover,
-        #availableVehicles .selectable-card:hover,
-        #guideCards .selectable-card:hover {
-            border-color: var(--ay-primary);
-            box-shadow: 0 10px 22px rgba(46,125,100,.12);
-            transform: translateY(-1px);
-        }
-        #packageCards .selectable-card.selected,
-        #availableVehicles .selectable-card.selected,
-        #guideCards .selectable-card.selected {
-            border-color: var(--ay-primary);
-            box-shadow: 0 12px 26px rgba(46,125,100,.18);
-            outline: 3px solid rgba(46,125,100,.08);
+        #bookingPage .card:nth-child(2) { animation-delay: 0.1s; }
+        #bookingPage .card:nth-child(3) { animation-delay: 0.2s; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 991px) {
+            #bookingPage .col-md-4 > .card.bg-light {
+                position: static;
+                margin-top: 2.5rem;
+                border-left: none;
+                border-top: 4px solid var(--ay-primary);
+            }
+
+            #bookingPage .col-md-7 .card {
+                padding: 1.5rem;
+            }
+
+            #bookingPage h2 {
+                font-size: 2.25rem;
+            }
+
+            /* Stack cards on mobile */
+            #packageCards .selectable-card,
+            #availableVehicles .selectable-card,
+            #guideCards .selectable-card {
+                height: auto;
+                min-height: 280px;
+            }
         }
 
-        /* Card option styles from TravelEase */
-        .card-option {
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        @media (max-width: 767px) {
+            #bookingPage h2 {
+                font-size: 2rem;
+            }
+
+            #bookingPage .btn-primary,
+            #paymentModal .btn-success {
+                padding: 12px 20px;
+                font-size: 1rem;
+                width: 100%; /* Full width on mobile */
+            }
+
+            #bookingPage .card {
+                margin-bottom: 1.5rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .nav-link {
+                padding: 0.5rem !important;
+            }
         }
-        .card-option:hover {
-            border-color: var(--ay-primary);
-            background-color: rgba(46,125,100,0.05);
+
+        /* Custom scrollbar for webkit browsers */
+        #bookingPage ::-webkit-scrollbar {
+            width: 8px;
         }
-        .card-option.selected {
-            border-color: var(--ay-primary);
-            background-color: rgba(46,125,100,0.1);
+
+        #bookingPage ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
-        .card-img-top {
-            height: 100px;
-            object-fit: cover;
+
+        #bookingPage ::-webkit-scrollbar-thumb {
+            background: var(--ay-primary-light);
+            border-radius: 10px;
+        }
+
+        #bookingPage ::-webkit-scrollbar-thumb:hover {
+            background: var(--ay-primary);
         }
     </style>
 </head>
@@ -1386,8 +565,9 @@
 <!-- Navbar -->
 <header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">
     <div class="container">
+<!--        <i  id="main-icon" class="fas fa-spa"></i>-->
         <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -1395,31 +575,45 @@
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>
-                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="userBooking.html">View Your Booking</a></li>
 
-                <!-- Sign in/up -->
+                <!--                &lt;!&ndash; ✅ FIXED: Sign in/up &ndash;&gt;-->
+                <!--                <li class="nav-item">-->
+                <!--                    <a href="signup.html" class="nav-link">Sign in</a>-->
+                <!--                </li>-->
+
+                <!--                &lt;!&ndash; ✅ FIXED: Dropdown &ndash;&gt;-->
+                <!--                <li class="nav-item dropdown d-none" id="userDropdown">-->
+                <!--                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">-->
+                <!--                        Hi, User Name-->
+                <!--                    </a>-->
+                <!--                    <ul class="dropdown-menu border-0 rounded-0 m-0">-->
+                <!--                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>-->
+                <!--                        <li><a href="#" class="dropdown-item" onclick="loadPage('userBookings.html')">Bookings</a></li>-->
+                <!--                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>-->
+                <!--                    </ul>-->
+                <!--                </li>-->
+                <!-- Sign in/up Link -->
                 <li class="nav-item">
-                    <a href="signin.html" class="nav-link">Sign in/up</a>
+                    <a href="signup.html" class="nav-link" id="signInUpLink">Sign in</a>
                 </li>
-
-                <!-- Dropdown (hidden until login) -->
+                <!-- User Dropdown -->
                 <li class="nav-item dropdown d-none" id="userDropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        Hi, User Name
+                        <span>Hi, User Name</span>
                     </a>
                     <ul class="dropdown-menu border-0 rounded-0 m-0">
                         <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
-                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>
-                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('booking.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item text-danger" id="logoutBtn">Log out</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </div>
 </header>
-
 <!-- Booking Page Wrapper -->
 <main id="bookingPage">
     <div class="container py-5">
