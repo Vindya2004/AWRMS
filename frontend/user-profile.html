@@ -354,6 +354,11 @@
                                     <label for="editEmail" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="editEmail">
                                 </div>
+                                <div class="mb-3">
+                                    <label for="editPhone" class="form-label">Contact</label>
+                                    <input type="text" class="form-control" id="editPhone">
+                                </div>
+
                                 <button type="submit" class="btn btn-success">Save Changes</button>
                             </form>
                         </div>
@@ -548,8 +553,9 @@
                 if (!userId) return alert("User ID not found.");
 
                 $.ajax({
-                    url: `http://localhost:8080/api/users/${userId}`,
+                    url: `http://localhost:8080/api/v1/user/update?email=${encodeURIComponent(email)}`,
                     method: 'PUT',
+
                     contentType: 'application/json',
                     data: JSON.stringify(updatedUser),
                     success: function () {
@@ -568,12 +574,13 @@
                 if (!userId) return alert("User ID not found.");
                 if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
                     $.ajax({
-                        url: `http://localhost:8080/api/users/${userId}`,
+                        url: `http://localhost:8080/api/v1/user/delete?email=${encodeURIComponent(email)}`,
                         method: 'DELETE',
+
                         success: function () {
                             alert("Account deleted successfully!");
                             localStorage.clear();
-                            window.location.href = "signin.html";
+                            window.location.href = "signup.html";
                         },
                         error: function (error) {
                             console.error("Error deleting account:", error);

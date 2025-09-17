@@ -96,6 +96,35 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return false;
     }
 
+    @Override
+    public boolean updateUser(String email, UserDTO userDTO) {
+        Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmail(email));
+
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+
+            // Update allowed fields
+            if (userDTO.getName() != null) {
+                existingUser.setName(userDTO.getName());
+            }
+            if (userDTO.getContact() != null) {
+                existingUser.setContact(userDTO.getContact());
+            }
+            if (userDTO.getPassword() != null && !userDTO.getPassword().isBlank()) {
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            }
+
+            // Role update is usually restricted (handled separately by updateUserRole)
+            // so we won’t set role here unless needed
+
+            userRepository.save(existingUser);
+            return true;
+        }
+
+        return false;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

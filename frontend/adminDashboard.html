@@ -64,6 +64,7 @@
     <a onclick="showPanel('bookings')"><i class="fas fa-book"></i> Bookings</a>
     <a onclick="showPanel('packages')"><i class="fas fa-box"></i> Packages</a>
     <a onclick="showPanel('payments')"><i class="fas fa-credit-card"></i> Payments</a>
+    <a onclick="showPanel('reviews')"><i class="fas fa-star"></i> Reviews</a>
     <!-- <a onclick="showPanel('settings')"><i class="fas fa-cog"></i> Settings</a>-->
 
     <div class="mt-auto text-left">
@@ -357,10 +358,121 @@
         </script>
     </div>
 
+    <!-- Review Management Section -->
+    <div id="reviews" class="hidden">
+        <h1>Review Management</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <input type="text" id="searchReview" class="form-control w-25" placeholder="Search by User Email or Comment">
+        </div>
+        <table class="table table-bordered mt-3">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>User Email</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="reviewTableBody">
+            <tr><td colspan="6" class="text-center">Loading...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Load all reviews when the page is ready
+            loadAllReviews();
+
+            // Search functionality for reviews
+            $("#searchReview").on("keyup", function () {
+                const searchTerm = $(this).val().toLowerCase();
+                filterReviews(searchTerm);
+            });
+        });
+
+        // Function to load all reviews
+        function loadAllReviews() {
+            $.ajax({
+                url: "http://localhost:8080/api/v1/review/all",
+                method: "GET",
+                success: function (response) {
+                    if (response.code === 201 || response.code === 200) {
+                        window.allReviews = response.data; // Store reviews globally for filtering
+                        renderReviews(response.data);
+                    } else {
+                        $("#reviewTableBody").html(`<tr><td colspan="6" class="text-center">No reviews found</td></tr>`);
+                    }
+                },
+                error: function (xhr) {
+                    console.error("Error loading reviews:", xhr.responseText);
+                    $("#reviewTableBody").html(`<tr><td colspan="6" class="text-center text-danger">Failed to load reviews</td></tr>`);
+                }
+            });
+        }
+
+        // Function to render reviews in the table
+        function renderReviews(reviews) {
+            const tbody = $("#reviewTableBody");
+            tbody.empty();
+
+            reviews.forEach(review => {
+                const row = `
+            <tr>
+                <td>${review.id || 'N/A'}</td>
+                <td>${review.userEmail || 'N/A'}</td>
+                <td>${review.rating || 'N/A'}</td>
+                <td>${review.comment || 'N/A'}</td>
+                <td>${review.createdAt || 'N/A'}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="deleteReview(${review.id || 0})">Delete</button>
+                </td>
+            </tr>
+        `;
+                tbody.append(row);
+            });
+        }
+
+        // Function to filter reviews based on search input
+        function filterReviews(searchTerm) {
+            const filteredReviews = window.allReviews.filter(review => {
+                return (review.userEmail && review.userEmail.toLowerCase().includes(searchTerm)) ||
+                    (review.comment && review.comment.toLowerCase().includes(searchTerm));
+            });
+            renderReviews(filteredReviews);
+        }
+
+        // Function to delete a review
+        function deleteReview(id) {
+            if (confirm("Are you sure you want to delete this review?")) {
+                $.ajax({
+                    url: `http://localhost:8080/api/v1/review/delete/${id}`,
+                    method: "DELETE",
+                    success: function (response) {
+                        if (response.code === 200 || response.code === 201 || response.code === 1) {
+                            alert("Review deleted successfully.");
+                            loadAllReviews(); // Re-fetch all reviews to update the table
+                        } else {
+                            alert("Failed to delete review: " + (response.message || "Unknown error"));
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error("Error deleting review:", xhr.responseText);
+                        alert("Failed to delete review.");
+                    }
+                });
+            }
+        }
+    </script>
+
+
+
     <div id="bookings" class="hidden">
         <h1>Booking Management</h1>
         <div class="d-flex justify-content-end mb-3">
-            <input type="text" id="searchBooking" class="form-control w-25" placeholder="Search by Email, Vehicle, Package...">
+            <input type="text" id="searchBooking" class="form-control w-25" placeholder="Search by Email, Package...">
         </div>
         <table class="table table-bordered mt-3">
             <thead class="table-dark">

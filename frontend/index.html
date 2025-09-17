@@ -135,6 +135,7 @@
                     <ul class="dropdown-menu border-0 rounded-0 m-0">
                         <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
                         <li><a href="#" class="dropdown-item" onclick="loadPage('booking.html')">Bookings</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="loadPage('review.html')">Add Review</a></li>
                         <li><a href="#" class="dropdown-item text-danger" id="logoutBtn">Log out</a></li>
                     </ul>
                 </li>
@@ -550,58 +551,81 @@
         loadActivities();
     });
 </script>
-
-<!-- Testimonial Start -->
-<div class="container-fluid py-5" id="feedback">
-    <div class="container py-5">
-        <div class="text-center mb-3 pb-3">
-            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
-            <h1>What Say Our Clients</h1>
-        </div>
-        <div class="owl-carousel testimonial-carousel">
-            <div class="text-center pb-4">
-                <img class="img-fluid mx-auto" src="image/testimonial-1.jpg" style="width: 100px; height: 100px;" >
-                <div class="testimonial-text bg-white p-4 mt-n5">
-                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                    </p>
-                    <h5 class="text-truncate">Client Name</h5>
-                    <span>Profession</span>
-                </div>
-            </div>
-            <div class="text-center">
-                <img class="img-fluid mx-auto" src="image/testimonial-2.jpg" style="width: 100px; height: 100px;" >
-                <div class="testimonial-text bg-white p-4 mt-n5">
-                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                    </p>
-                    <h5 class="text-truncate">Client Name</h5>
-                    <span>Profession</span>
-                </div>
-            </div>
-            <div class="text-center">
-                <img class="img-fluid mx-auto" src="image/testimonial-3.jpg" style="width: 100px; height: 100px;" >
-                <div class="testimonial-text bg-white p-4 mt-n5">
-                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                    </p>
-                    <h5 class="text-truncate">Client Name</h5>
-                    <span>Profession</span>
-                </div>
-            </div>
-            <div class="text-center">
-                <img class="img-fluid mx-auto" src="image/testimonial-4.jpg" style="width: 100px; height: 100px;" >
-                <div class="testimonial-text bg-white p-4 mt-n5">
-                    <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
-                    </p>
-                    <h5 class="text-truncate">Client Name</h5>
-                    <span>Profession</span>
-                </div>
-            </div>
+<!-- Reviews Section -->
+<section class="reviews-section" id="reviews">
+    <div class="container">
+        <h2 class="text-center mb-4">My Reviews</h2>
+        <div class="row" id="reviewCards">
+            <p class="no-reviews">Loading reviews...</p>
         </div>
     </div>
-</div>
-<!-- Testimonial End -->
+</section>
 
+<style>
+    .star-rating {
+        color: #FFD700; /* Gold color for filled stars */
+    }
+    .star-rating .empty-star {
+        color: #ccc; /* Gray color for empty stars */
+    }
+</style>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to generate star rating using Unicode stars
+        function getStarRating(rating) {
+            const maxStars = 5;
+            let stars = '';
+            for (let i = 1; i <= maxStars; i++) {
+                if (i <= rating) {
+                    stars += '★'; // Filled star (Unicode: U+2605)
+                } else {
+                    stars += '<span class="empty-star">☆</span>'; // Empty star (Unicode: U+2606)
+                }
+            }
+            return stars;
+        }
 
+        function loadReviews() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/v1/review/all", // Your backend endpoint
+                success: function (response) {
+                    const reviewContainer = $("#reviewCards");
+                    reviewContainer.empty(); // Clear existing content
+
+                    if (response.data && response.data.length > 0) {
+                        response.data.forEach(function (review) {
+                            const reviewCard = `
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm" style="border: 2px solid #FFD700;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${review.userEmail}</h5>
+                                        <p class="card-text star-rating">Rating: ${getStarRating(review.rating || 0)}</p>
+                                        <p class="card-text">${review.comment || 'No comment provided'}</p>
+                                        <p class="card-text"><small class="text-muted">${review.createdAt || ''}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                            reviewContainer.append(reviewCard);
+                        });
+                    } else {
+                        reviewContainer.html('<p class="text-center">No reviews available.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error loading reviews:", error);
+                    $("#reviewCards").html('<p class="text-center text-danger">Failed to load reviews.</p>');
+                }
+            });
+        }
+
+        // Load reviews on page load
+        loadReviews();
+    });
+</script>
 
 <section class="contact-container" id="contact">
     <div class="contact-grid">
@@ -627,7 +651,8 @@
                 <li>
                     <i class="fa-solid fa-envelope"></i>
                     <div>
-                        <strong>Email</strong> <a href="mailto:reservations@helasuwaya.lk">reservations@helasuwaya.lk</a>
+                        <strong>Email</strong> <a
+                            href="mailto:reservations@helasuwaya.lk">reservations@helasuwaya.lk</a>
                     </div>
                 </li>
             </ul>

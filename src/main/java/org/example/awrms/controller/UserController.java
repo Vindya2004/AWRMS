@@ -92,4 +92,19 @@ public class UserController {
         }
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO> updateUser(@RequestParam String email, @RequestBody UserDTO userDTO) {
+        try {
+            boolean updated = userService.updateUser(email, userDTO);
+            if (updated) {
+                return ResponseEntity.ok(new ResponseDTO(VarList.Created, "User updated successfully", userDTO));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Acceptable, "User not found", null));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
 }
