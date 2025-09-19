@@ -435,6 +435,111 @@
                 font-size: 2rem;
             }
         }
+        /* Articles Section - Big Card Layout */
+        .articles {
+            background-color: #fff;
+            padding: 5rem 5%;
+        }
+
+        .articles-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .article-card {
+            display: flex;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 350px;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .article-card:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .article-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .article-image {
+            flex: 1;
+            min-width: 45%;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article-content h3 {
+            color: #2a6b4e;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .article-content p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+
+        /* Responsive adjustments for the article cards */
+        @media (max-width: 992px) {
+            .article-card:nth-child(odd),
+            .article-card:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .article-image {
+                min-height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .article-content {
+                padding: 25px;
+            }
+
+            .article-content h3 {
+                font-size: 1.5rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -446,11 +551,14 @@
     </div>
 
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Treatments</a></li>
-        <li><a href="#">Retreats</a></li>
-        <li><a href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
+        <li class="nav-item"><a class="nav-link" href="#packageSection">Packages</a></li>
+        <li class="nav-item"><a class="nav-link" href="#doctorSection">Doctor</a></li>
+        <li class="nav-item"><a class="nav-link" href="#accommodation">Accommodation</a></li>
+        <li class="nav-item"><a class="nav-link" href="#accommodation">Programmes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
     </ul>
 
 
@@ -504,8 +612,8 @@
                                 </div>
                                 <div class="article-content">
                                     <h3>${article.title}</h3>
-                                    <p>${article.description.length > 120
-                            ? article.description.substring(0, 120) + "..."
+                                    <p>${article.description.length > 400
+                            ? article.description.substring(0, 400) + "..."
                             : article.description}</p>
                                     <div class="article-meta">
                                         <span><i class="fa-solid fa-calendar"></i> ${new Date().toLocaleDateString()}</span>

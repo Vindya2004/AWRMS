@@ -151,7 +151,7 @@
         <h1 class="display-3 fw-bold">DISCOVER THE WONDERS <br>
             OF AYURWEDHA  AND HELA WEDHAKAMA</h1>
 
-        <a href="booking.html" target="_blank" class="btn btn-outline-light btn-lg mt-3">BOOKING NOW</a>
+        <a href="article.html" target="_blank" class="btn btn-outline-light btn-lg mt-3">View Article</a>
     </div>
 </section>
 
@@ -289,10 +289,13 @@
                                     ${img}
                                     <div class="card-body text-center">
                                         <h5 class="card-title">${accommodation.name || 'Unnamed Accommodation'}</h5>
+                                         <p class="card-text">
+                        ${accommodation.description || 'No description available.'}
+                    </p>
                                     </div>
-                                    <div class="card-footer bg-transparent border-0 text-center">
-                                        <a href="#" class="btn btn-primary btn-sm">Book Now</a>
-                                    </div>
+<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
+<!--                                        <a href="#" class="btn btn-primary btn-sm">Book Now</a>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         `;
@@ -397,9 +400,9 @@
                                         <p class="card-text">Est. Days: ${pkg.estimateDays || 'N/A'}</p>
                                         ${activitiesText}
                                     </div>
-                                    <div class="card-footer bg-transparent border-0 text-center">
-                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
-                                    </div>
+<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
+<!--                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         `;
@@ -462,10 +465,11 @@
                                         <h5 class="card-title">${doctor.fullName || 'Unnamed Doctor'}</h5>
                                         <p class="card-text">${doctor.email || 'No email'}</p>
                                         <p class="card-text">Fee: RS:${doctor.paymentPerDay || 'N/A'}</p>
+                                        <p class="card-text">${doctor.description || 'No description available.'}</p>
                                     </div>
-                                    <div class="card-footer bg-transparent border-0 text-center">
-                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
-                                    </div>
+<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
+<!--                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         `;
@@ -529,9 +533,9 @@
                                         <p class="card-text"> ${activity.description || 'N/A'}</p>
                                         <p class="card-text">Cost/Day: RS:${activity.costPerDay || 'N/A'}</p>
                                     </div>
-                                    <div class="card-footer bg-transparent border-0 text-center">
-                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
-                                    </div>
+<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
+<!--                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         `;
@@ -831,33 +835,33 @@
 
 <script>
 
-    (function () {
-        emailjs.init("cUuWJLrEenUiJm0d0"); // Your EmailJS Public Key
-    })();
-
-    const contactForm = document.getElementById("contactForm");
-
-    contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (!contactForm.checkValidity()) {
-            contactForm.classList.add("was-validated");
-            return;
-        }
-
-        const serviceID = "service_pcroz7e";   // Your EmailJS Service ID
-        const templateID = "template_0dv6u7i"; // Your EmailJS Template ID
-
-        emailjs.sendForm(serviceID, templateID, contactForm)
-            .then(() => {
-                alert("✅ Message sent successfully! Check your inbox.");
-                contactForm.reset();
-                contactForm.classList.remove("was-validated");
-            }, (err) => {
-                alert("❌ Failed to send message: " + JSON.stringify(err));
-            });
-    });
-
+    // (function () {
+    //     emailjs.init("cUuWJLrEenUiJm0d0"); // Your EmailJS Public Key
+    // })();
+    //
+    // const contactForm = document.getElementById("contactForm");
+    //
+    // contactForm.addEventListener("submit", function (e) {
+    //     e.preventDefault();
+    //
+    //     if (!contactForm.checkValidity()) {
+    //         contactForm.classList.add("was-validated");
+    //         return;
+    //     }
+    //
+    //     const serviceID = "service_pcroz7e";   // Your EmailJS Service ID
+    //     const templateID = "template_0dv6u7i"; // Your EmailJS Template ID
+    //
+    //     emailjs.sendForm(serviceID, templateID, contactForm)
+    //         .then(() => {
+    //             alert("✅ Message sent successfully! Check your inbox.");
+    //             contactForm.reset();
+    //             contactForm.classList.remove("was-validated");
+    //         }, (err) => {
+    //             alert("❌ Failed to send message: " + JSON.stringify(err));
+    //         });
+    // });
+    //
 
 
     // Function to scroll to top
@@ -895,5 +899,6 @@
 <script src="js/index.js"></script>
 <script src="js/about.js"></script>
 <script src="js/load.js"></script>
+<script src="js/contact.js"></script>
 </body>
 </html>
