@@ -295,3 +295,435 @@
 <!--        loadPackages();-->
 <!--    });-->
 <!--</script>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Hela Suwaya | Our Doctors</title>-->
+<!--    &lt;!&ndash; Google Fonts &ndash;&gt;-->
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">-->
+<!--    &lt;!&ndash; Tailwind CSS &ndash;&gt;-->
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+<!--    &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">-->
+<!--    <style>-->
+<!--        :root {-->
+<!--            &#45;&#45;primary: #065f46;-->
+<!--            &#45;&#45;primary-light: #10b981;-->
+<!--            &#45;&#45;accent: #facc15;-->
+<!--            &#45;&#45;accent-dark: #ca8a04;-->
+<!--            &#45;&#45;text: #1f2937;-->
+<!--            &#45;&#45;bg-light: #f8fafc;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Poppins', sans-serif;-->
+<!--        }-->
+
+<!--        .brand-logo {-->
+<!--            font-family: 'Playfair Display', serif;-->
+<!--            font-weight: 800;-->
+<!--            font-size: 1.8rem;-->
+<!--            background: linear-gradient(180deg, var(&#45;&#45;accent), var(&#45;&#45;accent-dark));-->
+<!--            -webkit-background-clip: text;-->
+<!--            background-clip: text;-->
+<!--            color: transparent;-->
+<!--        }-->
+
+<!--        .navbar {-->
+<!--            background: rgba(6, 95, 70, 0.9);-->
+<!--            backdrop-filter: blur(10px);-->
+<!--            transition: all 0.3s ease;-->
+<!--            position: fixed;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            right: 0;-->
+<!--            z-index: 50;-->
+<!--        }-->
+
+<!--        .navbar.scrolled {-->
+<!--            background: rgba(6, 95, 70, 0.98);-->
+<!--            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .page-header {-->
+<!--            background: linear-gradient(135deg, #065f46, #033a2b);-->
+<!--            min-height: 400px;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            position: relative;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        .page-header::before {-->
+<!--            content: "";-->
+<!--            position: absolute;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;-->
+<!--            background-size: cover;-->
+<!--            opacity: 0.2;-->
+<!--        }-->
+
+<!--        .doctor-card {-->
+<!--            transition: transform 0.4s ease, box-shadow 0.4s ease;-->
+<!--            border-radius: 16px;-->
+<!--            overflow: hidden;-->
+<!--            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);-->
+<!--        }-->
+
+<!--        .doctor-card:hover {-->
+<!--            transform: translateY(-8px);-->
+<!--            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);-->
+<!--        }-->
+
+<!--        .doctor-img {-->
+<!--            height: 280px;-->
+<!--            object-fit: cover;-->
+<!--            transition: transform 0.5s ease;-->
+<!--        }-->
+
+<!--        .doctor-card:hover .doctor-img {-->
+<!--            transform: scale(1.05);-->
+<!--        }-->
+
+<!--        .btn-book {-->
+<!--            background: linear-gradient(135deg, var(&#45;&#45;accent), var(&#45;&#45;accent-dark));-->
+<!--            color: white;-->
+<!--            padding: 10px 24px;-->
+<!--            border-radius: 50px;-->
+<!--            font-weight: 600;-->
+<!--            transition: all 0.3s ease;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+<!--        .btn-book:hover {-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);-->
+<!--        }-->
+
+<!--        .floating-element {-->
+<!--            animation: float 4s ease-in-out infinite;-->
+<!--        }-->
+
+<!--        @keyframes float {-->
+<!--            0%, 100% { transform: translateY(0); }-->
+<!--            50% { transform: translateY(-12px); }-->
+<!--        }-->
+
+<!--        /* Modal Styles */-->
+<!--        .modal {-->
+<!--            display: none;-->
+<!--            position: fixed;-->
+<!--            z-index: 100;-->
+<!--            left: 0;-->
+<!--            top: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background-color: rgba(0,0,0,0.7);-->
+<!--            overflow: auto;-->
+<!--        }-->
+
+<!--        .modal-content {-->
+<!--            background-color: white;-->
+<!--            margin: 10% auto;-->
+<!--            padding: 30px;-->
+<!--            border-radius: 16px;-->
+<!--            width: 90%;-->
+<!--            max-width: 500px;-->
+<!--            position: relative;-->
+<!--            animation: modalFadeIn 0.4s;-->
+<!--        }-->
+
+<!--        @keyframes modalFadeIn {-->
+<!--            from { opacity: 0; transform: scale(0.95); }-->
+<!--            to { opacity: 1; transform: scale(1); }-->
+<!--        }-->
+
+<!--        .close-modal {-->
+<!--            color: #aaa;-->
+<!--            float: right;-->
+<!--            font-size: 28px;-->
+<!--            font-weight: bold;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        .close-modal:hover {-->
+<!--            color: black;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body class="bg-gray-50 text-gray-800">-->
+
+<!--&lt;!&ndash; Navbar &ndash;&gt;-->
+<!--<header class="navbar py-4">-->
+<!--    <div class="container mx-auto px-4 flex justify-between items-center">-->
+<!--        <a class="brand-logo" href="#">හෙළ සුවය</a>-->
+<!--        <nav class="hidden md:flex space-x-6">-->
+<!--            <a href="#home" class="text-white hover:text-yellow-300 transition-colors">Home</a>-->
+<!--            <a href="#about" class="text-white hover:text-yellow-300 transition-colors">About</a>-->
+<!--            <a href="#services" class="text-white hover:text-yellow-300 transition-colors">Services</a>-->
+<!--            <a href="#packages" class="text-white hover:text-yellow-300 transition-colors">Packages</a>-->
+<!--            <a href="#doctors" class="text-white hover:text-yellow-300 transition-colors">Doctors</a>-->
+<!--            <a href="#accommodation" class="text-white hover:text-yellow-300 transition-colors">Accommodation</a>-->
+<!--            <a href="#contact" class="text-white hover:text-yellow-300 transition-colors">Contact</a>-->
+<!--            <a href="signup.html" class="text-white hover:text-yellow-300 transition-colors">Sign In</a>-->
+<!--        </nav>-->
+<!--        <button class="md:hidden text-white" onclick="document.getElementById('navmenu').classList.toggle('hidden')">-->
+<!--            <i class="fas fa-bars text-xl"></i>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    <nav id="navmenu" class="hidden md:hidden bg-emerald-900 px-4 py-3">-->
+<!--        <a href="#home" class="block text-white hover:text-yellow-300 py-2">Home</a>-->
+<!--        <a href="#about" class="block text-white hover:text-yellow-300 py-2">About</a>-->
+<!--        <a href="#services" class="block text-white hover:text-yellow-300 py-2">Services</a>-->
+<!--        <a href="#packages" class="block text-white hover:text-yellow-300 py-2">Packages</a>-->
+<!--        <a href="#doctors" class="block text-white hover:text-yellow-300 py-2">Doctors</a>-->
+<!--        <a href="#accommodation" class="block text-white hover:text-yellow-300 py-2">Accommodation</a>-->
+<!--        <a href="#contact" class="block text-white hover:text-yellow-300 py-2">Contact</a>-->
+<!--        <a href="signup.html" class="block text-white hover:text-yellow-300 py-2">Sign In</a>-->
+<!--    </nav>-->
+<!--</header>-->
+
+<!--&lt;!&ndash; Hero Section &ndash;&gt;-->
+<!--<div class="page-header text-white" id="home">-->
+<!--    <div class="container mx-auto px-4 text-center relative z-10">-->
+<!--        <h1 class="text-4xl md:text-6xl font-bold mb-6 font-playfair">Meet Our Healers</h1>-->
+<!--        <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 opacity-90">Experience authentic Ayurveda with our team of certified, compassionate practitioners dedicated to your holistic wellness.</p>-->
+<!--        <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full">-->
+<!--            <a href="#" class="text-white hover:text-yellow-300">Home</a>-->
+<!--            <i class="fas fa-chevron-right text-xs"></i>-->
+<!--            <span>Our Doctors</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Doctors Section &ndash;&gt;-->
+<!--<section class="py-20 bg-white" id="doctors">-->
+<!--    <div class="container mx-auto px-4">-->
+<!--        <div class="text-center mb-16">-->
+<!--            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-playfair">Our Ayurvedic Experts</h2>-->
+<!--            <p class="text-gray-600 max-w-2xl mx-auto">Each practitioner brings decades of wisdom and personalized care rooted in Sri Lankan Hela Wedakama traditions.</p>-->
+<!--        </div>-->
+
+<!--        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">-->
+<!--            &lt;!&ndash; Doctor 1 &ndash;&gt;-->
+<!--            <div class="doctor-card bg-white group">-->
+<!--                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Anuradha Silva" class="w-full doctor-img">-->
+<!--                <div class="p-6">-->
+<!--                    <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Anuradha Silva</h3>-->
+<!--                    <p class="text-green-600 font-medium mb-3">Senior Ayurvedic Physician</p>-->
+<!--                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">Specializes in Panchakarma therapies and chronic disease management using traditional Hela methods passed down through generations.</p>-->
+<!--                    <div class="flex justify-between items-center">-->
+<!--                        <div class="flex space-x-3">-->
+<!--                            <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-facebook-f"></i></a>-->
+<!--                            <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                        </div>-->
+<!--                        <button onclick="openModal('Dr. Anuradha Silva')" class="btn-book text-sm">Book Now</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Doctor 2 &ndash;&gt;-->
+<!--            <div class="doctor-card bg-white group">-->
+<!--                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Rajitha Perera" class="w-full doctor-img">-->
+<!--                <div class="p-6">-->
+<!--                    <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Rajitha Perera</h3>-->
+<!--                    <p class="text-green-600 font-medium mb-3">Ayurvedic Wellness Consultant</p>-->
+<!--                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">Focuses on stress relief, rejuvenation therapies, and personalized diet plans aligned with Dinacharya (daily routines).</p>-->
+<!--                    <div class="flex justify-between items-center">-->
+<!--                        <div class="flex space-x-3">-->
+<!--                            <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-facebook-f"></i></a>-->
+<!--                            <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                        </div>-->
+<!--                        <button onclick="openModal('Dr. Rajitha Perera')" class="btn-book text-sm">Book Now</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Doctor 3 &ndash;&gt;-->
+<!--            <div class="doctor-card bg-white group">-->
+<!--                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Nimali Fernando" class="w-full doctor-img">-->
+<!--                <div class="p-6">-->
+<!--                    <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Nimali Fernando</h3>-->
+<!--                    <p class="text-green-600 font-medium mb-3">Women’s Health Specialist</p>-->
+<!--                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">Expert in prenatal/postnatal care, hormonal balance, and gynecological wellness through gentle herbal formulations.</p>-->
+<!--                    <div class="flex justify-between items-center">-->
+<!--                        <div class="flex space-x-3">-->
+<!--                            <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-facebook-f"></i></a>-->
+<!--                            <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                        </div>-->
+<!--                        <button onclick="openModal('Dr. Nimali Fernando')" class="btn-book text-sm">Book Now</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--&lt;!&ndash; Booking Modal &ndash;&gt;-->
+<!--<div id="bookingModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <span class="close-modal" onclick="closeModal()">&times;</span>-->
+<!--        <h2 class="text-2xl font-bold mb-6 text-gray-800">Book Your Ayurvedic Consultation</h2>-->
+<!--        <form id="bookingForm" class="space-y-4">-->
+<!--            <input type="hidden" id="selectedDoctor">-->
+<!--            <div>-->
+<!--                <label class="block text-gray-700 font-medium mb-1">Doctor</label>-->
+<!--                <input type="text" id="doctorName" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50" readonly>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label class="block text-gray-700 font-medium mb-1">Your Name</label>-->
+<!--                <input type="text" placeholder="Full Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400" required>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label class="block text-gray-700 font-medium mb-1">Email</label>-->
+<!--                <input type="email" placeholder="you@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400" required>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label class="block text-gray-700 font-medium mb-1">Phone</label>-->
+<!--                <input type="tel" placeholder="+94 ..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400" required>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label class="block text-gray-700 font-medium mb-1">Preferred Date</label>-->
+<!--                <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400" required>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label class="block text-gray-700 font-medium mb-1">Treatment Type</label>-->
+<!--                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400">-->
+<!--                    <option>Panchakarma Detox</option>-->
+<!--                    <option>Stress Relief Therapy</option>-->
+<!--                    <option>Weight Management</option>-->
+<!--                    <option>Joint & Muscle Pain Relief</option>-->
+<!--                    <option>Custom Consultation</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <button type="submit" class="w-full btn-book py-3 mt-4">Confirm Booking</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer class="bg-gray-900 text-white py-16 mt-12">-->
+<!--    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">-->
+<!--        <div>-->
+<!--            <h3 class="text-yellow-400 text-lg font-bold mb-6">Contact Details</h3>-->
+<!--            <div class="mb-4">-->
+<!--                <h4 class="text-yellow-400 font-semibold">Address</h4>-->
+<!--                <p class="text-gray-300">395/4, Harischandra Mawatha, Anuradhapura, Sri Lanka</p>-->
+<!--            </div>-->
+<!--            <div class="mb-4">-->
+<!--                <h4 class="text-yellow-400 font-semibold">Phone</h4>-->
+<!--                <p class="text-gray-300">+94 25 2030200<br>+94 704 725 634</p>-->
+<!--            </div>-->
+<!--            <div class="mb-4">-->
+<!--                <h4 class="text-yellow-400 font-semibold">Email</h4>-->
+<!--                <p class="text-gray-300">reservations@helasuwaya.lk</p>-->
+<!--            </div>-->
+<!--            <div class="flex gap-4">-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-yellow-400 transition"><i class="fab fa-instagram"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-yellow-400 transition"><i class="fab fa-youtube"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                <a href="https://wa.me/94704725634" class="text-white bg-gray-800 p-3 rounded-full hover:bg-green-500 transition"><i class="fab fa-whatsapp"></i></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <h3 class="text-yellow-400 text-lg font-bold mb-6">Quick Links</h3>-->
+<!--            <div class="grid grid-cols-2 gap-4">-->
+<!--                <ul class="space-y-2">-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Home</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Our Doctors</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Treatment Packages</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Facilities</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Ayurveda Blog</a></li>-->
+<!--                </ul>-->
+<!--                <ul class="space-y-2">-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">About Us</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Treatments</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Accommodation</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Excursions</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-yellow-400">Contact</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="flex justify-center">-->
+<!--            <div class="space-y-6 text-center">-->
+<!--                <div class="bg-yellow-400/10 border border-yellow-400 rounded-xl p-6">-->
+<!--                    <i class="fas fa-spa text-4xl text-yellow-400 mb-3"></i>-->
+<!--                    <h4 class="text-yellow-400 font-bold text-lg">Authentic Ayurveda</h4>-->
+<!--                    <p class="text-gray-300 text-sm mt-2">Rooted in 3000+ years of Hela tradition</p>-->
+<!--                </div>-->
+<!--                <div class="bg-green-500/10 border border-green-500 rounded-xl p-6">-->
+<!--                    <i class="fas fa-certificate text-3xl text-green-500 mb-3"></i>-->
+<!--                    <p class="text-green-500 text-sm font-medium">Certified by Ministry of Indigenous Medicine, Sri Lanka</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">-->
+<!--        <p>&copy; 2025 Hela Suwaya Ayurveda Private Limited</p>-->
+<!--        <p>Website Design by <a href="#" class="text-yellow-400 hover:underline">Athwa Solutions</a></p>-->
+<!--    </div>-->
+<!--</footer>-->
+
+<!--&lt;!&ndash; Back to Top Button &ndash;&gt;-->
+<!--<button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="fixed bottom-28 right-6 bg-yellow-400 text-white p-3 rounded-full shadow-lg hover:bg-yellow-500 transition transform hover:scale-110 z-40">-->
+<!--    <i class="fas fa-arrow-up"></i>-->
+<!--</button>-->
+
+<!--&lt;!&ndash; WhatsApp Floating Button &ndash;&gt;-->
+<!--<a href="https://wa.me/94704725634" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition transform hover:scale-110 z-40">-->
+<!--    <i class="fab fa-whatsapp text-2xl"></i>-->
+<!--</a>-->
+
+<!--&lt;!&ndash; Scripts &ndash;&gt;-->
+<!--<script>-->
+<!--    // Navbar Scroll Effect-->
+<!--    window.addEventListener('scroll', () => {-->
+<!--        const navbar = document.querySelector('.navbar');-->
+<!--        if (window.scrollY > 50) {-->
+<!--            navbar.classList.add('scrolled');-->
+<!--        } else {-->
+<!--            navbar.classList.remove('scrolled');-->
+<!--        }-->
+<!--    });-->
+
+<!--    // Modal Functions-->
+<!--    function openModal(doctorName) {-->
+<!--        document.getElementById('bookingModal').style.display = 'block';-->
+<!--        document.getElementById('selectedDoctor').value = doctorName;-->
+<!--        document.getElementById('doctorName').value = doctorName;-->
+<!--        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal open-->
+<!--    }-->
+
+<!--    function closeModal() {-->
+<!--        document.getElementById('bookingModal').style.display = 'none';-->
+<!--        document.body.style.overflow = 'auto';-->
+<!--    }-->
+
+<!--    // Close modal if clicked outside-->
+<!--    window.onclick = function(event) {-->
+<!--        const modal = document.getElementById('bookingModal');-->
+<!--        if (event.target == modal) {-->
+<!--            closeModal();-->
+<!--        }-->
+<!--    };-->
+
+<!--    // Form Submission (prevent default for demo)-->
+<!--    document.getElementById('bookingForm').addEventListener('submit', function(e) {-->
+<!--        e.preventDefault();-->
+<!--        alert('Thank you! Your booking request for ' + document.getElementById('doctorName').value + ' has been received. We will contact you shortly.');-->
+<!--        closeModal();-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

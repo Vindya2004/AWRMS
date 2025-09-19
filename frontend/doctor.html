@@ -1,480 +1,960 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Hela Suwaya | Our Doctors</title>-->
+<!--    &lt;!&ndash; Google Fonts &ndash;&gt;-->
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Abhaya+Libre:wght@700;800&display=swap" rel="stylesheet">-->
+<!--    &lt;!&ndash; Tailwind CSS &ndash;&gt;-->
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+<!--    <script>-->
+<!--        tailwind.config = {-->
+<!--            theme: {-->
+<!--                extend: {-->
+<!--                    colors: {-->
+<!--                        'ayurveda-green': {-->
+<!--                            light: '#4CAF50',-->
+<!--                            DEFAULT: '#2E7D32',-->
+<!--                            dark: '#1B5E20',-->
+<!--                        },-->
+<!--                        'ayurveda-gold': {-->
+<!--                            light: '#FFD700',-->
+<!--                            DEFAULT: '#D4AF37',-->
+<!--                            dark: '#B8860B',-->
+<!--                        },-->
+<!--                        'ayurveda-sand': '#F5F5DC',-->
+<!--                        'ayurveda-earth': '#795548',-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+<!--    <style>-->
+<!--        /* Custom styles for modern Ayurvedic look */-->
+<!--        :root {-->
+<!--            &#45;&#45;accent: #D4AF37; /* Warm gold */-->
+<!--            &#45;&#45;primary: #2E7D32; /* Nature green */-->
+<!--            &#45;&#45;secondary: #795548; /* Earth brown */-->
+<!--            &#45;&#45;light-bg: #FAF3E0; /* Soft sand */-->
+<!--            &#45;&#45;text: #1f2b22;-->
+<!--            &#45;&#45;muted: #6b7280;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            background-color: var(&#45;&#45;light-bg);-->
+<!--            font-family: 'Poppins', sans-serif;-->
+<!--        }-->
+
+<!--        .navbar {-->
+<!--            background: rgba(46, 125, 50, 0.95);-->
+<!--            backdrop-filter: blur(10px);-->
+<!--            transition: all 0.3s ease;-->
+<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .navbar.scrolled {-->
+<!--            background: rgba(46, 125, 50, 0.98);-->
+<!--            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);-->
+<!--        }-->
+
+<!--        .brand-logo {-->
+<!--            font-family: "Abhaya Libre", serif;-->
+<!--            font-weight: 800;-->
+<!--            font-size: 1.8rem;-->
+<!--            color: #D4AF37;-->
+<!--        }-->
+
+<!--        .page-header {-->
+<!--            background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(27, 94, 32, 0.9)), url('https://images.unsplash.com/photo-1547981609-4b6bfc67c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');-->
+<!--            background-size: cover;-->
+<!--            background-position: center;-->
+<!--            min-height: 360px;-->
+<!--            position: relative;-->
+<!--            margin-top: 76px;-->
+<!--        }-->
+
+<!--        .doctor-card {-->
+<!--            transition: all 0.3s ease;-->
+<!--            border-radius: 12px;-->
+<!--            overflow: hidden;-->
+<!--            background: white;-->
+<!--            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);-->
+<!--        }-->
+
+<!--        .doctor-card:hover {-->
+<!--            transform: translateY(-8px);-->
+<!--            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .doctor-img {-->
+<!--            height: 280px;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        .doctor-img img {-->
+<!--            transition: transform 0.5s ease;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            object-fit: cover;-->
+<!--        }-->
+
+<!--        .doctor-card:hover .doctor-img img {-->
+<!--            transform: scale(1.05);-->
+<!--        }-->
+
+<!--        .specialty-badge {-->
+<!--            background-color: var(&#45;&#45;accent);-->
+<!--            color: white;-->
+<!--            padding: 4px 12px;-->
+<!--            border-radius: 20px;-->
+<!--            font-size: 0.75rem;-->
+<!--            font-weight: 500;-->
+<!--        }-->
+
+<!--        .btn-primary {-->
+<!--            background: linear-gradient(to right, var(&#45;&#45;primary), var(&#45;&#45;primary-dark));-->
+<!--            color: white;-->
+<!--            padding: 10px 20px;-->
+<!--            border-radius: 30px;-->
+<!--            font-weight: 500;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background: linear-gradient(to right, var(&#45;&#45;primary-dark), var(&#45;&#45;primary));-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .btn-outline {-->
+<!--            border: 2px solid var(&#45;&#45;primary);-->
+<!--            color: var(&#45;&#45;primary);-->
+<!--            padding: 8px 18px;-->
+<!--            border-radius: 30px;-->
+<!--            font-weight: 500;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-outline:hover {-->
+<!--            background-color: var(&#45;&#45;primary);-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .filter-btn {-->
+<!--            padding: 8px 16px;-->
+<!--            border-radius: 20px;-->
+<!--            background: white;-->
+<!--            border: 1px solid #e5e7eb;-->
+<!--            transition: all 0.2s ease;-->
+<!--        }-->
+
+<!--        .filter-btn.active, .filter-btn:hover {-->
+<!--            background-color: var(&#45;&#45;primary);-->
+<!--            color: white;-->
+<!--            border-color: var(&#45;&#45;primary);-->
+<!--        }-->
+
+<!--        .section-title {-->
+<!--            position: relative;-->
+<!--            display: inline-block;-->
+<!--            margin-bottom: 2rem;-->
+<!--        }-->
+
+<!--        .section-title:after {-->
+<!--            content: '';-->
+<!--            position: absolute;-->
+<!--            bottom: -10px;-->
+<!--            left: 0;-->
+<!--            width: 50px;-->
+<!--            height: 3px;-->
+<!--            background-color: var(&#45;&#45;accent);-->
+<!--        }-->
+
+<!--        .section-title.center:after {-->
+<!--            left: 50%;-->
+<!--            transform: translateX(-50%);-->
+<!--        }-->
+
+<!--        .article-card {-->
+<!--            background: white;-->
+<!--            border-radius: 12px;-->
+<!--            overflow: hidden;-->
+<!--            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .article-card:hover {-->
+<!--            transform: translateY(-5px);-->
+<!--            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .review-card {-->
+<!--            background: rgba(255, 255, 255, 0.1);-->
+<!--            border-radius: 12px;-->
+<!--            padding: 24px;-->
+<!--            backdrop-filter: blur(10px);-->
+<!--        }-->
+
+<!--        .star-rating {-->
+<!--            color: var(&#45;&#45;accent);-->
+<!--        }-->
+
+<!--        .loading-spinner {-->
+<!--            border: 4px solid rgba(255, 255, 255, 0.3);-->
+<!--            border-radius: 50%;-->
+<!--            border-top: 4px solid var(&#45;&#45;accent);-->
+<!--            width: 40px;-->
+<!--            height: 40px;-->
+<!--            animation: spin 1s linear infinite;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        @keyframes spin {-->
+<!--            0% { transform: rotate(0deg); }-->
+<!--            100% { transform: rotate(360deg); }-->
+<!--        }-->
+
+<!--        @media (max-width: 768px) {-->
+<!--            .page-header {-->
+<!--                min-height: 300px;-->
+<!--                margin-top: 68px;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body class="text-gray-800">-->
+<!--&lt;!&ndash; Navbar &ndash;&gt;-->
+<!--<header class="navbar fixed w-full top-0 z-50 py-3">-->
+<!--    <div class="container mx-auto px-4 flex justify-between items-center">-->
+<!--        <a class="brand-logo" href="#">හෙළ සුවය</a>-->
+<!--        <nav class="hidden md:flex space-x-6">-->
+<!--            <a href="#home" class="text-white hover:text-ayurveda-gold transition-colors">Home</a>-->
+<!--            <a href="#about" class="text-white hover:text-ayurveda-gold transition-colors">About</a>-->
+<!--            <a href="#service" class="text-white hover:text-ayurveda-gold transition-colors">Services</a>-->
+<!--            <a href="#packageSection" class="text-white hover:text-ayurveda-gold transition-colors">Packages</a>-->
+<!--            <a href="#doctorSection" class="text-white font-semibold text-ayurveda-gold transition-colors">Doctors</a>-->
+<!--            <a href="#accommodation" class="text-white hover:text-ayurveda-gold transition-colors">Accommodation</a>-->
+<!--            <a href="#contact" class="text-white hover:text-ayurveda-gold transition-colors">Contact</a>-->
+<!--            <a href="signup.html" class="bg-ayurveda-gold text-ayurveda-green-dark px-4 py-2 rounded-full font-medium hover:bg-ayurveda-gold-light transition-colors">Sign In</a>-->
+<!--        </nav>-->
+<!--        <button class="md:hidden text-white" onclick="document.getElementById('navmenu').classList.toggle('hidden')">-->
+<!--            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
+<!--                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />-->
+<!--            </svg>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    <nav id="navmenu" class="hidden md:hidden bg-ayurveda-green-dark px-4 py-2">-->
+<!--        <a href="#home" class="block text-white hover:text-ayurveda-gold py-2">Home</a>-->
+<!--        <a href="#about" class="block text-white hover:text-ayurveda-gold py-2">About</a>-->
+<!--        <a href="#service" class="block text-white hover:text-ayurveda-gold py-2">Services</a>-->
+<!--        <a href="#packageSection" class="block text-white hover:text-ayurveda-gold py-2">Packages</a>-->
+<!--        <a href="#doctorSection" class="block text-ayurveda-gold font-semibold py-2">Doctors</a>-->
+<!--        <a href="#accommodation" class="block text-white hover:text-ayurveda-gold py-2">Accommodation</a>-->
+<!--        <a href="#contact" class="block text-white hover:text-ayurveda-gold py-2">Contact</a>-->
+<!--        <a href="signup.html" class="block text-ayurveda-green-dark bg-ayurveda-gold font-medium py-2 text-center rounded mt-2">Sign In</a>-->
+<!--    </nav>-->
+<!--</header>-->
+
+<!--&lt;!&ndash; Header &ndash;&gt;-->
+<!--<div class="page-header text-white flex items-center justify-center">-->
+<!--    <div class="container mx-auto px-4 text-center">-->
+<!--        <h1 class="text-4xl md:text-5xl font-bold mb-4">Explore Our Ayurvedic Treatments</h1>-->
+<!--        <p class="text-xl max-w-2xl mx-auto mb-6">Discover how natural herbs like aloe vera, turmeric, and neem can help cleanse, nourish, and rejuvenate your skin naturally. Tips on preparation and usage included.</p>-->
+<!--        <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">-->
+<!--            <a href="#" class="text-white hover:text-ayurveda-gold-light">Home</a>-->
+<!--            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
+<!--                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />-->
+<!--            </svg>-->
+<!--            <span>Our Doctors</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Doctors Filter Section &ndash;&gt;-->
+<!--<section class="py-12 bg-white">-->
+<!--    <div class="container mx-auto px-4">-->
+<!--        <h2 class="text-3xl font-bold text-center mb-12 section-title center">Read Articles</h2>-->
+
+<!--        <div class="flex flex-wrap justify-center gap-4 mb-12">-->
+<!--            <button class="filter-btn active">All Specialists</button>-->
+<!--            <button class="filter-btn">Panchakarma</button>-->
+<!--            <button class="filter-btn">Rasayana</button>-->
+<!--            <button class="filter-btn">Women's Health</button>-->
+<!--            <button class="filter-btn">Joint Care</button>-->
+<!--            <button class="filter-btn">Detoxification</button>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Article Section &ndash;&gt;-->
+<!--        <section id="article-section" class="mb-16">-->
+<!--            <div id="articles-loading" class="loading-spinner my-12"></div>-->
+<!--            <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">-->
+<!--                &lt;!&ndash; Articles will be dynamically loaded here &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div id="articles-error" class="text-center text-red-500 my-12 hidden">-->
+<!--                <p>Failed to load articles. Please try again later.</p>-->
+<!--                <button onclick="loadArticles()" class="btn-outline mt-4">Retry</button>-->
+<!--            </div>-->
+<!--        </section>-->
+
+<!--        <div class="text-center mt-12">-->
+<!--            <a href="#" class="btn-outline inline-block">View All Doctors</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--&lt;!&ndash; Booking CTA Section &ndash;&gt;-->
+<!--<section class="py-16 bg-ayurveda-green-dark text-white">-->
+<!--    <div class="container mx-auto px-4 text-center">-->
+<!--        <h2 class="text-3xl font-bold mb-6">Ready to Begin Your Healing Journey?</h2>-->
+<!--        <p class="text-xl max-w-2xl mx-auto mb-8">Consult with our Ayurvedic doctors to create a personalized treatment plan tailored to your unique needs.</p>-->
+<!--        <div class="flex flex-col sm:flex-row justify-center gap-4">-->
+<!--            <a href="#booking" class="btn-primary bg-ayurveda-gold text-ayurveda-green-dark hover:bg-ayurveda-gold-light">Book a Consultation</a>-->
+<!--            <a href="tel:+94704725634" class="btn-outline border-white text-white hover:bg-white hover:text-ayurveda-green-dark">Call Now</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer class="bg-gray-900 text-white py-16">-->
+<!--    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">-->
+<!--        <div>-->
+<!--            <h3 class="text-ayurveda-gold text-lg font-bold mb-6">Contact Details</h3>-->
+<!--            <div class="mb-4">-->
+<!--                <h4 class="text-ayurveda-gold font-semibold">Address</h4>-->
+<!--                <p class="text-gray-300">395/4, Harischandra Mawatha, Anuradhapura, Sri Lanka</p>-->
+<!--            </div>-->
+<!--            <div class="mb-4">-->
+<!--                <h4 class="text-ayurveda-gold font-semibold">Phone</h4>-->
+<!--                <p class="text-gray-300">+94 25 2030200<br>+94 704 725 634</p>-->
+<!--            </div>-->
+<!--            <div class="mb-4">-->
+<!--                <h4 class="text-ayurveda-gold font-semibold">Email</h4>-->
+<!--                <p class="text-gray-300">reservations@helasuwaya.lk</p>-->
+<!--            </div>-->
+<!--            <div class="flex gap-4 mt-6">-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-facebook-f"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-twitter"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-youtube"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-instagram"></i></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <h3 class="text-ayurveda-gold text-lg font-bold mb-6">Hela Suwaya Menu</h3>-->
+<!--            <div class="grid grid-cols-2 gap-4">-->
+<!--                <ul class="space-y-2">-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Home</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Doctors</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Packages</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Facilities</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Ayurveda</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Blog</a></li>-->
+<!--                </ul>-->
+<!--                <ul class="space-y-2">-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">About Us</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Treatments</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Accommodation</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Destinations & Excursions</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Hela Wedakama</a></li>-->
+<!--                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Contact Us</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="flex justify-center">-->
+<!--            <div class="space-y-6">-->
+<!--                <div class="bg-ayurveda-gold/10 border-2 border-ayurveda-gold rounded-lg p-4 text-center">-->
+<!--                    <i class="fas fa-leaf text-2xl text-ayurveda-gold"></i>-->
+<!--                    <h4 class="text-ayurveda-gold font-bold">Hela Suwaya<br>Ayurveda</h4>-->
+<!--                </div>-->
+<!--                <div class="bg-ayurveda-green/10 border-2 border-ayurveda-green rounded-lg p-4 text-center">-->
+<!--                    <i class="fas fa-certificate text-xl text-ayurveda-green"></i>-->
+<!--                    <p class="text-ayurveda-green text-sm">Certification<br>Partner</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="border-t border-gray-800 mt-8 pt-4 text-center text-gray-400">-->
+<!--        <p>&copy; 2025 Hela Suwaya Ayurveda Private Limited</p>-->
+<!--        <p>Website Design and Development by <a href="#" class="text-ayurveda-gold hover:underline">Athwa Solutions</a></p>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Back to Top &ndash;&gt;-->
+<!--    <button class="fixed bottom-24 right-6 bg-ayurveda-gold text-white px-4 py-2 rounded-full flex items-center gap-2 hover:bg-ayurveda-gold-light transition-all shadow-md" onclick="window.scrollTo({top:0, behavior:'smooth'})">-->
+<!--        <i class="fas fa-chevron-up"></i> Back to Top-->
+<!--    </button>-->
+<!--    &lt;!&ndash; WhatsApp &ndash;&gt;-->
+<!--    <a href="https://wa.me/94704725634" class="fixed bottom-6 right-6 bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-green-600 transition-all shadow-md">-->
+<!--        <i class="fab fa-whatsapp text-xl"></i>-->
+<!--    </a>-->
+<!--</footer>-->
+
+<!--&lt;!&ndash; Font Awesome for Icons &ndash;&gt;-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // API endpoint for articles-->
+<!--        const ARTICLES_API = 'http://localhost:8080/api/v1/article/getAll';-->
+
+<!--        // Function to load articles-->
+<!--        function loadArticles(specialty = 'All Specialists') {-->
+<!--            $.ajax({-->
+<!--                type: 'GET',-->
+<!--                url: ARTICLES_API,-->
+<!--                success: function (response) {-->
+<!--                    // Hide loading and error, show article list-->
+<!--                    $('#articles-loading').addClass('hidden');-->
+<!--                    $('#articles-error').addClass('hidden');-->
+<!--                    $('#articleList').empty();-->
+
+<!--                    if (response.code !== '201' || !response.content) {-->
+<!--                        $('#articles-error').removeClass('hidden');-->
+<!--                        return;-->
+<!--                    }-->
+
+<!--                    // Filter articles by specialty-->
+<!--                    const filteredArticles = specialty === 'All Specialists'-->
+<!--                        ? response.content-->
+<!--                        : response.content.filter(article => article.specialty === specialty);-->
+
+<!--                    if (filteredArticles.length === 0) {-->
+<!--                        $('#articleList').append('<p class="text-center col-12 py-8">No articles available at the moment.</p>');-->
+<!--                        return;-->
+<!--                    }-->
+
+<!--                    // Loop through the articles data and append it to the container-->
+<!--                    filteredArticles.forEach(function (article) {-->
+<!--                        // Determine the image source, fallback to a placeholder if imageUrl is missing-->
+<!--                        const img = article.imageUrl-->
+<!--                            ? `<img src="http://localhost:8080/uploads/${article.imageUrl}" class="card-img-top" alt="${article.title || 'Unnamed Article'}">`-->
+<!--                            : '<img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="Unnamed Article">';-->
+
+<!--                        // Create the HTML for each article with title, specialty, and description-->
+<!--                        var articleItem = `-->
+<!--                            <div class="col-lg-4 col-md-6 mb-4">-->
+<!--                                <div class="card h-100 shadow-sm">-->
+<!--                                    ${img}-->
+<!--                                    <div class="card-body text-center">-->
+<!--                                        <span class="badge bg-warning text-white mb-2">${article.specialty || 'General'}</span>-->
+<!--                                        <h5 class="card-title">${article.title || 'Unnamed Article'}</h5>-->
+<!--                                        <p class="card-text text-muted">${article.description ? article.description.substring(0, 100) + '...' : 'No description available'}</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-footer bg-transparent border-0 text-center">-->
+<!--                                        <a href="#" class="btn btn-primary btn-sm">Read More</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        `;-->
+
+<!--                        // Append the article item to the article list-->
+<!--                        $('#articleList').append(articleItem);-->
+<!--                    });-->
+<!--                },-->
+<!--                error: function (xhr, status, error) {-->
+<!--                    console.error('Error loading articles:', error);-->
+<!--                    $('#articles-loading').addClass('hidden');-->
+<!--                    $('#articles-error').removeClass('hidden');-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+<!--        // Navbar Scroll Effect-->
+<!--        $(window).scroll(function () {-->
+<!--            const navbar = $('.navbar');-->
+<!--            if ($(window).scrollTop() > 10) {-->
+<!--                navbar.addClass('scrolled');-->
+<!--            } else {-->
+<!--                navbar.removeClass('scrolled');-->
+<!--            }-->
+<!--        });-->
+
+<!--        // Filter functionality-->
+<!--        $('.filter-btn').click(function () {-->
+<!--            $('.filter-btn').removeClass('active');-->
+<!--            $(this).addClass('active');-->
+<!--            const specialty = $(this).text();-->
+<!--            loadArticles(specialty);-->
+<!--        });-->
+
+<!--        // Load articles when the page loads-->
+<!--        loadArticles();-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Hela Suwaya | Guides</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hela Suwaya | Our Doctors</title>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet" />
-
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Font Awesome 5 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Abhaya+Libre:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ayurveda-green': {
+                            light: '#4CAF50',
+                            DEFAULT: '#2E7D32',
+                            dark: '#1B5E20',
+                        },
+                        'ayurveda-gold': {
+                            light: '#FFD700',
+                            DEFAULT: '#D4AF37',
+                            dark: '#B8860B',
+                        },
+                        'ayurveda-sand': '#F5F5DC',
+                        'ayurveda-earth': '#795548',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Reset & Base */
-        html, body {
-            margin:0; padding:0;
+        /* Custom styles for modern Ayurvedic look */
+        :root {
+            --accent: #D4AF37; /* Warm gold */
+            --primary: #2E7D32; /* Nature green */
+            --secondary: #795548; /* Earth brown */
+            --light-bg: #FAF3E0; /* Soft sand */
+            --text: #1f2b22;
+            --muted: #6b7280;
+        }
+
+        body {
+            background-color: var(--light-bg);
             font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-            color: #1f2b22;
-            background: #f8faf9;
         }
 
-        /* Brand tokens */
-        :root{
-            --primary:#4a7c59;
-            --primary-600:#3d664a;
-            --accent:#d4af37;
-            --text:#1f2b22;
-            --muted:#556b57;
+        .navbar {
+            background: rgba(46, 125, 50, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Bootstrap light overrides */
-        .text-primary { color: var(--primary) !important; }
-        .bg-primary { background-color: var(--primary) !important; }
-        .btn-primary { background-color: var(--primary); border-color: var(--primary); }
-        .btn-primary:hover { background-color: var(--primary-600); border-color: var(--primary-600); }
-        .btn-outline-primary { color: var(--primary); border-color: var(--primary); }
-        .btn-outline-primary:hover { color: #fff; background-color: var(--primary); border-color: var(--primary); }
-
-        /* Navbar */
-        .navbar { transition: background 0.3s ease-in-out, box-shadow .3s ease-in-out; }
         .navbar.scrolled {
-            background: rgba(0, 0, 0, 0.85) !important;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            background: rgba(46, 125, 50, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
+
         .brand-logo {
-            font-family: "Abhaya Libre","Noto Sans Sinhala", system-ui, sans-serif;
+            font-family: "Abhaya Libre", serif;
             font-weight: 800;
             font-size: 1.8rem;
-            letter-spacing: 0.02em;
-            background: linear-gradient(180deg, #c79a57 0%, #9b6a2c 55%, #7a4d1a 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent !important;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);
+            color: #D4AF37;
         }
 
-        /* HERO header */
-        .page-header{
-            position: relative;
-            min-height: 360px;
-            background: linear-gradient(135deg, #243124, #1a241b);
-            color:#fff;
-            overflow: hidden;
-            isolation:isolate;
-        }
-        .page-header::before {
-            content:"";
-            position:absolute;
-            inset:0;
-            background-image: url('https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=1950&h=1100&dpr=1');
-            background-position: center;
+        .page-header {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(27, 94, 32, 0.9)), url('https://images.unsplash.com/photo-1547981609-4b6bfc67c272?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
             background-size: cover;
-            background-repeat: no-repeat;
-            opacity:.35; z-index:0;
-        }
-        .page-header::after{
-            content:"";
-            position:absolute; inset:0;
-            background:
-                    radial-gradient(800px circle at 15% 20%, rgba(212,175,55,.18), transparent 50%),
-                    radial-gradient(1000px circle at 85% 80%, rgba(74,124,89,.18), transparent 55%);
-            pointer-events:none; z-index:1;
-        }
-        .page-header > .container{ position:relative; z-index:2; }
-        .page-header .display-4{
-            letter-spacing:2px; font-weight:700;
-            text-shadow:0 2px 12px rgba(0,0,0,.35);
-        }
-        .page-header .d-inline-flex{
-            backdrop-filter: blur(4px);
-            background:rgba(255,255,255,.08);
-            padding:6px 14px; border-radius:999px; gap:10px;
+            background-position: center;
+            min-height: 360px;
+            position: relative;
+            margin-top: 76px;
         }
 
-        /* Team / Guides */
-        .team-item {
-            border-radius: 14px;
-            border:1px solid rgba(31,43,34,.08);
-            overflow:hidden;
-            box-shadow:0 10px 24px rgba(0,0,0,.08);
-            transition: transform .25s ease, box-shadow .25s ease;
-        }
-        .team-item:hover { transform: translateY(-4px); box-shadow:0 16px 36px rgba(0,0,0,.12); }
-
-        .team-img { position: relative; }
-        .team-img img { display:block; width:100%; height:auto; transition: transform .5s ease; }
-        .team-item:hover .team-img img { transform: scale(1.06); }
-
-        .team-img::after{
-            content:"";
-            position:absolute; inset:0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.35) 100%);
-            opacity:0; transition: opacity .3s ease;
-        }
-        .team-item:hover .team-img::after{ opacity:1; }
-
-        .team-social{
-            position:absolute;
-            bottom:-60px; left:0; right:0;
-            display:flex; justify-content:center; gap:10px;
-            padding:12px 0;
-            transition: bottom .3s ease;
-        }
-        .team-item:hover .team-social{ bottom:12px; }
-
-        .btn-square{
-            width:38px; height:38px; display:inline-flex;
-            align-items:center; justify-content:center; padding:0;
-            border-radius:10px;
+        .doctor-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
-        .team-item .text-center h5 { margin-bottom:4px; color: var(--text); font-weight:700; }
-        .team-item .text-center p { color: var(--muted); font-size:.95rem; }
+        .doctor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
 
-        /* Footer */
-        .footer {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
-            url('/placeholder.svg?height=800&width=1200') center/cover;
-            color: white; padding: 60px 0 20px; position: relative; min-height: 500px;
-            margin-top: 50px;
+        .doctor-img {
+            height: 280px;
+            overflow: hidden;
         }
-        .footer-content {
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
-            display: grid; grid-template-columns: 1fr 1.5fr 1fr;
-            gap: 40px; align-items: start;
-        }
-        .footer-section h3 {
-            color: #d4af37; font-size: 1.2rem; font-weight: 700; margin-bottom: 30px; letter-spacing: 1px;
-        }
-        .footer-section h4 {
-            color: #d4af37; font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; margin-top: 25px; letter-spacing: 0.5px;
-        }
-        .footer-section h4:first-of-type { margin-top: 0; }
-        .contact-details p { color: #e0e0e0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 5px; }
-        .social-icons { display: flex; gap: 15px; margin-top: 30px; }
-        .social-icon {
-            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: white;
-            text-decoration: none; transition: all 0.3s ease;
-        }
-        .social-icon:hover { background: #d4af37; border-color: #d4af37; transform: translateY(-2px); }
-        .menu-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .menu-column ul { list-style: none; padding: 0; margin: 0; }
-        .menu-column li { margin-bottom: 12px; }
-        .menu-column a {
-            color: #e0e0e0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; letter-spacing: 0.5px;
-        }
-        .menu-column a:hover { color: #d4af37; }
-        .logos-section { display: flex; justify-content: center; align-items: flex-start; }
-        .logo-container { display: flex; flex-direction: column; gap: 30px; align-items: center; }
-        .main-logo, .certification-logo { text-align: center; }
-        .logo-placeholder {
-            background: rgba(212, 175, 55, 0.1); border: 2px solid #d4af37; border-radius: 10px;
-            padding: 20px; min-width: 120px; min-height: 80px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-        }
-        .logo-placeholder h4 { color: #d4af37; font-size: 0.9rem; font-weight: bold; line-height: 1.2; margin: 0; }
-        .cert-placeholder {
-            background: rgba(74, 124, 89, 0.1); border: 2px solid #4a7c59; border-radius: 10px;
-            padding: 15px; min-width: 100px; min-height: 60px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-        }
-        .cert-placeholder small { color: #4a7c59; font-size: 0.7rem; text-align: center; line-height: 1.2; }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 40px; padding-top: 20px; text-align: center;
-            max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px;
-        }
-        .footer-bottom p { color: #b0b0b0; font-size: 0.85rem; margin-bottom: 5px; }
-        .footer-bottom a { color: #d4af37; text-decoration: none; }
-        .footer-bottom a:hover { text-decoration: underline; }
 
-        /* Floating buttons */
-        .back-to-top {
-            position: fixed; bottom: 100px; right: 30px; background: #d4af37; color: white;
-            border: none; border-radius: 25px; padding: 10px 15px; cursor: pointer; font-size: 0.8rem;
-            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; opacity: 0.9; z-index: 1000;
+        .doctor-img img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .back-to-top:hover { background: #b8941f; transform: translateY(-2px); opacity: 1; }
-        .whatsapp-btn {
-            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25d366;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.5rem; text-decoration: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease; z-index: 1001;
-        }
-        .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
 
-        /* Responsive */
-        @media (max-width: 992px){
-            .team-social { bottom: -50px; }
-            .team-item:hover .team-social{ bottom: 10px; }
+        .doctor-card:hover .doctor-img img {
+            transform: scale(1.05);
         }
+
+        .specialty-badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .section-title.center:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .star-rating {
+            color: var(--accent);
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--accent);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
-            .page-header{ min-height:300px; }
-            .footer-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-            .menu-columns { grid-template-columns: 1fr; gap: 20px; }
-            .social-icons { justify-content: center; }
-            .back-to-top { bottom: 120px; right: 20px; padding: 8px 12px; font-size: 0.75rem; }
-            .whatsapp-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.2rem; }
-        }
-        @media (max-width: 480px) {
-            .footer { padding: 40px 0 20px; }
-            .footer-content { padding: 0 15px; gap: 30px; }
-            .logo-container { flex-direction: row; gap: 20px; }
-            .logo-placeholder, .cert-placeholder { min-width: 80px; min-height: 60px; padding: 10px; }
-        }
-        @media (prefers-reduced-motion: reduce){
-            *{ transition: none !important; }
+            .page-header {
+                min-height: 300px;
+                margin-top: 68px;
+            }
         }
     </style>
 </head>
-<body>
+<body class="text-gray-800">
 <!-- Navbar -->
-<header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3">
-    <div class="container">
-        <a class="navbar-brand brand-logo" href="#">හෙළ සුවය</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <nav class="collapse navbar-collapse" id="navmenu">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#treatments">Service</a></li>
-                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-
-                <li class="nav-item">
-                    <a href="signin.html" class="nav-link">Sign in</a>
-                </li>
-
-                <li class="nav-item dropdown d-none" id="userDropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hi, User Name</a>
-                    <ul class="dropdown-menu border-0 rounded-0 m-0">
-                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-profile.html')">User Profile</a></li>
-                        <li><a href="#" class="dropdown-item" onclick="loadPage('user-bookings.html')">Bookings</a></li>
-                        <li><a href="#" class="dropdown-item text-danger">Log out</a></li>
-                    </ul>
-                </li>
-            </ul>
+<header class="navbar fixed w-full top-0 z-50 py-3">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <a class="brand-logo" href="#">හෙළ සුවය</a>
+        <nav class="hidden md:flex space-x-6">
+            <a href="#home" class="text-white hover:text-ayurveda-gold transition-colors">Home</a>
+            <a href="#about" class="text-white hover:text-ayurveda-gold transition-colors">About</a>
+            <a href="#service" class="text-white hover:text-ayurveda-gold transition-colors">Services</a>
+            <a href="#packageSection" class="text-white hover:text-ayurveda-gold transition-colors">Packages</a>
+            <a href="#doctorSection" class="text-white font-semibold text-ayurveda-gold transition-colors">Doctors</a>
+            <a href="#accommodation" class="text-white hover:text-ayurveda-gold transition-colors">Accommodation</a>
+            <a href="#contact" class="text-white hover:text-ayurveda-gold transition-colors">Contact</a>
+            <a href="signup.html" class="bg-ayurveda-gold text-ayurveda-green-dark px-4 py-2 rounded-full font-medium hover:bg-ayurveda-gold-light transition-colors">Sign In</a>
         </nav>
+        <button class="md:hidden text-white" onclick="document.getElementById('navmenu').classList.toggle('hidden')">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
     </div>
+    <nav id="navmenu" class="hidden md:hidden bg-ayurveda-green-dark px-4 py-2">
+        <a href="#home" class="block text-white hover:text-ayurveda-gold py-2">Home</a>
+        <a href="#about" class="block text-white hover:text-ayurveda-gold py-2">About</a>
+        <a href="#service" class="block text-white hover:text-ayurveda-gold py-2">Services</a>
+        <a href="#packageSection" class="block text-white hover:text-ayurveda-gold py-2">Packages</a>
+        <a href="#doctorSection" class="block text-ayurveda-gold font-semibold py-2">Doctors</a>
+        <a href="#accommodation" class="block text-white hover:text-ayurveda-gold py-2">Accommodation</a>
+        <a href="#contact" class="block text-white hover:text-ayurveda-gold py-2">Contact</a>
+        <a href="signup.html" class="block text-ayurveda-green-dark bg-ayurveda-gold font-medium py-2 text-center rounded mt-2">Sign In</a>
+    </nav>
 </header>
 
-<!-- Header Start -->
-<div class="container-fluid page-header" id="home" style="padding-top: 70px;">
-    <div class="container">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-            <h3 class="display-4 text-white text-uppercase">Doctors</h3>
-            <div class="d-inline-flex text-white">
-                <p class="m-0 text-uppercase"><a class="text-white text-decoration-none" href="#">Home</a></p>
-                <i class="fas fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Doctors</p>
-            </div>
+<!-- Header -->
+<div class="page-header text-white flex items-center justify-center">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Explore Our Ayurvedic Treatments</h1>
+        <p class="text-xl max-w-2xl mx-auto mb-6">Discover how natural herbs like aloe vera, turmeric, and neem can help cleanse, nourish, and rejuvenate your skin naturally. Tips on preparation and usage included.</p>
+        <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+            <a href="#" class="text-white hover:text-ayurveda-gold-light">Home</a>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>Our Doctors</span>
         </div>
     </div>
 </div>
-<!-- Header End -->
 
-<!-- Team Start -->
-<div class="container-fluid py-5">
-    <div class="container pt-5 pb-3">
-        <div class="text-center mb-3 pb-3">
-            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Doctors</h6>
-            <h1>Our Doctors</h1>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                <div class="team-item bg-white mb-4">
-                    <div class="team-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-1.jpg" alt="doctor 1">
-                        <div class="team-social">
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <h5 class="text-truncate">Doctor Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
+<!-- Doctors Filter Section -->
+<section class="py-12 bg-white">
+    <!-- Articles Section -->
+    <div class="container-fluid py-5" id="article-section">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Articles</h6>
+                <h1>Read Articles</h1>
             </div>
-
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                <div class="team-item bg-white mb-4">
-                    <div class="team-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-2.jpg" alt="doctor 2">
-                        <div class="team-social">
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <h5 class="text-truncate">Doctor Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
+            <div class="row" id="articleList">
+                <!-- Articles will be appended here dynamically -->
             </div>
-
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                <div class="team-item bg-white mb-4">
-                    <div class="team-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-3.jpg" alt="doctor 3">
-                        <div class="team-social">
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <h5 class="text-truncate">Doctor Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
+            <div class="flex flex-wrap justify-center gap-4 mb-12 mt-6">
+                <button class="filter-btn active">All Specialists</button>
+                <button class="filter-btn">Panchakarma</button>
+                <button class="filter-btn">Rasayana</button>
+                <button class="filter-btn">Women's Health</button>
+                <button class="filter-btn">Joint Care</button>
+                <button class="filter-btn">Detoxification</button>
             </div>
-
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
-                <div class="team-item bg-white mb-4">
-                    <div class="team-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-4.jpg" alt="doctor 4">
-                        <div class="team-social">
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <h5 class="text-truncate">Doctor Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
-<!-- Team End -->
+    <!-- Articles End -->
+        </section>
+
+        <div class="text-center mt-12">
+            <a href="#" class="btn-outline inline-block">View All Doctors</a>
+        </div>
+    </div>
+</section>
+
+<!-- Booking CTA Section -->
+<section class="py-16 bg-ayurveda-green-dark text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">Ready to Begin Your Healing Journey?</h2>
+        <p class="text-xl max-w-2xl mx-auto mb-8">Consult with our Ayurvedic doctors to create a personalized treatment plan tailored to your unique needs.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#booking" class="btn-primary bg-ayurveda-gold text-ayurveda-green-dark hover:bg-ayurveda-gold-light">Book a Consultation</a>
+            <a href="tel:+94704725634" class="btn-outline border-white text-white hover:bg-white hover:text-ayurveda-green-dark">Call Now</a>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
-<footer class="footer" id="contact">
-    <div class="footer-content">
-        <div class="footer-section contact-details">
-            <h3>CONTACT DETAILS</h3>
-
-            <div class="contact-item">
-                <h4>ADDRESS</h4>
-                <p>395/4,<br>
-                    Harischandra Mawatha,<br>
-                    Anuradhapura,<br>
-                    Sri Lanka</p>
+<footer class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+            <h3 class="text-ayurveda-gold text-lg font-bold mb-6">Contact Details</h3>
+            <div class="mb-4">
+                <h4 class="text-ayurveda-gold font-semibold">Address</h4>
+                <p class="text-gray-300">395/4, Harischandra Mawatha, Anuradhapura, Sri Lanka</p>
             </div>
-
-            <div class="contact-item">
-                <h4>GENERAL NUMBER</h4>
-                <p>+94 25 2030200</p>
-                <p>+94 704 725 634</p>
+            <div class="mb-4">
+                <h4 class="text-ayurveda-gold font-semibold">Phone</h4>
+                <p class="text-gray-300">+94 25 2030200<br>+94 704 725 634</p>
             </div>
-
-            <div class="contact-item">
-                <h4>EMAIL ADDRESS</h4>
-                <p>reservations@helasuwaya.lk</p>
+            <div class="mb-4">
+                <h4 class="text-ayurveda-gold font-semibold">Email</h4>
+                <p class="text-gray-300">reservations@helasuwaya.lk</p>
             </div>
-
-            <div class="social-icons">
-                <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <div class="flex gap-4 mt-6">
+                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-white bg-gray-800 p-3 rounded-full hover:bg-ayurveda-gold transition-colors"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-
-        <div class="footer-section menu-section">
-            <h3>Hela Suwaya MENU</h3>
-
-            <div class="menu-columns">
-                <div class="menu-column">
-                    <ul>
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">OUR DOCTORS</a></li>
-                        <li><a href="#">OUR PACKAGES</a></li>
-                        <li><a href="#">OUR FACILITIES</a></li>
-                        <li><a href="#">AYURVEDA</a></li>
-                        <li><a href="#">OUR BLOG</a></li>
-                    </ul>
-                </div>
-                <div class="menu-column">
-                    <ul>
-                        <li><a href="#">ABOUT US</a></li>
-                        <li><a href="#">OUR TREATMENTS</a></li>
-                        <li><a href="#">ACCOMMODATION</a></li>
-                        <li><a href="#">DESTINATIONS AND EXCURSIONS</a></li>
-                        <li><a href="#">HELA WEDAKAMA</a></li>
-                        <li><a href="#">CONTACT US</a></li>
-                    </ul>
-                </div>
+        <div>
+            <h3 class="text-ayurveda-gold text-lg font-bold mb-6">Hela Suwaya Menu</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Home</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Doctors</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Packages</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Facilities</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Ayurveda</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Blog</a></li>
+                </ul>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">About Us</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Our Treatments</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Accommodation</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Destinations & Excursions</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Hela Wedakama</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-ayurveda-gold">Contact Us</a></li>
+                </ul>
             </div>
         </div>
-
-        <div class="footer-section logos-section">
-            <div class="logo-container">
-                <div class="main-logo">
-                    <div class="logo-placeholder">
-                        <i class="fas fa-leaf" style="font-size: 2rem; color: #d4af37;"></i>
-                        <h4>Hela Suwaya<br>AYURVEDA</h4>
-                    </div>
+        <div class="flex justify-center">
+            <div class="space-y-6">
+                <div class="bg-ayurveda-gold/10 border-2 border-ayurveda-gold rounded-lg p-4 text-center">
+                    <i class="fas fa-leaf text-2xl text-ayurveda-gold"></i>
+                    <h4 class="text-ayurveda-gold font-bold">Hela Suwaya<br>Ayurveda</h4>
                 </div>
-                <div class="certification-logo">
-                    <div class="cert-placeholder">
-                        <i class="fas fa-certificate" style="font-size: 1.5rem; color: #4a7c59;"></i>
-                        <small>Certification<br>Partner</small>
-                    </div>
+                <div class="bg-ayurveda-green/10 border-2 border-ayurveda-green rounded-lg p-4 text-center">
+                    <i class="fas fa-certificate text-xl text-ayurveda-green"></i>
+                    <p class="text-ayurveda-green text-sm">Certification<br>Partner</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="footer-bottom">
-        <p>&copy;2024 Hela Suwaya Ayurveda Private Limited</p>
-        <p>Website Design and Development by <a href="#">Athwa Solutions</a></p>
+    <div class="border-t border-gray-800 mt-8 pt-4 text-center text-gray-400">
+        <p>&copy; 2025 Hela Suwaya Ayurveda Private Limited</p>
+        <p>Website Design and Development by <a href="#" class="text-ayurveda-gold hover:underline">Athwa Solutions</a></p>
     </div>
-
-    <!-- Back to top button -->
-    <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Back to top">
-        <i class="fas fa-chevron-up"></i>
-        <span>Back to top</span>
+    <!-- Back to Top -->
+    <button class="fixed bottom-24 right-6 bg-ayurveda-gold text-white px-4 py-2 rounded-full flex items-center gap-2 hover:bg-ayurveda-gold-light transition-all shadow-md" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <i class="fas fa-chevron-up"></i> Back to Top
     </button>
-
-    <!-- WhatsApp button -->
-    <a href="https://wa.me/94704725634" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+    <!-- WhatsApp -->
+    <a href="https://wa.me/94704725634" class="fixed bottom-6 right-6 bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-green-600 transition-all shadow-md">
+        <i class="fab fa-whatsapp text-xl"></i>
     </a>
 </footer>
 
-<!-- JS libs -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Small helpers -->
+<!-- Font Awesome for Icons -->
+<!-- Dependencies and JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script>
-    // Navbar scroll effect
-    document.addEventListener('scroll', function () {
-        const nav = document.querySelector('.navbar');
-        if (!nav) return;
-        if (window.scrollY > 10) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
+    $(document).ready(function () {
+        // Function to load articles dynamically
+        function loadArticles(specialty = 'All Specialists') {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/v1/article/getAll", // Correct API endpoint
+                success: function (response) {
+                    // Clear any existing content
+                    $('#articleList').empty();
+
+                    // Check if response is valid
+                    if (response.code !== '201' || !response.content || response.content.length === 0) {
+                        $('#articleList').append('<p class="text-center col-12 py-8">No articles available at the moment.</p>');
+                        return;
+                    }
+
+                    // Filter articles by specialty
+                    const filteredArticles = specialty === 'All Specialists'
+                        ? response.content
+                        : response.content.filter(article => article.specialty === specialty);
+
+                    if (filteredArticles.length === 0) {
+                        $('#articleList').append('<p class="text-center col-12 py-8">No articles available for this specialty.</p>');
+                        return;
+                    }
+
+                    // Loop through the articles data and append it to the container
+                    filteredArticles.forEach(function (article) {
+                        // Determine the image source, fallback to a placeholder if imageUrl is missing
+                        const img = article.imageUrl
+                            ? `<img src="http://localhost:8080/uploads/${article.imageUrl}" class="card-img-top" alt="${article.title || 'Unnamed Article'}">`
+                            : '<img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="Unnamed Article">';
+
+                        // Create the HTML for each article with title, specialty, and description
+                        var articleItem = `
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    ${img}
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">${article.title || 'Unnamed Article'}</h5>
+                                        <p class="card-text text-muted">${article.description ? article.description.substring(0, 100) + '...' : 'No description available'}</p>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0 text-center">
+                                        <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // Append the article item to the article list
+                        $('#articleList').append(articleItem);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error loading articles:", error);
+                    $('#articleList').empty().append('<p class="text-center col-12 py-8 text-danger">Failed to load articles. Check console for details.</p>');
+                }
+            });
+        }
+
+        // Filter functionality
+        $('.filter-btn').click(function () {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            const specialty = $(this).text();
+            loadArticles(specialty);
+        });
+
+        // Call the loadArticles function when the page loads
+        loadArticles();
     });
 </script>
 </body>

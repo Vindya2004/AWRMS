@@ -64,7 +64,8 @@ public class SecurityConfig {
                                                 ,"/api/v1/booking/**"
                                         ,"/api/v1/payment/**"
                                         ,"/api/v1/dashboard/**"
-                                        ,"/api/v1/review/**").permitAll()
+                                        ,"/api/v1/review/**"
+                                        ,"/api/v1/article/**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -65,6 +65,7 @@
     <a onclick="showPanel('packages')"><i class="fas fa-box"></i> Packages</a>
     <a onclick="showPanel('payments')"><i class="fas fa-credit-card"></i> Payments</a>
     <a onclick="showPanel('reviews')"><i class="fas fa-star"></i> Reviews</a>
+    <a onclick="showPanel('articles')"><i class="fas fa-star"></i> Articles</a>
     <!-- <a onclick="showPanel('settings')"><i class="fas fa-cog"></i> Settings</a>-->
 
     <div class="mt-auto text-left">
@@ -479,13 +480,13 @@
             <tr>
                 <th>Package Name</th>
                 <th>Doctor Email</th>
-                <th>Accommodation No</th>
+                <th>Accommodation</th>
                 <th>User Email</th>
                 <th>Booking Date</th>
                 <th>Checkout Date</th>
                 <th>Estimated Days</th>
                 <th>Doctor Fee</th>
-                <th>Base Price</th>
+                <th>Package Price</th>
                 <th>Total Price</th>
             </tr>
             </thead>
@@ -835,6 +836,239 @@
         </script>
     </div>
 
+<!--    /////////////////////////////////-->
+
+    <div id="articles" class="hidden">
+        <h1>Article Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArticleModal">Add Article</button>
+            <input type="text" id="searchArticle" class="form-control w-25" placeholder="Search by Title or Description">
+        </div>
+        <table class="table table-bordered mt-3">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="articleTableBody">
+            <tr><td colspan="5" class="text-center">Loading...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Article Modal -->
+    <div class="modal fade" id="addArticleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addArticleForm" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" id="articleTitle" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="articleDescription" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="articleImage" name="imageUrl" accept="image/*">
+                            <img id="addArticleImgPreview" class="mt-2" style="width: 80px; height: 80px; display: none; border-radius: 5px;">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Article</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Article Modal -->
+    <div class="modal fade" id="editArticleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editArticleForm" enctype="multipart/form-data">
+                        <input type="hidden" id="editArticleId" name="id">
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" id="editArticleTitle" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="editArticleDescription" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="editArticleImage" name="imageUrl" accept="image/*">
+                            <img id="editArticleImgPreview" class="mt-2" style="width: 80px; height: 80px; display: none; border-radius: 5px;">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    <script>-->
+<!--        const ARTICLE_API = "http://localhost:8080/api/v1/article";-->
+
+<!--        // Escape string for JS function call-->
+<!--        function escapeQuotes(str) {-->
+<!--            return str.replace(/'/g, "\\'").replace(/"/g, "&quot;");-->
+<!--        }-->
+
+<!--        // Load Articles-->
+<!--        function loadArticles() {-->
+<!--            fetch(`${ARTICLE_API}/getAll`)-->
+<!--                .then(res => res.json())-->
+<!--                .then(data => {-->
+<!--                    const tbody = document.getElementById("articleTableBody");-->
+<!--                    tbody.innerHTML = "";-->
+<!--                    if (!data.data || data.data.length === 0) {-->
+<!--                        tbody.innerHTML = `<tr><td colspan="5" class="text-center">No Articles Found</td></tr>`;-->
+<!--                        return;-->
+<!--                    }-->
+<!--                    data.data.forEach(article => {-->
+<!--                        const row = document.createElement("tr");-->
+<!--                        row.innerHTML = `-->
+<!--                    <td>${article.id}</td>-->
+<!--                    <td>${article.title}</td>-->
+<!--                    <td>${article.description}</td>-->
+<!--                    <td>${article.imageUrl-->
+<!--                            ? `<img src="http://localhost:8080/uploads/${article.imageUrl}" alt="img" style="width:60px;height:60px;border-radius:5px;">`-->
+<!--                            : "No Image"}</td>-->
+<!--                    <td>-->
+<!--                        <button class="btn btn-sm btn-warning" onclick="editArticle(${article.id}, '${escapeQuotes(article.title)}', '${escapeQuotes(article.description)}', '${article.imageUrl || ''}')">Edit</button>-->
+<!--                        <button class="btn btn-sm btn-danger" onclick="deleteArticle(${article.id})">Delete</button>-->
+<!--                    </td>-->
+<!--                `;-->
+<!--                        tbody.appendChild(row);-->
+<!--                    });-->
+<!--                })-->
+<!--                .catch(err => {-->
+<!--                    console.error(err);-->
+<!--                    document.getElementById("articleTableBody").innerHTML =-->
+<!--                        `<tr><td colspan="5" class="text-center text-danger">Error Loading Articles</td></tr>`;-->
+<!--                });-->
+<!--        }-->
+
+<!--        // Add Article-->
+<!--        document.getElementById("addArticleForm").addEventListener("submit", e => {-->
+<!--            e.preventDefault();-->
+<!--            const formData = new FormData();-->
+<!--            formData.append("title", document.getElementById("articleTitle").value);-->
+<!--            formData.append("description", document.getElementById("articleDescription").value);-->
+<!--            const file = document.getElementById("articleImage").files[0];-->
+<!--            if (file) formData.append("imageUrl", file);-->
+
+<!--            fetch(`${ARTICLE_API}/save`, { method: "POST", body: formData })-->
+<!--                .then(res => res.json())-->
+<!--                .then(data => {-->
+<!--                    alert(data.message);-->
+<!--                    if (data.code === 201 || data.code === 200) {-->
+<!--                        document.getElementById("addArticleForm").reset();-->
+<!--                        document.getElementById("addArticleImgPreview").style.display = "none";-->
+<!--                        loadArticles();-->
+<!--                        bootstrap.Modal.getInstance(document.getElementById("addArticleModal")).hide();-->
+<!--                    }-->
+<!--                })-->
+<!--                .catch(console.error);-->
+<!--        });-->
+
+<!--        // Preview Image-->
+<!--        document.getElementById("articleImage").addEventListener("change", e => {-->
+<!--            const file = e.target.files[0];-->
+<!--            if (file) {-->
+<!--                const reader = new FileReader();-->
+<!--                reader.onload = e => {-->
+<!--                    const img = document.getElementById("addArticleImgPreview");-->
+<!--                    img.src = e.target.result;-->
+<!--                    img.style.display = "block";-->
+<!--                };-->
+<!--                reader.readAsDataURL(file);-->
+<!--            }-->
+<!--        });-->
+
+<!--        // Edit Article-->
+<!--        function editArticle(id, title, description, imageUrl) {-->
+<!--            document.getElementById("editArticleId").value = id;-->
+<!--            document.getElementById("editArticleTitle").value = title;-->
+<!--            document.getElementById("editArticleDescription").value = description;-->
+<!--            const imgPreview = document.getElementById("editArticleImgPreview");-->
+<!--            if (imageUrl) {-->
+<!--                imgPreview.src = `http://localhost:8080/uploads/${imageUrl}`;-->
+<!--                imgPreview.style.display = "block";-->
+<!--            } else imgPreview.style.display = "none";-->
+
+<!--            new bootstrap.Modal(document.getElementById("editArticleModal")).show();-->
+<!--        }-->
+
+<!--        // Update Article-->
+<!--        document.getElementById("editArticleForm").addEventListener("submit", e => {-->
+<!--            e.preventDefault();-->
+<!--            const id = document.getElementById("editArticleId").value;-->
+<!--            const formData = new FormData();-->
+<!--            formData.append("title", document.getElementById("editArticleTitle").value);-->
+<!--            formData.append("description", document.getElementById("editArticleDescription").value);-->
+<!--            const file = document.getElementById("editArticleImage").files[0];-->
+<!--            if (file) formData.append("imageUrl", file);-->
+
+<!--            fetch(`${ARTICLE_API}/update/${id}`, { method: "POST", body: formData })-->
+<!--                .then(res => res.json())-->
+<!--                .then(data => {-->
+<!--                    alert(data.message);-->
+<!--                    if (data.code === 201 || data.code === 200) {-->
+<!--                        document.getElementById("editArticleForm").reset();-->
+<!--                        document.getElementById("editArticleImgPreview").style.display = "none";-->
+<!--                        loadArticles();-->
+<!--                        bootstrap.Modal.getInstance(document.getElementById("editArticleModal")).hide();-->
+<!--                    }-->
+<!--                })-->
+<!--                .catch(console.error);-->
+<!--        });-->
+
+<!--        // Delete Article-->
+<!--        function deleteArticle(id) {-->
+<!--            if (!confirm("Are you sure?")) return;-->
+<!--            fetch(`${ARTICLE_API}/delete/${id}`, { method: "DELETE" })-->
+<!--                .then(res => res.json())-->
+<!--                .then(data => {-->
+<!--                    alert(data.message);-->
+<!--                    if (data.code === 201 || data.code === 200) loadArticles();-->
+<!--                })-->
+<!--                .catch(console.error);-->
+<!--        }-->
+
+<!--        // Search-->
+<!--        document.getElementById("searchArticle").addEventListener("keyup", function() {-->
+<!--            const filter = this.value.toLowerCase();-->
+<!--            document.querySelectorAll("#articleTableBody tr").forEach(row => {-->
+<!--                const title = row.cells[1]?.innerText.toLowerCase();-->
+<!--                const desc = row.cells[2]?.innerText.toLowerCase();-->
+<!--                row.style.display = title.includes(filter) || desc.includes(filter) ? "" : "none";-->
+<!--            });-->
+<!--        });-->
+
+<!--        // Initial Load-->
+<!--        document.addEventListener("DOMContentLoaded", loadArticles);-->
+<!--    </script>-->
+
+
+
+
+<!--////////////////////////////////////////////-->
     <div id="accommodations" class="hidden">
         <h1>Accommodation Management</h1>
 
@@ -885,9 +1119,9 @@
                     <div class="mb-3">
                         <label class="form-label">Category</label>
                         <select id="accommodationCategory" name="category" class="form-control" required>
-                            <option value="beach">Beach</option>
-                            <option value="mountain">Mountain</option>
-                            <option value="forest">Forest</option>
+                            <option value="beach">A/C</option>
+                            <option value="mountain">Non A/C</option>
+                            <option value="forest">Luxary</option>
                             <option value="city">City</option>
                         </select>
                     </div>
@@ -935,9 +1169,9 @@
                     <div class="mb-3">
                         <label class="form-label">Category</label>
                         <select id="editAccommodationCategory" name="editAccommodationCategory" class="form-control">
-                            <option value="beach">Beach</option>
-                            <option value="mountain">Mountain</option>
-                            <option value="forest">Forest</option>
+                            <option value="beach">A/C</option>
+                            <option value="mountain">Non A/C</option>
+                            <option value="forest">Luxary</option>
                             <option value="city">City</option>
                         </select>
                     </div>
@@ -1123,6 +1357,7 @@
 <script src="js/accommodation.js"></script>
 <script src="js/activity.js"></script>
 <script src="js/tpackage.js"></script>
+<script src="js/article.js"></script>
 <script src="AdminScripts/admin-destination.js"></script>
 <script src="AdminScripts/admin-package.js"></script>
 <script src="AdminScripts/admin-bookings.js"></script>
