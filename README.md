@@ -114,7 +114,10 @@ Authorization: Bearer <token>
 ✅ JWT authentication for secure API access
 ✅ Responsive UI built with Bootstrap
 👨‍💻 Author
-Developed by Vindya – Ayurwedha Retreat Booking System Project.
-🔗 GitHub Repository
+  Developed by Vindya Madubhashini
 
+
+🎥 Demo Video
+🎬 Watch the full walkthrough here: 
+  [Spring-Boot-Final-Project](https://www.youtube.com/watch?v=HmQDJn3IYHM&t=1s)
 
