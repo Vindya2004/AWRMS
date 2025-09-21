@@ -116,8 +116,7 @@ Authorization: Bearer <token>
 👨‍💻 Author
   Developed by Vindya Madubhashini
 
-
-🎥 Demo Video
-🎬 Watch the full walkthrough here: 
-  [Spring-Boot-Final-Project](https://www.youtube.com/watch?v=HmQDJn3IYHM&t=1s)
+ 
+  ## Demo Video
+Watch the full walkthrough here: [Spring Boot Final Project](https://www.youtube.com/watch?v=HmQDJn3IYHM&t=1s)
 
